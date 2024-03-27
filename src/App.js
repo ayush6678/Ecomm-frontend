@@ -57,7 +57,7 @@ function App() {
   // get STRIPE_API_KEY for payment from backend for connection to stripe payment gateway
   async function getStripeApiKey() {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/v1/stripeapikey");
+      const { data } = await axios.get("https://ecomm-backend-o6x0.onrender.com/api/v1/stripeapikey");
       if (
         data.stripeApiKey !== undefined &&
         data.stripeApiKey !== null &&

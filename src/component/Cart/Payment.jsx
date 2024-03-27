@@ -410,7 +410,7 @@ const PaymentComponent = () => {
       // sessionStorage.removeItem("stripeApiKey");
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/payment/process",
+        "https://ecomm-backend-o6x0.onrender.com/api/v1/payment/process",
         paymentData,
         config
       );
