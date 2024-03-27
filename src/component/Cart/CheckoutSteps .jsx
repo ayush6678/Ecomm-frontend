@@ -97,8 +97,8 @@ const ColorlibStepIcon = ({ active, completed, icon, onClick }) => {
 
   return (
     <div
-      style={`${classes1.root} ${active && classes1.active} ${completed &&
-        classes1.completed}`}
+      // style={`${classes1.root} ${active && classes1.active} ${completed &&
+      //   classes1.completed}`}
       onClick={onClick}>
       <div
         style={

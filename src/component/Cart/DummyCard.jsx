@@ -1,12 +1,12 @@
 import React from "react";
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
-import { useAlert } from "react-alert";
-const useStyles = makeStyles({
+// import { useAlert } from "react-alert";
+const useStyles = {
   creditCard: {
     width: 375,
     height: 225,
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     cursor: "pointer",
     "&:hover": {
       color: "#ed1c24",
-      
+
     },
 
   },
@@ -107,15 +107,15 @@ const useStyles = makeStyles({
   dialogContent: {
     overflow: "hidden",
   },
-});
+};
 
 const DummyCard = ({ onClose }) => {
-  const classes = useStyles();
+  const classes = useStyles;
 
-const alert = useAlert();
+  // const alert = useAlert();
   const handleValueCopy = (value) => {
     navigator.clipboard.writeText(value);
-     alert.success("Number Copied");
+    // alert.success("Number Copied");
   };
 
   return (
@@ -179,7 +179,7 @@ const alert = useAlert();
           >
             Click to copy card number
           </Button>
-         
+
         </DialogActions>
       </Dialog>
     </>

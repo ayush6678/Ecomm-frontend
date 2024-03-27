@@ -2,7 +2,7 @@
 
 export const useStyles = {
   reviewRoot: {
-    // padding: theme.spacing(2),
+    padding: "2rem",
     marginTop: "2rem",
     backgroundColor: "white",
     width: "100%",
@@ -13,7 +13,7 @@ export const useStyles = {
     textAlign: "center",
     fontWeight: 800,
     fontSize: "2rem !important",
-    // marginBottom: theme.spacing(2),
+    marginBottom: "2rem",
     color: "#414141",
   },
   subHeadings: {
@@ -52,7 +52,7 @@ export const useStyles = {
   ratingContainer: {
     marginTop: "1rem 0",
     display: "inline-block",
-    // marginRight: theme.spacing(),
+    marginRight: "2rem",
   },
   star: {
     color: "black",
@@ -61,8 +61,8 @@ export const useStyles = {
   },
   ratingNumber: {
     display: "inline-block",
-    // marginLeft: theme.spacing(1),
-    // marginRight: theme.spacing(1.5),
+    marginLeft: "1rem",
+    marginRight: "1.5rem",
     fontWeight: "bold",
     fontSize: "1rem",
   },

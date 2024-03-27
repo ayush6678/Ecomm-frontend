@@ -145,7 +145,7 @@ const ContactUs = () => {
           letterSpacing: "2px",
         }}>
           <span style={{ fontWeight: "500", paddingBottom: "0.5rem" }}>
-            Atrangi Store, Pvt Ltd.
+            Kriptees Store, Pvt Ltd.
           </span>
           <br />
           15130 Sec 22

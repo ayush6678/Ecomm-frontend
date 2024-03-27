@@ -263,6 +263,7 @@
 }
 
 
+    /* margin-top: 1; */
 
 .gridcheckbox {
     display: flex;
@@ -277,15 +278,10 @@
     & .MuiTypography-body1 {
         font-size: 14px;
     }
-
-    ;
-    margin-top: 1;
-
+    /* margin-top: 1; */
     & .MuiIconButton-label {
         color: black;
     }
-
-    ;
 }
 
 .root {

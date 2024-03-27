@@ -105,7 +105,6 @@ function NewProduct() {
     images.forEach((currImg) => {
       myForm.append("images", currImg);
     });
-
     dispatch(createProduct(myForm));
   };
 

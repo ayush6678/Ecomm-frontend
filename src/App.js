@@ -18,7 +18,7 @@ import Cart from "./component/Cart/Cart";
 import ProductDetails from "./component/Product/ProductDetails";
 import Products from "./component/Product/Products";
 // import Route from "./component/Route/Route";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // const LazyPayment = lazy(() => import("./component/Cart/Payment"));
 import Dashboard from "./component/Admin/Dashboard";
 import ProductList from "./component/Admin/ProductList";
@@ -39,17 +39,58 @@ import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import Shipping from "./component/Cart/Shipping";
 import OrderSuccess from "./component/Cart/OrderSuccess";
 import Activator from "./component/Route/Activator";
+import { Elements } from "@stripe/react-stripe-js";
+import PaymentComponent from "./component/Cart/Payment";
+import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
+import UpdateUser from "./component/Admin/UpdateUser";
 
 // const LazyProductReviews = lazy(() =>
 //   import("./component/Admin/ProductReviews")
 // );
 function App() {
 
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
   const dispatch = useDispatch();
+
+  // get STRIPE_API_KEY for payment from backend for connection to stripe payment gateway
+  async function getStripeApiKey() {
+    try {
+      const { data } = await axios.get("http://localhost:5000/api/v1/stripeapikey");
+      if (
+        data.stripeApiKey !== undefined &&
+        data.stripeApiKey !== null &&
+        data.stripeApiKey !== ""
+      ) {
+        sessionStorage.setItem(
+          "stripeApiKey",
+          JSON.stringify(data.stripeApiKey)
+        );
+      }
+      setStripeApiKey(data.stripeApiKey);
+    } catch (error) {
+      // Handle error if the API call fails
+      console.error("Error fetching Stripe API key:", error);
+    }
+  }
+
+  useEffect(() => {
+    const stripeApiKey = sessionStorage.getItem("stripeApiKey");
+    if (stripeApiKey) {
+
+      setStripeApiKey(stripeApiKey);
+    } else {
+      getStripeApiKey();
+    }
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     dispatch(load_UserProfile());
   }, []);
+
+
   return (
     <div className="App">
 
@@ -279,7 +320,7 @@ function App() {
           <Route
             exact
             path="/orders"
-            render={() => (
+            element={
               <>
                 {<Header />}
                 <MyOrder />
@@ -287,13 +328,13 @@ function App() {
                 <Services />
                 {<Footer />}
               </>
-            )}
+            }
           />
 
           <Route
             exact
             path="/shipping"
-            render={() => (
+            element={
               <>
                 {<Header />}
                 <Shipping />
@@ -301,13 +342,13 @@ function App() {
                 <Services />
                 {<Footer />}
               </>
-            )}
+            }
           />
 
           <Route
             exact
             path="/order/confirm"
-            render={
+            element={
               <>
                 {<Header />}
                 <ConfirmOrder />
@@ -324,7 +365,7 @@ function App() {
           <Route
             exact
             path="/success"
-            render={() => (
+            element={
               <>
                 {<Header />}
                 <OrderSuccess />
@@ -332,7 +373,7 @@ function App() {
                 <Services />
                 {<Footer />}
               </>
-            )}
+            }
           />
 
 
@@ -405,6 +446,7 @@ function App() {
               </>
             }
           />
+
           <Route
 
             exact
@@ -416,11 +458,22 @@ function App() {
               </>
             }
           />
+
           <Route
 
             exact
             path="/admin/users"
             element={<UserList />}
+          />
+
+          <Route
+            exact
+            path="/admin/user/:id"
+            element={
+              <>
+                <UpdateUser />
+              </>
+            }
           />
 
           <Route
@@ -436,6 +489,20 @@ function App() {
               </>
             }
           />
+
+          <Route exact path="/process/payment"
+            element={
+              <>
+                <Elements stripe={loadStripe(stripeApiKey)}>
+
+                  {<Header />}
+                  <PaymentComponent />
+                </Elements>
+
+              </>
+            }
+          />
+          {/* <PrivateRoute exact path="/process/payment" component={Payment} /> */}
 
         </Routes>
 

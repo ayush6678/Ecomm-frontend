@@ -65,7 +65,7 @@ function UpdatePassword() {
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      alert.success("Profile Updated Successfully");
+      // alert.success("Profile Updated Successfully");
       dispatch({
         type: UPDATE_PASSWORD_RESET,
       });

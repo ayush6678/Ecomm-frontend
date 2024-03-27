@@ -74,7 +74,7 @@ const DialogBox = ({ open, handleClose, id }) => {
       myForm.set("productId", productId);
     }
     dispatch(newReview(myForm));
-    alert.success("Review posted successfully");
+    // alert.success("Review posted successfully");
     handleClose();
   };
 
@@ -84,7 +84,7 @@ const DialogBox = ({ open, handleClose, id }) => {
       dispatch(clearErrors());
     }
     if (success) {
-      alert.success("Review posted successfully");
+      // alert.success("Review posted successfully");
       dispatch({ type: NEW_REVIEW_RESET });
     }
   }, [dispatch,
@@ -157,6 +157,7 @@ const DialogBox = ({ open, handleClose, id }) => {
             style={classes.star}
           />
         </Box>
+        
         <Box mt={2}>
           <FormControl component="fieldset">
             <FormLabel
@@ -173,12 +174,12 @@ const DialogBox = ({ open, handleClose, id }) => {
             >
               <FormControlLabel
                 value="yes"
-                control={<Radio color="black" />}
+                control={<Radio  />}
                 label="Yes"
               />
               <FormControlLabel
                 value="no"
-                control={<Radio color="black" />}
+                control={<Radio  />}
                 label="No"
               />
             </RadioGroup>

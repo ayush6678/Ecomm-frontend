@@ -4,7 +4,6 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-// import { makeStyles } from "@mui/styles";
 
 const classes = {
   cardRoot: {
@@ -14,8 +13,8 @@ const classes = {
     alignItems: "flex-start",
     width: 455,
     minHeight: "50vh",
-    // padding: theme.spacing(2),
-    // margin: theme.spacing(2),
+    padding: "2rem",
+    margin: "2rem",
     boxShadow: "0px 3px 6px #00000029",
     borderRadius: "4px",
     background: "white",
@@ -25,10 +24,10 @@ const classes = {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    // marginBottom: theme.spacing(2),
+    marginBottom: "2rem",
   },
   avatar: {
-    // marginRight: theme.spacing(1),
+    marginRight: "1rem",
   },
 
   title: {
@@ -48,7 +47,7 @@ const classes = {
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
-    // marginTop: theme.spacing(2),
+    marginTop: "2rem",
   },
 
   thumbIcon: {
@@ -129,11 +128,13 @@ const MyCard = ({ review }) => {
   return (
     <div style={classes.cardRoot}>
       <div style={classes.cardheader}>
+
         <Avatar
           alt="User Avatar"
           src={review.avatar || "https://i.imgur.com/JSW6mEk.png"}
           style={classes.avatar}
         />
+
         <Typography variant="body1" style={classes.subHeadings}>
           {review.name}
         </Typography>
@@ -167,7 +168,7 @@ const MyCard = ({ review }) => {
           {review.recommend ? "Yes!" : "No!"}
         </span>
       </Typography>
-      <div style={classes.helpful}>
+      {/* <div style={classes.helpful}>
         <Typography
           variant="body2"
           color="textSecondary "
@@ -176,18 +177,18 @@ const MyCard = ({ review }) => {
           Helpful?
         </Typography>
         <ThumbUpIcon
-          style={`${classes.thumbIcon} ${helpfulClicked ? classes.clicked : ""
-            }`}
+          // style={classes.thumbIcon ${helpfulClicked ? classes.clicked : ""
+          //   }}
           onClick={() => helpfulHandler("up")}
         />
         <Typography>{helpful}</Typography>
         <ThumbDownIcon
-          style={`${classes.thumbIcon} ${unhelpfulClicked ? classes.clicked : ""
-            }`}
+          // style={`${classes.thumbIcon} ${unhelpfulClicked ? classes.clicked : ""
+          //   }`}
           onClick={() => helpfulHandler("down")}
         />
         <Typography>{unhelpful}</Typography>
-      </div>
+      </div> */}
     </div>
   );
 };

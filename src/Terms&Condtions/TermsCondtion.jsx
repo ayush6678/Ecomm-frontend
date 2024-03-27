@@ -16,7 +16,7 @@ const TermsAndConditionsPage = () => {
       </div>
       <div className="terms-content">
         <p>
-          Thank you for shopping with Atrangi! We appreciate your business
+          Thank you for shopping with Kriptees! We appreciate your business
           and your interest in our cricket equipment. We want to make sure you
           have a good experience purchasing from our website.
         </p>
@@ -29,18 +29,18 @@ const TermsAndConditionsPage = () => {
         </p>
         <h2>Acceptance of These Terms</h2>
         <p>
-          You (“Customer”) may place orders for Products with Atrangi
+          You (“Customer”) may place orders for Products with Kriptees
           ("we," "our") via our website or, in certain circumstances, over the
           phone. By placing an order, you consent to these Terms and Conditions
           of Sale (“Terms”) and acknowledge that we will furnish the Products
           subject to these Terms. Any term or condition in any order or other
           form or correspondence that is inconsistent with these Terms shall be
           inapplicable and of no force and effect whatsoever, unless expressly
-          agreed to in writing by Atrangi.
+          agreed to in writing by Kriptees.
         </p>
         <h2>Orders</h2>
         <p>
-          All orders are subject to Atrangi's acceptance. We may refuse to
+          All orders are subject to Kriptees's acceptance. We may refuse to
           accept, cancel, or limit any order or order quantity for any reason,
           even after an order confirmation has been sent. If we cancel an order
           after you have been charged, we will refund you the charged amount.
@@ -57,10 +57,10 @@ const TermsAndConditionsPage = () => {
         <h2>Price</h2>
         <p>
           All prices are subject to change until your order is accepted by
-          Atrangi. Prices displayed on the website exclude shipping
+          Kriptees. Prices displayed on the website exclude shipping
           charges, which are calculated and displayed based on the selected
           shipping option during checkout. The prices on the website may differ
-          from those in physical stores that stock Atrangi products. We
+          from those in physical stores that stock Kriptees products. We
           reserve the right to correct pricing errors and notify you of any
           changes before proceeding with your order.
         </p>
@@ -74,8 +74,8 @@ const TermsAndConditionsPage = () => {
         <p>
           The prices quoted for the Products include Singapore's prevailing
           Goods and Services Tax (GST). Customer is responsible for paying any
-          taxes, except for those based on Atrangi's income. If
-          Atrangi is required to collect and pay taxes on Customer's
+          taxes, except for those based on Kriptees's income. If
+          Kriptees is required to collect and pay taxes on Customer's
           behalf, we may invoice Customer for those amounts.
         </p>
         <h2>Payment</h2>
@@ -99,7 +99,7 @@ const TermsAndConditionsPage = () => {
         <h2>Returns</h2>
         <p>
           Once an order has been placed and accepted, you may not cancel the
-          order without Atrangi's written consent. You may return products
+          order without Kriptees's written consent. You may return products
           for a refund of the purchase price (excluding initial shipping
           charges) plus any applicable tax. Return shipping expenses are the
           customer's responsibility. Products must be returned within thirty
@@ -131,13 +131,13 @@ const TermsAndConditionsPage = () => {
         </p>
         <h2>Indemnification</h2>
         <p>
-          You agree to indemnify and hold Atrangi harmless from any
+          You agree to indemnify and hold Kriptees harmless from any
           claims, costs, proceedings, losses, or demands arising from your
           breach of these Terms or anyone using your account.
         </p>
         <h2>Entire Agreement</h2>
         <p>
-          These Terms constitute the entire agreement between Atrangi and
+          These Terms constitute the entire agreement between Kriptees and
           the Customer, superseding all prior or contemporaneous agreements,
           representations, warranties, and understandings.
         </p>

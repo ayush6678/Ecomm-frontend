@@ -93,15 +93,14 @@ function Header() {
               </span>
             </div>
           </div>
+
           {!searchBarActive && (
             <Link to="/">
 
-              {/* <h1 style={{
+              <h1 style={{
                 color: "white",
-                marginTop: "25px",
+              }}>Kriptees</h1>
 
-              }}>Atrangi</h1>
-               */}
               {/* <img
                 src={require("../../../Image/logo.png")}
                 alt="logo"
@@ -166,12 +165,20 @@ function Header() {
                   <button>My Account</button>
                 </Link>
               ) : (
-                <Link
-                  to="/signup"
-                // style={{ color: "inherit", textDecoration: "none" }}
-                >
-                  <button>Sign Up</button>
-                </Link>
+                <div>
+                  < Link to="/login">
+                    <button>
+                      Login
+                    </button>
+                  </Link>
+
+                  <Link
+                    to="/signup"
+                  // style={{ color: "inherit", textDecoration: "none" }}
+                  >
+                    <button>Sign Up</button>
+                  </Link>
+                </div>
               )}
             </div>
           </div>

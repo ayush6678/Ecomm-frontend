@@ -7,13 +7,13 @@ const PrivacyPolicy = () => {
     <div className="privacy-policy-container">
       <MetaData title={"Privacy Policy"} />
       <div className="container___">
-        <h1>Privacy Policy of Atrangi</h1>
+        <h1>Privacy Policy of Kriptees</h1>
         <p style={{ fontSize: "16px", fontWeight: "600" }}>
           {" "}
           Effective Date: 23-12-2021
         </p>
         <p>
-          At Atrangi, we value the privacy of our customers and are
+          At Kriptees, we value the privacy of our customers and are
           committed to protecting your personal information. This Privacy Policy
           explains how we collect, use, disclose, and safeguard your information
           when you use our website and services. Please read this Privacy Policy
@@ -116,7 +116,7 @@ const PrivacyPolicy = () => {
           </Link>
         </p>
         <p>
-          By using the Atrangi website and services, you agree to the
+          By using the Kriptees website and services, you agree to the
           collection, use, and disclosure of your information as described in
           this Privacy Policy.
         </p>

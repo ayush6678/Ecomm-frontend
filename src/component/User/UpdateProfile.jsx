@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 import UpdateIcon from "@mui/icons-material/Update";
 import "./LoginFormStyle.css";
 import { Link } from "react-router-dom";
-import { CloudUpload } from "@mui/icons-material";
 
 function UpdateProfile() {
 
@@ -31,8 +30,6 @@ function UpdateProfile() {
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidName, setIsValidEName] = useState(true);
-  const [avatar, setAvatar] = useState("");
-  const [avatarPreview, setAvatarPreview] = useState("");
 
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;
@@ -42,17 +39,6 @@ function UpdateProfile() {
     );
   };
 
-  const handleAvatarChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        setAvatarPreview(reader.result);
-        setAvatar(reader.result);
-      };
-    }
-  };
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -64,7 +50,6 @@ function UpdateProfile() {
     const myForm = new FormData();
     myForm.set("name", name);
     myForm.set("email", email);
-    myForm.set("avatar", avatar);
 
     dispatch(updateProfile(myForm));
   };
@@ -76,7 +61,6 @@ function UpdateProfile() {
       // console.log(user, "user");
       setName(user.name);
       setEmail(user.email);
-      // setAvatarPreview(user.avatar.url);
     }
 
     if (error) {
@@ -150,31 +134,6 @@ function UpdateProfile() {
           }
         />
 
-        <div className={"root"}>
-          <Avatar
-            alt="Avatar Preview"
-            src={avatarPreview}
-            className={"avatar2"}
-          />
-          <input
-            accept="image/*"
-            className={"input"}
-            id="avatar-input"
-            type="file"
-            onChange={handleAvatarChange}
-          />
-          <label htmlFor="avatar-input">
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<CloudUpload style={{ color: "#FFFFFF" }} />}
-              component="span"
-              className={"uploadAvatarButton"}
-            >
-              <p className={"uploadAvatarText"}>Upload Avatar</p>
-            </Button>
-          </label>
-        </div>
 
         <Button
           variant="contained"

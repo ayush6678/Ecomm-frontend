@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ProductList.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // import { useAlert } from "react-alert";
 import { Button } from "@mui/material";
 import MetaData from "../Layouts/MetaData/MetaData";
@@ -21,6 +21,7 @@ function UserList() {
   const { error: deleteError, isDeleted, message } = useSelector(
     (state) => state.profileData
   );
+  const { id } = useParams();
   // const alert = useAlert();
   // const history = useHistory();
   const deleteUserHandler = (id) => {
@@ -47,9 +48,9 @@ function UserList() {
     dispatch(getAllUsers());
   }, [dispatch,
     // alert,
-    error, deleteError, 
+    error, deleteError,
     // history,
-     isDeleted, message]);
+    isDeleted, message]);
 
   // Datagrid  values  and schema
 
@@ -78,7 +79,7 @@ function UserList() {
       flex: 0.3,
       headerClassName: "column-header hide-on-mobile",
       cellClassName: (params) => {
-        return params.getValue(params.id, "role") === "admin"
+        return params.formattedValue === "admin"
           ? "greenColor"
           : "redColor";
       },
@@ -94,13 +95,18 @@ function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/admin/user/${params.getValue(params.id, "id")}`}>
+            <Link to={`/admin/user/${params.id
+              // params.getValue(params.id, "id")
+              }`}>
               <EditIcon className="icon-" />
             </Link>
 
             <Button
               onClick={() =>
-                deleteUserHandler(params.getValue(params.id, "id"))
+                deleteUserHandler(
+                  params.id
+                  // params.getValue(params.id, "id")
+                  )
               }
             >
               <DeleteIcon className="iconbtn" />
@@ -157,32 +163,32 @@ function UserList() {
       {loading ? (
         <Loader />
       ) : (
-    <>
-      <MetaData title={`ALL Users - Admin`} />
+        <>
+          <MetaData title={`ALL Users - Admin`} />
 
-      <div className="product-list" style={{ marginTop: 0 }}>
-        <div className={!toggle ? "listSidebar" : "toggleBox"}>
-          <Sidebar />
-        </div>
+          <div className="product-list" style={{ marginTop: 0 }}>
+            <div className={!toggle ? "listSidebar" : "toggleBox"}>
+              <Sidebar />
+            </div>
 
-        <div className="list-table">
-          <Navbar toggleHandler={toggleHandler} />
-          <div className="productListContainer">
-            <h4 id="productListHeading">ALL USERS</h4>
+            <div className="list-table">
+              <Navbar toggleHandler={toggleHandler} />
+              <div className="productListContainer">
+                <h4 id="productListHeading">ALL USERS</h4>
 
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              pageSize={10}
-              disableSelectionOnClick
-              className="productListTable"
-              autoHeight
-            />
+                <DataGrid
+                  rows={rows}
+                  columns={columns}
+                  pageSize={10}
+                  disableSelectionOnClick
+                  className="productListTable"
+                  autoHeight
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </>
-    )}
+        </>
+      )}
     </>
   );
 }

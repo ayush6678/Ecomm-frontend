@@ -70,7 +70,7 @@ const Shipping = () => {
   const navigate = useNavigate();
   const { shippingInfo } = useSelector((state) => state.cart);
 
-  const classes = useStyles();
+  const classes = useStyles;
   const [address, setAddress] = React.useState(shippingInfo.address);
   const [firstName, setFirstName] = React.useState(shippingInfo.firstName);
   const [lastName, setLastName] = React.useState(shippingInfo.lastName);
@@ -189,9 +189,9 @@ const Shipping = () => {
 
         <div className="shippingPage__container">
           <div className="shippingPage__container__left">
-            <div className={classes.shippingRoot}>
+            <div style={classes.shippingRoot}>
               <form onSubmit={handleSubmit}>
-                <Typography variant="h6" className={classes.heading}>
+                <Typography variant="h6" style={classes.heading}>
                   SHIPPING ADDRESS
                 </Typography>
                 <Grid container spacing={2}>
@@ -202,7 +202,7 @@ const Shipping = () => {
                       fullWidth
                       value={firstName}
                       onChange={handleFirstNameChange}
-                      className={classes.outlinedInput}
+                      style={classes.outlinedInput}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -212,7 +212,7 @@ const Shipping = () => {
                       fullWidth
                       value={lastName}
                       onChange={handleLastNameChange}
-                      className={classes.outlinedInput}
+                      style={classes.outlinedInput}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -222,7 +222,7 @@ const Shipping = () => {
                       fullWidth
                       value={address}
                       onChange={handleAddressChange}
-                      className={classes.outlinedInput}
+                      style={classes.outlinedInput}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -232,7 +232,7 @@ const Shipping = () => {
                       fullWidth
                       value={city}
                       onChange={handleCityChange}
-                      className={classes.outlinedInput}
+                      style={classes.outlinedInput}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -242,7 +242,7 @@ const Shipping = () => {
                       fullWidth
                       value={pinCode}
                       onChange={handlePincodeChange}
-                      className={classes.outlinedInput}
+                      style={classes.outlinedInput}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -252,7 +252,7 @@ const Shipping = () => {
                       fullWidth
                       value={state}
                       onChange={handleStateChange}
-                      className={classes.outlinedInput}
+                      style={classes.outlinedInput}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -262,7 +262,7 @@ const Shipping = () => {
                       fullWidth
                       value={country}
                       onChange={handleCountryChange}
-                      className={classes.outlinedInput}
+                      style={classes.outlinedInput}
                     />
                   </Grid>
 
@@ -273,7 +273,7 @@ const Shipping = () => {
                       fullWidth
                       value={phoneNo}
                       onChange={handlePhoneChange}
-                      className={classes.outlinedInput}
+                      style={classes.outlinedInput}
                       error={!isPhoneNoValid && phoneNo !== ""}
                       helperText={
                         !isPhoneNoValid &&
@@ -289,7 +289,7 @@ const Shipping = () => {
                       fullWidth
                       value={email}
                       onChange={handleEmailChange}
-                      className={classes.outlinedInput}
+                      style={classes.outlinedInput}
                       error={!isValidEmail && email !== ""}
                       helperText={
                         !isValidEmail &&
@@ -327,7 +327,7 @@ const Shipping = () => {
                       type="submit"
                       variant="contained"
                       color="primary"
-                      className={classes.submitButton}
+                      style={classes.submitButton}
 
                     >
                       Continue

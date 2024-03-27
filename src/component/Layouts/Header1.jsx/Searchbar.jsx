@@ -1,6 +1,5 @@
 import React from "react";
 import { SearchOutlined, CloseOutlined } from "@mui/icons-material";
-import styled from "@emotion/styled";
 import "./Searchbar.css";
 
 

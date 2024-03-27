@@ -152,7 +152,7 @@ const Footer = () => {
                     src={require("../../../Image/Footer/logo.png")}
                     alt="cricekt weapon logo"
                   /> */}
-                  <h1 className="Foot_heading">Atrangi</h1>
+                  <h1 className="Foot_heading">Kriptees</h1>
                 </Link>
               </div>
 
@@ -265,7 +265,7 @@ const Footer = () => {
 
               <div className="foot_copyright">
                 <p>
-                  &copy; {currYear} | Atrangi, All Rights Reserved.
+                  &copy; {currYear} | Kriptees, All Rights Reserved.
 
                 </p>
               </div>

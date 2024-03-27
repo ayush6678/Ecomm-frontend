@@ -90,7 +90,6 @@ const ProfileModal = ({ user, isAuthenticated }) => {
     setIsOpen(false);
     navigate("/login");
   }
-  // console.log(user.avatar)
 
   return (
     <>
@@ -116,12 +115,14 @@ const ProfileModal = ({ user, isAuthenticated }) => {
             ) : (
               <>
                 <div className="profile-info">
-                  <Avatar
+
+                  {/* <Avatar
                     src={user.avatar.url}
                     alt="User Avatar"
                     className="avatar"
                     style={{ width: "68px", height: "68px" }}
-                  />
+                  /> */}
+
                   <p className="user-id">
                     <strong>ID :</strong> {user._id.substring(0, 8)}
                   </p>

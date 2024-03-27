@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import MetaData from "../layouts/MataData/MataData";
-import { useAlert } from "react-alert";
+import MetaData from "../Layouts/MetaData/MetaData";
+// import { useAlert } from "react-alert";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import OrderDetailsSection from "./OrderDetails";
 import DummyCard from "./DummyCard";
 import { clearErrors, createOrder } from "../../actions/orderAction";
@@ -35,22 +35,23 @@ import {
 
 } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
 import AssuredWorkloadOutlinedIcon from "@mui/icons-material/AssuredWorkloadOutlined";
 import { ReactComponent as MasterCard } from "../../Image/payment-svg/mastercard.svg";
 import { ReactComponent as Visa } from "../../Image/payment-svg/visa (1).svg";
 import { ReactComponent as Paytm } from "../../Image/payment-svg/paytm.svg";
 import {
-  dispalyMoney,
+  displayMoney,
   generateDiscountedPrice,
 } from "../DisplayMoney/DisplayMoney";
+import { useNavigate } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = {
   payemntPage: {
     padding: "1rem 0",
     width: "100%",
     backgroundColor: "white",
-    overFlow : "hidden",
+    overFlow: "hidden",
   },
 
   paymentPage__container: {
@@ -58,10 +59,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     boxSize: "border-box",
     justifyContent: "space-around",
-    [theme.breakpoints.down("sm")]: {
-      flexDirection: "column-reverse",
-      alignItems: "center",
-    },
+    // [theme.breakpoints.down("sm")]: {
+    //   flexDirection: "column-reverse",
+    //   alignItems: "center",
+    // },
   },
 
   PaymentBox: {
@@ -72,11 +73,11 @@ const useStyles = makeStyles((theme) => ({
     overFlow: "hidden",
     backgroundColor: "white",
     width: "50%",
-    [theme.breakpoints.down("sm")]: {
-      width: "90%",
-      marginTop: "1rem",
-      padding: "2rem",
-    },
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "90%",
+    //   marginTop: "1rem",
+    //   padding: "2rem",
+    // },
   },
   PaymentHeading: {
     fontWeight: "800",
@@ -268,20 +269,20 @@ const useStyles = makeStyles((theme) => ({
     height: "fit-content",
     padding: "1rem 0.5rem 0 0.5rem",
     width: "40%",
-    [theme.breakpoints.down("sm")]: {
-      width: "90%",
-      padding: "2rem",
-    },
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "90%",
+    //   padding: "2rem",
+    // },
   },
   order_Details: {
     display: "flex",
     flexDirection: "column",
     width: "100%",
     padding: "2rem 0.5rem 2rem 0.5rem",
-    [theme.breakpoints.down("sm")]: {
-      width: "90%",
-      padding: "2rem",
-    },
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "90%",
+    //   padding: "2rem",
+    // },
   },
   orderSub_heading: {
     fontWeight: "600",
@@ -298,19 +299,19 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     width: "98%",
     padding: "1rem 1px",
-    [theme.breakpoints.down("sm")]: {
-      width: "90%",
-      padding: "1rem 2rem",
-    },
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "90%",
+    //   padding: "1rem 2rem",
+    // },
   },
   shipping_Address: {
     display: "flex",
     justifyContent: "space-between",
     width: "100%",
 
-    [theme.breakpoints.down("sm")]: {
-      width: "90%",
-    },
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "90%",
+    // },
   },
   shipping_Address_Details: {
     display: "flex",
@@ -331,27 +332,24 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
- 
-}));
+};
 
 const PaymentComponent = () => {
-  const classes = useStyles();
-  const history = useHistory();
-  const alert = useAlert();
+  const classes = useStyles;
+  const navigate = useNavigate();
+  // const alert = useAlert();
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user, loading } = useSelector((state) => state.userData);
-  const user = JSON.parse(sessionStorage.getItem("user"));
-
+  const user1 = JSON.parse(sessionStorage.getItem("user"));
   const { error } = useSelector((state) => state.newOrder);
   const [isFocused, setIsFocused] = useState(false);
   const [nameOnCard, setNameOnCard] = React.useState("");
   const [couponCode, setCouponCode] = useState("");
   const [isValid, setIsValid] = useState(true);
-    const [showDummyCard, setShowDummyCard] = useState(false);
-
+  const [showDummyCard, setShowDummyCard] = useState(false);
 
   const subTotal = cartItems.reduce((acc, currItem) => {
     return acc + currItem.quantity * currItem.price;
@@ -372,20 +370,17 @@ const PaymentComponent = () => {
     setIsFocused(event.target.value !== "");
   };
 
+  const handleRadioChange = () => {
+    setShowDummyCard(!showDummyCard);
+  };
 
-  
-    const handleRadioChange = () => {
-      setShowDummyCard(!showDummyCard);
-    };
-
-    const handleCloseDummyCard = () => {
-      setShowDummyCard(false);
-    };
+  const handleCloseDummyCard = () => {
+    setShowDummyCard(false);
+  };
 
 
-  const address = `${shippingInfo.address} , ${shippingInfo.city} ${
-    shippingInfo.state
-  } , ${shippingInfo.pinCode} , ${shippingInfo.country || "India"}`;
+  const address = `${shippingInfo.address} , ${shippingInfo.city} ${shippingInfo.state
+    } , ${shippingInfo.pinCode} , ${shippingInfo.country || "India"}`;
 
   const order = {
     shippingInfo,
@@ -396,88 +391,127 @@ const PaymentComponent = () => {
   };
 
   const paymentData = {
-    // stripe takes payment in pese there for multiply with 100 bcz 1rs == 100 pese
     amount: Math.round(totalFinalPrice * 100),
   };
 
   async function paymentSubmitHandler(e) {
     e.preventDefault();
-    if(nameOnCard === ""){
-      alert.error("Please enter name on card");
+    if (nameOnCard === "") {
       return;
     }
-
+    const token = localStorage.getItem('token');
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `${token}`,
         },
       };
+      // sessionStorage.removeItem("stripeApiKey");
+
       const { data } = await axios.post(
-        "/api/v1/payment/process",
+        "http://localhost:5000/api/v1/payment/process",
         paymentData,
         config
       );
-
       // client_secret is key from STRIPE  while making payement post req at backend
       const client_secret = data.client_secret;
 
       // passed at App.js route statement
       if (!stripe || !elements) return;
 
-      // this object is from stripe-js. only values need to put
-      const result = await stripe.confirmCardPayment(client_secret, {
-        payment_method: {
-          card: elements.getElement(CardNumberElement),
-          billing_details: {
-            name: user.name,
-            email: user.email,
-            address: {
-              line1: shippingInfo.address,
-              state: shippingInfo.state,
-              postal_code: shippingInfo.pinCode,
-              country: "IN",
-            },
-          },
-        },
-      });
+      const result = await stripe;
+      const { paymentMethod, error } = await result.createPaymentMethod({
+        type: 'card',
+        card: elements.getElement(CardNumberElement)
+      })
+
+      if (!error) {
+        try {
+          const response = await result.paymentIntents.confirm(client_secret, {
+            payment_method: paymentMethod.id,
+          });
+
+          if (response.error) {
+            console.error('Error confirming payment:', response.error);
+            // Handle payment error here
+          } else {
+            // Payment successful
+            order.paymentInfo = {
+              id: result.paymentIntent.id,
+              status: result.paymentIntent.status,
+            };
+            // alert.success(result.paymentIntent.status);
+            dispatch(createOrder(order));
+            navigate("/success");
+            console.log('Payment successful:', response);
+            // Handle successful payment here
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          // Handle other errors here
+        }
+      } else {
+        console.error('Error creating payment method:', error);
+        // Handle payment method creation error here
+      }
+
+
+      // const result = await stripe.confirmCardPayment(client_secret, {
+      //   payment_method: {
+      //     card: elements.getElement(CardNumberElement),
+      //     billing_details: {
+      //       name: user.name,
+      //       email: user.email,
+      //       address: {
+      //         line1: shippingInfo.address,
+      //         state: shippingInfo.state,
+      //         postal_code: shippingInfo.pinCode,
+      //         country: "IN",
+      //       },
+      //     },
+      //   },
+      // });
+
 
       if (result.error) {
         // if error then again enable the button on
-
-        alert.error(result.error.message);
-      } else {
+        console.log(result)
+        // alert.error(result.error.message);
+      }
+      else {
         if (result.paymentIntent.status === "succeeded") {
           // add new property inside order object
           order.paymentInfo = {
             id: result.paymentIntent.id,
             status: result.paymentIntent.status,
           };
-          alert.success(result.paymentIntent.status);
-
+          // alert.success(result.paymentIntent.status);
           dispatch(createOrder(order));
-
-          history.push("/success");
+          navigate("/success");
         } else {
-          alert.error("There's some issue while processing payment");
+          // alert.error("There's some issue while processing payment");
         }
       }
     } catch (error) {
       // if error while payment then again enable payment button
 
-    
-      alert.error(error.message);
+      // console.log("err")
+
+      // alert.error(error.message);
     }
   }
-  
+
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // alert.error(error);
       dispatch(clearErrors());
     }
 
-  }, [dispatch, alert, error]);
+  }, [dispatch,
+    // alert,
+    error]);
 
   // claculte price after discount
   let totalPrice = cartItems.reduce(
@@ -490,362 +524,361 @@ const PaymentComponent = () => {
   let discountedPrice = generateDiscountedPrice(totalPrice);
   let totalDiscount = totalPrice - discountedPrice;
   let final = totalPrice - totalDiscount;
-  final = dispalyMoney(final);
-  totalDiscount = dispalyMoney(totalDiscount); 
-  totalPrice = dispalyMoney(totalPrice);
+  final = displayMoney(final);
+  totalDiscount = displayMoney(totalDiscount);
+  totalPrice = displayMoney(totalPrice);
 
   return (
     <>
- 
-        <div className={classes.payemntPage}>
-          <CheckoutSteps activeStep={2} />
-          <MetaData title={"Payment"} />
-          <div className={classes.paymentPage__container}>
-            <div className={classes.PaymentBox}>
-              <Typography
-                variant="h5"
-                component="h1"
-                className={classes.PaymentHeading}
-              >
-                Payment method
-              </Typography>
-              <Typography
-                variant="subtitle2"
-                gutterBottom
-                className={classes.securePayemnt}
-              >
-                <AssuredWorkloadOutlinedIcon />
-                Payments are SSL encrypted so that your credit card and payment
-                details stay safe.
-              </Typography>
+      <div style={classes.payemntPage}>
+        <CheckoutSteps activeStep={2} />
+        <MetaData title={"Payment"} />
+        <div style={classes.paymentPage__container}>
+          <div style={classes.PaymentBox}>
+            <Typography
+              variant="h5"
+              component="h1"
+              style={classes.PaymentHeading}
+            >
+              Payment method
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              gutterBottom
+              style={classes.securePayemnt}
+            >
+              <AssuredWorkloadOutlinedIcon />
+              Payments are SSL encrypted so that your credit card and payment
+              details stay safe.
+            </Typography>
 
-              <div className={classes.cardContainer}>
-                <Typography variant="h6" className={classes.subHeading}>
-                  Credit Card <CreditCard fontSize="medium" />
-                </Typography>
-                <Grid container spacing={2} className={classes.cardDetails}>
-                  <Grid item xs={12}>
-                    <Typography
-                      variant="subtitle2"
-                      className={classes.labelText}
-                    >
-                      Card number
-                    </Typography>
-                    <div className={classes.cardNumberInput}>
-                      <CardMembership className={classes.inputIcon} />
-                      <CardNumberElement className={classes.paymentInput} />
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} container justifyContent="space-between">
-                    <Grid item className={classes.icons}>
-                      <MasterCard
-                        style={{
-                          width: "5%",
-                          height: "auto",
-                        }}
-                      />
-                      <Visa
-                        style={{
-                          width: "5%",
-                          height: "auto",
-                        }}
-                      />
-                      <Paytm
-                        style={{
-                          width: "5%",
-                          height: "auto",
-                        }}
-                      />
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography
-                      variant="subtitle2"
-                      className={classes.labelText}
-                    >
-                      EXPIRY DATE
-                    </Typography>
-                    <div className={classes.expiryInput}>
-                      <Payment className={classes.inputIcon} />
-                      <CardExpiryElement className={classes.paymentInput2} />
-                    </div>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography
-                      variant="subtitle2"
-                      className={classes.labelText}
-                    >
-                      CVV/CVV
-                    </Typography>
-                    <div className={classes.cvvInput}>
-                      <Lock className={classes.inputIcon} />
-                      <CardCvcElement className={classes.paymentInput2} />
-                    </div>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography
-                      variant="subtitle2"
-                      className={classes.labelText}
-                    >
-                      NAME ON CARD
-                    </Typography>
-                    <TextField
-                      placeholder="John Doe"
-                      variant="outlined"
-                      fullWidth
-                      className={classes.outlinedInput}
-                      value={nameOnCard}
-                      required
-                      onChange={handleNameOnCardChange}
+            <div style={classes.cardContainer}>
+              <Typography variant="h6" style={classes.subHeading}>
+                Credit Card <CreditCard fontSize="medium" />
+              </Typography>
+              <Grid container spacing={2} style={classes.cardDetails}>
+                <Grid item xs={12}>
+                  <Typography
+                    variant="subtitle2"
+                    style={classes.labelText}
+                  >
+                    Card number
+                  </Typography>
+                  <div style={classes.cardNumberInput}>
+                    <CardMembership style={classes.inputIcon} />
+                    <CardNumberElement style={classes.paymentInput} />
+                  </div>
+                </Grid>
+                <Grid item xs={12} container justifyContent="space-between">
+                  <Grid item style={classes.icons}>
+                    <MasterCard
+                      style={{
+                        width: "5%",
+                        height: "auto",
+                      }}
+                    />
+                    <Visa
+                      style={{
+                        width: "5%",
+                        height: "auto",
+                      }}
+                    />
+                    <Paytm
+                      style={{
+                        width: "5%",
+                        height: "auto",
+                      }}
                     />
                   </Grid>
                 </Grid>
-              </div>
-
-              <div className={classes.cardSelection}>
-                <Radio
-                  value="dummyCard"
-                  className={classes.radio}
-                  checked={showDummyCard}
-                  onChange={handleRadioChange}
-                />
-                <Typography variant="subtitle2" className={classes.radioText}>
-                  Use dummy card
-                </Typography>
-                <CreditCard fontSize="medium" />
-                {showDummyCard && <DummyCard onClose={handleCloseDummyCard} />}
-              </div>
-              <Typography
-                variant="body2"
-                className={classes.termsAndConditionsText}
-              >
-                By clicking "Place Order", you agree to our
-                <Link href="#" className={classes.privacyText}>
-                  Cricket Weapon Terms & Conditions
-                </Link>
-              </Typography>
-              <Button
-                variant="contained"
-                className={classes.placeOrderBtn}
-                fullWidth
-                // disabled={isDisable}
-                style={{ marginTop: "3rem" }}
-                onClick={paymentSubmitHandler}
-              >
-                Place Order
-              </Button>
+                <Grid item xs={6}>
+                  <Typography
+                    variant="subtitle2"
+                    style={classes.labelText}
+                  >
+                    EXPIRY DATE
+                  </Typography>
+                  <div style={classes.expiryInput}>
+                    <Payment style={classes.inputIcon} />
+                    <CardExpiryElement style={classes.paymentInput2} />
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography
+                    variant="subtitle2"
+                    style={classes.labelText}
+                  >
+                    CVV/CVV
+                  </Typography>
+                  <div style={classes.cvvInput}>
+                    <Lock style={classes.inputIcon} />
+                    <CardCvcElement style={classes.paymentInput2} />
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography
+                    variant="subtitle2"
+                    style={classes.labelText}
+                  >
+                    NAME ON CARD
+                  </Typography>
+                  <TextField
+                    placeholder="John Doe"
+                    variant="outlined"
+                    fullWidth
+                    style={classes.outlinedInput}
+                    value={nameOnCard}
+                    required
+                    onChange={handleNameOnCardChange}
+                  />
+                </Grid>
+              </Grid>
             </div>
-            <div className={classes.payemntAmount}>
-              <div className="order_summary">
-                <h4>
-                  Order Summary &nbsp; ( {cartItems.length}{" "}
-                  {cartItems.length > 1 ? "items" : "item"} )
-                </h4>
-                <div className="order_summary_details">
-                  <div className="price order_Summary_Item">
-                    <span>Original Price</span>
-                    {/* ORIGINAL PRICE TOATAL */}
-                    <p>{totalPrice}</p>
-                  </div>
 
-                  <div className="discount order_Summary_Item">
-                    <span>Discount</span>
-                    <p>
-                      <del>{totalDiscount}</del>
+            <div style={classes.cardSelection}>
+              <Radio
+                value="dummyCard"
+                style={classes.radio}
+                checked={showDummyCard}
+                onChange={handleRadioChange}
+              />
+              <Typography variant="subtitle2" style={classes.radioText}>
+                Use dummy card
+              </Typography>
+              <CreditCard fontSize="medium" />
+              {showDummyCard && <DummyCard onClose={handleCloseDummyCard} />}
+            </div>
+            <Typography
+              variant="body2"
+              style={classes.termsAndConditionsText}
+            >
+              By clicking "Place Order", you agree to our
+              <Link href="#" style={classes.privacyText}>
+                Kristees Terms & Conditions
+              </Link>
+            </Typography>
+            <Button
+              variant="contained"
+              style={classes.placeOrderBtn}
+              fullWidth
+              // disabled={isDisable}
+              // style={{ marginTop: "3rem" }}
+              onClick={paymentSubmitHandler}
+            >
+              Place Order
+            </Button>
+          </div>
+          <div style={classes.payemntAmount}>
+            <div className="order_summary">
+              <h4>
+                Order Summary &nbsp; ( {cartItems.length}{" "}
+                {cartItems.length > 1 ? "items" : "item"} )
+              </h4>
+              <div className="order_summary_details">
+                <div className="price order_Summary_Item">
+                  <span>Original Price</span>
+                  {/* ORIGINAL PRICE TOATAL */}
+                  <p>{totalPrice}</p>
+                </div>
+
+                <div className="discount order_Summary_Item">
+                  <span>Discount</span>
+                  <p>
+                    <del>{totalDiscount}</del>
+                  </p>
+                </div>
+
+                <div className="delivery order_Summary_Item">
+                  <span>Delivery</span>
+                  <p>
+                    <b>Free</b>
+                  </p>
+                </div>
+
+                <div className="separator_cart"></div>
+                <div className="total_price order_Summary_Item">
+                  <div>
+                    <h4>Total Price</h4>
+
+                    <p
+                      style={{
+                        fontSize: "14px",
+                        marginTop: "-10px",
+                        color: "#414141",
+                      }}
+                    >
+                      (Inclusive of all taxes)
                     </p>
                   </div>
-
-                  <div className="delivery order_Summary_Item">
-                    <span>Delivery</span>
-                    <p>
-                      <b>Free</b>
-                    </p>
-                  </div>
-
-                  <div className="separator_cart"></div>
-                  <div className="total_price order_Summary_Item">
-                    <div>
-                      <h4>Total Price</h4>
-
-                      <p
-                        style={{
-                          fontSize: "14px",
-                          marginTop: "-10px",
-                          color: "#414141",
-                        }}
-                      >
-                        (Inclusive of all taxes)
-                      </p>
-                    </div>
-                    <p>
-                      <b>{final}</b>
-                    </p>
-                  </div>
+                  <p>
+                    <b>{final}</b>
+                  </p>
                 </div>
               </div>
+            </div>
 
-              <div className="separator"></div>
+            <div className="separator"></div>
 
-              <div className="coupon-box-wrapper">
-                <div
-                  className={`coupon-box-content ${isFocused ? "focused" : ""}`}
+            <div className="coupon-box-wrapper">
+              <div
+                className={`coupon-box-content ${isFocused ? "focused" : ""}`}
+              >
+                <TextField
+                  label="Enter coupon code"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                  onFocus={handleFocus}
+                  onBlur={() => setIsFocused(false)}
+                  error={!isValid}
+                  helperText={!isValid && "Invalid coupon code"}
+                  variant="outlined"
+                  size="small"
+                  style={{
+                    width: "200px",
+                    marginRight: "1rem",
+                  }}
+                />
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className="coupon-box-apply-btn"
+                  onClick={handleApplyCoupon}
                 >
-                  <TextField
-                    label="Enter coupon code"
-                    value={couponCode}
-                    onChange={(e) => setCouponCode(e.target.value)}
-                    onFocus={handleFocus}
-                    onBlur={() => setIsFocused(false)}
-                    error={!isValid}
-                    helperText={!isValid && "Invalid coupon code"}
-                    variant="outlined"
-                    size="small"
-                    style={{
-                      width: "200px",
-                      marginRight: "1rem",
+                  Apply
+                </Button>
+              </div>
+            </div>
+
+            <div className="paymentLogoImg">
+              <img
+                src={require("../../Image/cart/cart_img.png")}
+                alt="payemnt-icons"
+                className="paymentImg"
+              />
+            </div>
+            <div style={classes.order_Details}>
+              <h5 style={classes.orderSub_heading}>ORDER DETAILS</h5>
+              {cartItems &&
+                cartItems.map((item, idx) => (
+                  <Link to={`/product/${item.productId}`} style={{ textDecoration: "none", color: "inherit" }}>
+                    <OrderDetailsSection
+                      key={idx}
+                      item={item}
+                      totalDiscount={totalDiscount}
+                      totalPrice={totalPrice}
+                    />
+                  </Link>
+                ))}
+            </div>
+            <Divider style={classes.boldDivider} />
+            <div style={classes.shipping_Deatils}>
+              <Typography variant="h6" style={classes.orderSub_heading}>
+                DELIVERY ADDRESS
+              </Typography>
+
+              <div style={classes.shipping_Address}>
+                <div style={classes.shipping_Address_Details}>
+                  <Typography
+                    variant="subtitle2"
+                    style={{ fontSize: "16px", fontWeight: 400 }}
+                  >
+                    {user.name && user.name}
+                  </Typography>
+                  <Typography
+                    variant="subtitle2"
+                    style={{ fontSize: "16px", fontWeight: 400 }}
+                  >
+                    {address}
+                  </Typography>
+                </div>
+                <div style={classes.shipping_Address_edit}>
+                  <EditIcon
+                    style={classes.editIcon}
+                    onClick={() => {
+                      navigate("/shipping");
                     }}
                   />
+                </div>
+              </div>
+              <Typography
+                variant="subtitle2"
+                // style={classes.mobileNo}
+                style={{
+                  fontWeight: 400,
+                  marginTop: "-5px",
+                  fontSize: "16px",
+                }}
+              >
+                {shippingInfo.phoneNo},
+              </Typography>
 
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className="coupon-box-apply-btn"
-                    onClick={handleApplyCoupon}
+              <Typography
+                variant="subtitle2"
+                style={classes.emailAddress}
+              // style={{ fontWeight: 400, fontSize: "16px" }}
+              >
+                {user.email}
+              </Typography>
+            </div>
+
+            <div style={classes.shipping_Deatils}>
+              <Typography
+                variant="h6"
+                style={classes.orderSub_heading}
+              // style={{ marginTop: "5px" }}
+              >
+                BILLING DETAILS
+              </Typography>
+
+              <div style={classes.shipping_Address}>
+                <div style={classes.shipping_Address_Details}>
+                  <Typography
+                    variant="subtitle2"
+                    style={{ fontSize: "16px", fontWeight: 400 }}
                   >
-                    Apply
-                  </Button>
+                    {user.name}
+                  </Typography>
+                  <Typography
+                    variant="subtitle2"
+                    style={{ fontSize: "16px", fontWeight: 400 }}
+                  >
+                    {address}
+                  </Typography>
+                </div>
+                <div style={classes.shipping_Address_edit}>
+                  <EditIcon
+                    style={classes.editIcon}
+                    onClick={() => {
+                      navigate("/shipping");
+                    }}
+                  />
                 </div>
               </div>
+              <Typography
+                variant="subtitle2"
+                // style={classes.mobileNo}
+                style={{
+                  fontWeight: 400,
+                  marginTop: "-5px",
+                  fontSize: "16px",
+                }}
+              >
+                {shippingInfo.phoneNo},
+              </Typography>
 
-              <div className="paymentLogoImg">
-                <img
-                  src={require("../../Image/cart/cart_img.png")}
-                  alt="payemnt-icons"
-                  className="paymentImg"
-                />
-              </div>
-              <div className={classes.order_Details}>
-                <h5 className={classes.orderSub_heading}>ORDER DETAILS</h5>
-                {cartItems &&
-                  cartItems.map((item, idx) => (
-                    <Link to={`/product/${item.productId}`} style ={{textDecoration : "none" , color : "inherit"}}>
-                      <OrderDetailsSection
-                        key={idx}
-                        item={item}
-                        totalDiscount={totalDiscount}
-                        totalPrice={totalPrice}
-                      />
-                    </Link>
-                  ))}
-              </div>
-              <Divider className={classes.boldDivider} />
-              <div className={classes.shipping_Deatils}>
-                <Typography variant="h6" className={classes.orderSub_heading}>
-                  DELIVERY ADDRESS
-                </Typography>
-
-                <div className={classes.shipping_Address}>
-                  <div className={classes.shipping_Address_Details}>
-                    <Typography
-                      variant="subtitle2"
-                      style={{ fontSize: "16px", fontWeight: 400 }}
-                    >
-                      {user.name && user.name}
-                    </Typography>
-                    <Typography
-                      variant="subtitle2"
-                      style={{ fontSize: "16px", fontWeight: 400 }}
-                    >
-                      {address}
-                    </Typography>
-                  </div>
-                  <div className={classes.shipping_Address_edit}>
-                    <EditIcon
-                      className={classes.editIcon}
-                      onClick={() => {
-                        history.push("/shipping");
-                      }}
-                    />
-                  </div>
-                </div>
-                <Typography
-                  variant="subtitle2"
-                  className={classes.mobileNo}
-                  style={{
-                    fontWeight: 400,
-                    marginTop: "-5px",
-                    fontSize: "16px",
-                  }}
-                >
-                  {shippingInfo.phoneNo},
-                </Typography>
-
-                <Typography
-                  variant="subtitle2"
-                  className={classes.emailAddress}
-                  style={{ fontWeight: 400, fontSize: "16px" }}
-                >
-                  {user.email}
-                </Typography>
-              </div>
-
-              <div className={classes.shipping_Deatils}>
-                <Typography
-                  variant="h6"
-                  className={classes.orderSub_heading}
-                  style={{ marginTop: "5px" }}
-                >
-                  BILLING DETAILS
-                </Typography>
-
-                <div className={classes.shipping_Address}>
-                  <div className={classes.shipping_Address_Details}>
-                    <Typography
-                      variant="subtitle2"
-                      style={{ fontSize: "16px", fontWeight: 400 }}
-                    >
-                      {user.name}
-                    </Typography>
-                    <Typography
-                      variant="subtitle2"
-                      style={{ fontSize: "16px", fontWeight: 400 }}
-                    >
-                      {address}
-                    </Typography>
-                  </div>
-                  <div className={classes.shipping_Address_edit}>
-                    <EditIcon
-                      className={classes.editIcon}
-                      onClick={() => {
-                        history.push("/shipping");
-                      }}
-                    />
-                  </div>
-                </div>
-                <Typography
-                  variant="subtitle2"
-                  className={classes.mobileNo}
-                  style={{
-                    fontWeight: 400,
-                    marginTop: "-5px",
-                    fontSize: "16px",
-                  }}
-                >
-                  {shippingInfo.phoneNo},
-                </Typography>
-
-                <Typography
-                  variant="subtitle2"
-                  className={classes.emailAddress}
-                  style={{ fontWeight: 400, fontSize: "16px" }}
-                >
-                  {user.email}
-                </Typography>
-              </div>
+              <Typography
+                variant="subtitle2"
+                style={classes.emailAddress}
+              // style={{ fontWeight: 400, fontSize: "16px" }}
+              >
+                {user.email}
+              </Typography>
             </div>
           </div>
         </div>
-    
+      </div>
+
     </>
   );
 };

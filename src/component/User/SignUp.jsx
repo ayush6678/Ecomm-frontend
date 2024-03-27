@@ -10,19 +10,16 @@ import {
 } from "@mui/material";
 // import CricketBallLoader from "../Layouts/loader/Loader";
 // import MetaData from "../Layouts/MetaData/MetaData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signUp, clearErrors } from "../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 // import { useAlert } from "react-alert";
-// import { useHistory } from "react-router-dom";
 // import useStyles from "./LoginFromStyle";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import CloudUpload from "@mui/icons-material/CloudUpload";
 import { LockOutlined } from "@mui/icons-material";
 
 function SignUp() {
-    
 
     // const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
@@ -33,15 +30,13 @@ function SignUp() {
     const [isValidEmail, setIsValidEmail] = useState(true);
     const [isValidName, setIsValidName] = useState(true);
     const [isValidPassword, setIsValidPassword] = useState(true);
-    const [avatar, setAvatar] = useState("");
-    const [avatarPreview, setAvatarPreview] = useState("");
     const [loading, setLoading] = useState(false);
 
     const [areCheckboxesChecked, setAreCheckboxesChecked] = useState({
         checkbox1: false,
         checkbox2: false,
     });
-    // const history = useHistory();
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     // const alert = useAlert();
@@ -57,11 +52,11 @@ function SignUp() {
         if (isAuthenticated) {
             // alert.success("User Registered Successfully");
             console.log("User Registered Successfully")
-            // history.push("/account");
+            navigate("/account");
         }
-    }, [dispatch, isAuthenticated, loading, error, 
+    }, [dispatch, isAuthenticated, loading, error,
         // alert, 
-        // history
+        navigate
     ]);
 
     const handleEmailChange = (event) => {
@@ -70,20 +65,6 @@ function SignUp() {
         setIsValidEmail(
             newEmail !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)
         );
-    };
-
-    const handleAvatarChange = (event) => {
-
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                setAvatarPreview(reader.result);
-                setAvatar(reader.result);
-
-            };
-        }
     };
 
     const handleNameChange = (event) => {
@@ -136,10 +117,10 @@ function SignUp() {
         formData.set("name", name);
         formData.set("email", email);
         formData.set("password", password);
-        formData.set("avatar", avatar);
 
         dispatch(signUp(formData));
         setLoading(false);
+
     }
     return (
         <>
@@ -198,7 +179,7 @@ function SignUp() {
                                     className="showPasswordButton"
                                     onClick={handleShowPasswordClick}
                                 >
-                                    {showPassword ? <VisibilityOff color="disabled"/> : <Visibility color="primary"/>}
+                                    {showPassword ? <VisibilityOff color="disabled" /> : <Visibility color="primary" />}
                                 </Button>
                             ),
                         }}
@@ -218,39 +199,13 @@ function SignUp() {
                                     className="showPasswordButton"
                                     onClick={handleShowPasswordClick}
                                 >
-                                    {showPassword ? <VisibilityOff color="disabled" /> : <Visibility color="primary"/>}
+                                    {showPassword ? <VisibilityOff color="disabled" /> : <Visibility color="primary" />}
                                 </Button>
                             ),
                         }}
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
                     />
-
-                    <div className="root">
-                        <Avatar
-                            alt="Avatar Preview"
-                            src={avatarPreview}
-                            className="avatar2"
-                        />
-                        <input
-                            accept="image/*"
-                            className="input"
-                            id="avatar-input"
-                            type="file"
-                            onChange={handleAvatarChange}
-                        />
-                        <label htmlFor="avatar-input">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                startIcon={<CloudUpload style={{ color: "#FFFFFF" }} />}
-                                component="span"
-                                className="uploadAvatarButton"
-                            >
-                                <p className="uploadAvatarText">Upload Avatar</p>
-                            </Button>
-                        </label>
-                    </div>
 
                     <Grid
                         container
@@ -261,7 +216,7 @@ function SignUp() {
                         <Grid item>
                             <FormControlLabel
                                 control={<Checkbox />}
-                                label="I Accept The Atrangi Terms & Conditions"
+                                label="I Accept The Kriptees Terms & Conditions"
                                 className="checkbox"
                                 checked={areCheckboxesChecked.checkbox1}
                                 onChange={handleCheckboxChange("checkbox1")}
@@ -270,7 +225,7 @@ function SignUp() {
                         <Grid item>
                             <FormControlLabel
                                 control={<Checkbox />}
-                                label="I Accept The Atrangi Terms Of Use"
+                                label="I Accept The Kriptees Terms Of Use"
                                 className="checkbox"
                                 checked={areCheckboxesChecked.checkbox2}
                                 onChange={handleCheckboxChange("checkbox2")}

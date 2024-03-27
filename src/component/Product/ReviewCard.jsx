@@ -5,16 +5,20 @@ import Rating from "@mui/material/Rating";
 import { useStyles } from "./ReviewStyle";
 import MyCard from "./Card";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import CricketBallLoader from "../Layouts/loader/Loader";
 // import { useAlert } from "react-alert";
-// import { useHistory } from "react-router-dom";
-const DialogBox = lazy(() => import("./DialogBox"));
+
+
+// const DialogBox = lazy(() => import("./DialogBox"));
+import DialogBox from "./DialogBox";
 
 
 const ReviewCard = ({ product }) => {
   const classes = useStyles;
   const { isAuthenticated } = useSelector((state) => state.userData);
   // const alert = useAlert();
-  // const history = useHistory();
+  const navigate = useNavigate();
   const [sortValue, setSortValue] = useState("highest");
 
   const handleSortChange = (event) => {
@@ -46,7 +50,7 @@ const ReviewCard = ({ product }) => {
   const handleClickOpen = () => {
     if (!isAuthenticated) {
       // alert.error("Please Login to write a review");
-      //  history.push("/login");
+      navigate("/login");
     }
     setOpen(true);
   };
@@ -57,39 +61,39 @@ const ReviewCard = ({ product }) => {
   };
 
   return (
-    <div className={classes.reviewRoot}>
-      <Typography variant="h5" component="h1" className={classes.reviewHeader}>
+    <div style={classes.reviewRoot}>
+      <Typography variant="h5" component="h1" style={classes.reviewHeader}>
         Users Reviews
       </Typography>
       <Button
         variant="contained"
-        className={classes.submitBtn}
+        style={classes.submitBtn}
         fullWidth
-        style={{ marginTop: "2rem" }}
+        // style={{ marginTop: "2rem" }}
         onClick={handleClickOpen}
       >
         Write your Review
       </Button>
 
       <Suspense
-      // fallback={<CricketBallLoader />}
+        fallback={<CricketBallLoader />}
       >
         <DialogBox
           open={open}
           handleClose={handleClose}
-          className={classes.dialog}
+          style={classes.dialog}
         />
       </Suspense>
       <Grid container alignItems="center" style={{ marginTop: "2rem" }}>
-        <Grid item className={classes.ratingContainer}>
+        <Grid item style={classes.ratingContainer}>
           <Rating
             value={product.ratings}
             precision={0.5}
             readOnly
-            className={classes.star}
+            style={classes.star}
           />
         </Grid>
-        <Typography variant="body2" className={classes.ratingNumber}>
+        <Typography variant="body2" style={classes.ratingNumber}>
           {product.ratings} stars
         </Typography>
         <Grid item>
@@ -100,12 +104,12 @@ const ReviewCard = ({ product }) => {
         </Grid>
       </Grid>
 
-      <Grid container justify="flex-end" className={classes.selectContainer}>
+      <Grid container justify="flex-end" style={classes.selectContainer}>
         <Grid item>
           <Typography
             variant="body2"
-            style={{ fontSize: "12px" }}
-            className={classes.sortBy}
+            // style={{ fontSize: "12px" }}
+            style={classes.sortBy}
           >
             SortBy :
           </Typography>
@@ -113,7 +117,7 @@ const ReviewCard = ({ product }) => {
         <Grid item>
           <Select
             value={sortValue ? sortValue : "highest"}
-            className={classes.select}
+            style={classes.select}
             onClick={handleSortChange}
             MenuProps={{
               anchorOrigin: { vertical: "bottom", horizontal: "left" },
@@ -121,22 +125,22 @@ const ReviewCard = ({ product }) => {
               MenuListProps: { disableScrollLock: true },
             }}
           >
-            <MenuItem value="highest" className={classes.menuItem}>
+            <MenuItem value="highest" style={classes.menuItem}>
               Highest Rated
             </MenuItem>
-            <MenuItem value="lowest" className={classes.menuItem}>
+            <MenuItem value="lowest" style={classes.menuItem}>
               Lowest Rated
             </MenuItem>
-            <MenuItem value="latest" className={classes.menuItem}>
+            <MenuItem value="latest" style={classes.menuItem}>
               Latest Reviews
             </MenuItem>
-            <MenuItem value="oldest" className={classes.menuItem}>
+            <MenuItem value="oldest" style={classes.menuItem}>
               Oldest Reviews
             </MenuItem>
           </Select>
         </Grid>
       </Grid>
-      <div className={classes.container}>
+      <div style={classes.container}>
         {product.reviews &&
           product.reviews.map((review) => <MyCard review={review} />)}
       </div>

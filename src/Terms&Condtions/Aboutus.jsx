@@ -31,7 +31,7 @@ const AboutUs = () => {
             <Grid item xs={12} sm={6}>
               <img
                 src={TermsImage}
-                alt="Atrangi"
+                alt="Kriptees"
                 style={{
                   width: "100%",
                   height: "auto",
@@ -65,7 +65,7 @@ const AboutUs = () => {
                 textAlign: "justify",
                 padding: "0.8rem 1rem",
               }}>
-                Welcome to Atrangi, where fashion meets individuality in the most vibrant and eclectic way possible. We're not just a clothing brand; we're a celebration of uniqueness, a nod to the wonderfully diverse tapestry of styles that make up our world.
+                Welcome to Kriptees, where fashion meets individuality in the most vibrant and eclectic way possible. We're not just a clothing brand; we're a celebration of uniqueness, a nod to the wonderfully diverse tapestry of styles that make up our world.
 
 
               </Typography>
@@ -80,7 +80,7 @@ const AboutUs = () => {
                 textAlign: "justify",
                 padding: "0.8rem 1rem",
               }}>
-                At Atrangi, we believe that fashion is more than just clothing; it's a form of self-expression, a canvas upon which you paint your personality. That's why our collections are as diverse as our clientele, ranging from bold and vibrant prints to elegant and understated designs. Whether you're a trendsetter or a trend-breaker, there's something for everyone in our carefully curated selection.
+                At Kriptees, we believe that fashion is more than just clothing; it's a form of self-expression, a canvas upon which you paint your personality. That's why our collections are as diverse as our clientele, ranging from bold and vibrant prints to elegant and understated designs. Whether you're a trendsetter or a trend-breaker, there's something for everyone in our carefully curated selection.
               </Typography>
             </Grid>
           </Grid>
@@ -127,8 +127,8 @@ const AboutUs = () => {
             textAlign: "justify",
             padding: "0.8rem 1rem",
           }}>
-            But Atrangi is more than just a brand; it's a community. We're a family of like-minded individuals united by our love for fashion and our belief in the power of self-expression. Whether you're shopping online or visiting one of our stores, you'll always be greeted with a warm smile and a helping hand.
-            So come, join us on this journey of self-discovery and style. Together, let's embrace the Atrangi in all of us.
+            But Kriptees is more than just a brand; it's a community. We're a family of like-minded individuals united by our love for fashion and our belief in the power of self-expression. Whether you're shopping online or visiting one of our stores, you'll always be greeted with a warm smile and a helping hand.
+            So come, join us on this journey of self-discovery and style. Together, let's embrace the Kriptees in all of us.
 
 
           </Typography>
@@ -141,7 +141,7 @@ const AboutUs = () => {
             textAlign: "justify",
             padding: "0.8rem 1rem",
           }}>
-            At Atrangi, we believe in fostering long-term relationships
+            At Kriptees, we believe in fostering long-term relationships
             with our customers. We provide excellent customer service and strive
             to exceed expectations at every step. We are committed to delivering
             a seamless online shopping experience and ensuring customer
@@ -177,7 +177,7 @@ const AboutUs = () => {
             textAlign: "justify",
             padding: "0.8rem 1rem",
           }}>
-            At Atrangi, our commitment goes beyond just creating beautiful clothing; we're dedicated to making a positive impact on the world around us. That's why we prioritize sustainability and ethical practices in everything we do, from sourcing materials to manufacturing our garments. We believe that fashion should never come at the expense of the planet or its people, and we're constantly striving to minimize our environmental footprint and support fair labor practices.
+            At Kriptees, our commitment goes beyond just creating beautiful clothing; we're dedicated to making a positive impact on the world around us. That's why we prioritize sustainability and ethical practices in everything we do, from sourcing materials to manufacturing our garments. We believe that fashion should never come at the expense of the planet or its people, and we're constantly striving to minimize our environmental footprint and support fair labor practices.
 
 
           </Typography>

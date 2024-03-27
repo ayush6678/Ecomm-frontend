@@ -91,7 +91,7 @@ function OrderList() {
       headerClassName: "column-header hide-on-mobile",
       renderCell: (params) => {
         const color = params.value === "Delivered" ? "green" : "red";
-        return <div style={{ color, fontWeight: 600 }}>{params.value}</div>;
+        return <div style={{ color:"white", fontWeight: "600" }}>{params.value}</div>;
       },
     },
     {
@@ -156,7 +156,7 @@ function OrderList() {
         <>
           <MetaData title={`ALL Orders - Admin`} />
 
-          <div className="product-list" style={{ marginTop: 0 }}>
+          <div className="product-list" style={{ marginTop: "0" }}>
             <div className={!toggle ? "listSidebar" : "toggleBox"}>
               <Sidebar />
             </div>

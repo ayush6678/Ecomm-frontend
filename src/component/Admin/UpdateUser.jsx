@@ -11,11 +11,8 @@ import {
   updateUser,
   clearErrors,
 } from "../../actions/userAction";
-// import Loader from "../Layouts/loader/Loader";
-import {
-  // useHistory,
-  // useRouteMatch
-} from "react-router-dom";
+import Loader from "../Layouts/loader/Loader";
+import { useNavigate, useParams } from "react-router-dom";
 // import { makeStyles } from "@mui/styles";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {
@@ -198,9 +195,9 @@ function UpdateUser() {
   const dispatch = useDispatch();
   // const alert = useAlert();
   // const userId = useRouteMatch().params.id;
-  const userId = 1;
-
-  // const history = useHistory();
+  const { id } = useParams();
+  const userId = id;
+  const navigate = useNavigate();
   const classes = useStyles;
   const { loading, error, user } = useSelector((state) => state.userDetails);
   const { loading: updateLoading, error: updateError, isUpdated } = useSelector(
@@ -239,23 +236,20 @@ function UpdateUser() {
 
     if (isUpdated) {
       // alert.success("User Updated Successfully");
-      // history.push("/admin/users");
+      navigate("/admin/users");
       dispatch({ type: UPDATE_USER_RESET });
     }
   }, [dispatch, alert,
     error,
-    // history,
+    navigate,
     isUpdated, updateError, user, userId]);
 
   const updateUserSubmitHandler = (e) => {
     e.preventDefault();
-
     const myForm = new FormData();
-
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("role", role);
-
     dispatch(updateUser(userId, myForm));
   };
 
@@ -266,31 +260,31 @@ function UpdateUser() {
       ) : (
         <>
           <MetaData title="Update User" />
-          <div className={classes.updateUser1}>
+          <div style={classes.updateUser1}>
             <div
-              className={
-                !toggle ? `${classes.firstBox_01}` : `${classes.toggleBox_01}`
+              style={
+                !toggle ? classes.firstBox_01 : classes.toggleBox_01
               }
             >
               <Sidebar />
             </div>
 
-            <div className={classes.secondBox_01}>
-              <div className={classes.navBar_01}>
+            <div style={classes.secondBox_01}>
+              <div style={classes.navBar_01}>
                 <Navbar toggleHandler={toggleHandler} />
               </div>
-              <div className={classes.formSection}>
+              <div style={classes.formSection}>
                 <form
-                  className={`${classes.form} `}
+                  style={classes.form}
                   onSubmit={updateUserSubmitHandler}
                 >
-                  <Avatar className={classes.avatar}>
+                  <Avatar style={classes.avatar}>
                     <AccountCircleIcon />
                   </Avatar>
                   <Typography
                     variant="h5"
                     component="h1"
-                    className={classes.heading}
+                    style={classes.heading}
                   >
                     Update Role
                   </Typography>
@@ -298,18 +292,100 @@ function UpdateUser() {
                   <TextField
                     variant="outlined"
                     fullWidth
-                    className={`${classes.nameInput} ${classes.textField}`}
-                    label="Product Name"
+                    style={{
+                      position: "relative",
+                      "& > label": {
+                        left: ".2rem",
+                      },
+                      padding: "4px 0px",
+                      fontSize: "1rem",
+                      width: "100%",
+                      marginBottom: "5.5rem",
+                      height: ".7rem",
+
+                      marginBottom: "2rem",
+                      "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+                        color: "black",
+                        padding: "12px 14px",
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "black",
+                        fontSize: "14px",
+                        textAlign: "center",
+                      },
+                      "& .MuiInputLabel-root.Mui-focused": {
+                        color: "black",
+                        fontSize: "14px",
+                        textAlign: "center",
+                      },
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "black",
+                          color: "black",
+                        },
+                        "& .MuiOutlinedInput-input": {
+                          padding: "13px 8px",
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "black",
+                          color: "black",
+                          outline: "none",
+                        },
+                      },
+                    }}
+                    label="User Name"
                     required
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
-
+                    onChange={(e) => {
+                      setName(e.target.value)
+                    }
+                    }
                   />
 
                   <TextField
                     variant="outlined"
                     fullWidth
-                    className={`${classes.nameInput} ${classes.textField}`}
+                    style={{
+                      position: "relative",
+                      "& > label": {
+                        left: ".2rem",
+                      },
+                      padding: "4px 0px",
+                      fontSize: "1rem",
+                      width: "100%",
+                      marginBottom: "5.5rem",
+                      height: ".7rem",
+
+                      marginBottom: "2rem",
+                      "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+                        color: "black",
+                        padding: "12px 14px",
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "black",
+                        fontSize: "14px",
+                        textAlign: "center",
+                      },
+                      "& .MuiInputLabel-root.Mui-focused": {
+                        color: "black",
+                        fontSize: "14px",
+                        textAlign: "center",
+                      },
+                      "& .MuiOutlinedInput-root": {
+                        "&:hover fieldset": {
+                          borderColor: "black",
+                          color: "black",
+                        },
+                        "& .MuiOutlinedInput-input": {
+                          padding: "13px 8px",
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "black",
+                          color: "black",
+                          outline: "none",
+                        },
+                      },
+                    }}
                     label="Email"
                     required
                     value={email}
@@ -343,7 +419,7 @@ function UpdateUser() {
                     <Select
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
-                      className={classes.select}
+                      style={classes.select}
                       MenuProps={{
                         classes: { paper: classes.selectMenuPaper }, // Update the class name here
                         anchorOrigin: {
@@ -368,7 +444,7 @@ function UpdateUser() {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    className={classes.loginButton}
+                    style={classes.loginButton}
                     disabled={
                       updateLoading ? true : false || role === "" ? true : false
                     }

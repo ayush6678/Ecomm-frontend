@@ -27,7 +27,7 @@ function Home() {
 
     return (
         <>
-            <MetaData title="Atrangi" />
+            <MetaData title="Kriptees" />
             <div className="Home_Page">
                 <div className="heroSlider_Home">
                     <HeroSlider />

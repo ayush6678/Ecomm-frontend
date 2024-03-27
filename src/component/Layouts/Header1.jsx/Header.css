@@ -1,15 +1,16 @@
 .header {
-  background-color: #696969a2;
+  background-color: #000000b4;
   font-family: "Roboto", sans-serif;
   font-size: 0.75rem;
   padding: 0;
   position: fixed;
+  border-bottom: 1px white solid;
   top: 0;
   width: 100%;
   z-index: 999;
   display: flex;
   flex-direction: column;
-  height: 5rem;
+  height: 4rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -69,20 +70,23 @@
 }
 
 .headerLogin {
-  width: 110px;
+  display: flex;
+  /* width: 110px; */
   cursor: pointer;
   /* background-color: rgb(75, 66, 66); */
   /* padding-right: 5px; */
-  padding-left: 30px;
+  /* padding-left: 30px; */
 }
 
 .headerLogin button {
   font-family: "Roboto", sans-serif;
   height: 33px;
+  margin: 5px;
+  border-radius: 5px;
   border: none;
   text-align: center;
   color: rgb(255, 255, 255);
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(22, 124, 219, 0);
   font-weight: 400;
   font-size: 14px;
   cursor: pointer;
@@ -105,7 +109,6 @@
   width: auto;
   height: 52px;
   padding: auto;
-
   align-self: center;
 }
 
@@ -124,7 +127,6 @@
 .headerBottom_navMenu {
   width: auto;
   align-self: center;
-
   /* height: 64px; */
 }
 
@@ -135,7 +137,6 @@
   width: auto;
   text-align: center;
   /* margin-top: 5px; */
-
 }
 
 .headerBottom_navMenu ul li {

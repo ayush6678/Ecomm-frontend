@@ -120,13 +120,15 @@ function Sidebar() {
       {!loading && (
         <>
           <div style={classes.sidebar}>
-            <Avatar
+
+            {/* <Avatar
               src={user && user.avatar
                 // .url
               }
               alt="User Avatar"
               style={classes.avatar11}
-            />
+            /> */}
+
             <Typography variant="subtitle1" style={classes.name}>
               {user && user.name}
             </Typography>
