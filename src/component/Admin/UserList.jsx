@@ -3,7 +3,7 @@ import "./ProductList.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import { Button } from "@mui/material";
 import MetaData from "../Layouts/MetaData/MetaData";
 import EditIcon from "@mui/icons-material/Edit";
@@ -31,16 +31,16 @@ function UserList() {
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (deleteError) {
-      // alert.error(deleteError);
+      toast.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      // alert.success(message);
+      toast.success(message);
       // history.push("/admin/users");
       dispatch({ type: DELETE_USER_RESET });
     }

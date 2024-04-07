@@ -13,7 +13,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { signUp, clearErrors } from "../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 // import useStyles from "./LoginFromStyle";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -45,12 +45,12 @@ function SignUp() {
 
     useEffect(() => {
         if (error) {
-            // alert.error(error);
+            toast.error(error);
             dispatch(clearErrors());
         }
 
         if (isAuthenticated) {
-            // alert.success("User Registered Successfully");
+            toast.success("User Registered Successfully");
             console.log("User Registered Successfully")
             navigate("/account");
         }
@@ -108,7 +108,7 @@ function SignUp() {
 
 
         if (password !== confirmPassword) {
-            // alert.error("Password and Confirm Password do not match");
+            toast.error("Password and Confirm Password do not match");
             setLoading(false);
             return;
         }

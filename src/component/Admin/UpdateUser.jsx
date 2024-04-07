@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../Layouts/MetaData/MetaData";
@@ -225,17 +225,17 @@ function UpdateUser() {
     }
 
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (updateError) {
-      // alert.error(updateError);
+      toast.error(updateError);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      // alert.success("User Updated Successfully");
+      toast.success("User Updated Successfully");
       navigate("/admin/users");
       dispatch({ type: UPDATE_USER_RESET });
     }

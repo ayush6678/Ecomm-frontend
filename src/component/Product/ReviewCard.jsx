@@ -7,7 +7,7 @@ import MyCard from "./Card";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CricketBallLoader from "../Layouts/loader/Loader";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 
 
 // const DialogBox = lazy(() => import("./DialogBox"));
@@ -49,7 +49,7 @@ const ReviewCard = ({ product }) => {
 
   const handleClickOpen = () => {
     if (!isAuthenticated) {
-      // alert.error("Please Login to write a review");
+      toast.error("Please Login to write a review");
       navigate("/login");
     }
     setOpen(true);

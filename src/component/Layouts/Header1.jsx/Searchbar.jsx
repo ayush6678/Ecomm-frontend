@@ -1,37 +1,7 @@
 import React from "react";
-import { SearchOutlined, CloseOutlined } from "@mui/icons-material";
+import { CloseOutlined } from "@mui/icons-material";
+import { GoSearch } from "react-icons/go";
 import "./Searchbar.css";
-
-
-const SearchBar = {
-  display: "flex",
-  alignItems: "center",
-  width: "auto",
-  backgroundColor: "#f2f2f2",
-  borderRadius: "5px",
-  padding: "7px",
-  // @media(max - width: 768px) {
-  //   width: 90 %;
-}
-
-const SearchInput = {
-  width: "100%",
-  outline: "none",
-  backgroundColor: "transparent",
-  marginLeft: "10px",
-  marginRight: "10px",
-  fontSize: "1.1rem",
-  // padding: "5px 8px 0px 8px",
-  border: "none",
-}
-
-const SearchButton = {
-  border: "none",
-  outline: "none",
-  backgroundColor: "transparent",
-  cursor: "pointer"
-}
-
 
 const Search = ({
   handleSearchButtonClick,
@@ -43,31 +13,30 @@ const Search = ({
 }) => {
 
   return (
-    <>
+    <div className="main">
       {!searchBarActive && (
-        <div style={SearchButton} onClick={handleSearchButtonClick}>
-          <SearchOutlined fontSize="large" className="closeIcon" />
+        <div className="SearchButton" onClick={handleSearchButtonClick}>
+          <GoSearch fontSize="large" className="closeIcon" />
         </div>
       )}
       {searchBarActive && (
-        <div style={SearchBar}>
-          <div style={SearchButton} onClick={handleSearchFormSubmit}>
-            <SearchOutlined fontSize="large" className="closeIcon" />
+        <div className="SearchBar">
+          <div className="SearchButton" onClick={handleSearchFormSubmit}>
           </div>
           <form onSubmit={handleSearchFormSubmit} className="search_from">
-            <input style={SearchInput}
+            <input className="SearchInput"
               type="text"
               placeholder="Search"
               value={searchValue}
               onChange={handleSearchInputChange}
             />
           </form>
-          <button style={SearchButton} onClick={handleCrossButtonClick}>
+          <button className="SearchButton" onClick={handleCrossButtonClick}>
             <CloseOutlined fontSize="large" className="closeIcon" />
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

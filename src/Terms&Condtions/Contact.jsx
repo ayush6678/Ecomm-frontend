@@ -8,23 +8,23 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-// import { useAlert } from "react-alert";
-// import { useHistory } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 import MetaData from "../component/Layouts/MetaData/MetaData";
 
 
 
 const ContactUs = () => {
   // const alert = useAlert();
-  // const history = useHistory();
+  const navigate= useNavigate();
   const handleCall = () => {
     window.location.href = "tel:+8171280446";
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // alert.success("Your message has been sent successfully");
-    // history.push("/");
+    toast.success("Your message has been sent successfully");
+    navigate("/");
   };
 
   return (
@@ -43,9 +43,8 @@ const ContactUs = () => {
           color: "#414141",
           fontSize: "1.5rem !important",
           padding: "1rem 3rem",
-          // fontFamily: "Roboto",
+          fontFamily: "Roboto",
           fontWeight: "700 !important",
-          letterSpacing: "2px",
           // [theme.breakpoints.down("sm")]: {
           //   fontSize: "14px ",
           //   padding: "1rem 0",
@@ -62,7 +61,7 @@ const ContactUs = () => {
 
         <Typography variant="h4" style={{
           fontSize: "18px",
-          color: "black",
+          color: "white",
           padding: "2rem 0",
         }}>
           Need Help?
@@ -72,10 +71,8 @@ const ContactUs = () => {
           paddingBottom: "3rem",
           marginLeft: "0.5rem",
           color: "#414141",
-          lineHeight: "1.5rem",
           fontSize: "16px !important",
           width: "90%",
-          letterSpacing: "2px",
           // [theme.breakpoints.down("sm")]: {
           //   width: "100%"
           // }
@@ -98,10 +95,8 @@ const ContactUs = () => {
           paddingBottom: "3rem",
           marginLeft: "0.5rem",
           color: "#414141",
-          lineHeight: "1.5rem",
           fontSize: "16px !important",
           width: "90%",
-          letterSpacing: "2px",
           // [theme.breakpoints.down("sm")]: {
           //   width: "100%"
           // }
@@ -123,10 +118,8 @@ const ContactUs = () => {
           paddingBottom: "3rem",
           marginLeft: "0.5rem",
           color: "#414141",
-          lineHeight: "1.5rem",
           fontSize: "16px !important",
           width: "90%",
-          letterSpacing: "2px",
           // [theme.breakpoints.down("sm")]: {
           //   width: "100%"
           // }
@@ -139,10 +132,8 @@ const ContactUs = () => {
           paddingBottom: "3rem",
           marginLeft: "0.5rem",
           color: "#414141",
-          lineHeight: "1.5rem",
           fontSize: "16px !important",
           width: "90%",
-          letterSpacing: "2px",
         }}>
           <span style={{ fontWeight: "500", paddingBottom: "0.5rem" }}>
             Kriptees Store, Pvt Ltd.
@@ -221,9 +212,8 @@ const ContactUs = () => {
               color: "#414141",
               fontSize: "1.5rem !important",
               padding: "1rem 3rem",
-              // fontFamily: "Roboto",
+              fontFamily: "Roboto",
               fontWeight: "700 !important",
-              letterSpacing: "2px",
               paddingBottom: "1rem",
               // [theme.breakpoints.down("sm")]: {
               //   fontSize: "14px ",
@@ -238,10 +228,8 @@ const ContactUs = () => {
             paddingBottom: "3rem",
             marginLeft: "0.5rem",
             color: "#414141",
-            lineHeight: "1.5rem",
             fontSize: "16px !important",
             width: "90%",
-            letterSpacing: "2px",
             // [theme.breakpoints.down("sm")]: {
             //   width: "100%"
             // }
@@ -275,14 +263,14 @@ const ContactUs = () => {
               },
               "& .MuiSelect-root_contactus": {
                 backgroundColor: "white",
-                color: "black",
+                color: "white",
               },
               "& .MuiSelect-icon": {
-                color: "black",
+                color: "white",
               },
               "& .MuiList-root_contactus": {
                 backgroundColor: "white",
-                color: "black",
+                color: "white",
               },
             }}>
               <Typography variant="body2" style={{
@@ -328,14 +316,14 @@ const ContactUs = () => {
               },
               "& .MuiSelect-root_contactus": {
                 backgroundColor: "white",
-                color: "black",
+                color: "white",
               },
               "& .MuiSelect-icon": {
-                color: "black",
+                color: "white",
               },
               "& .MuiList-root_contactus": {
                 backgroundColor: "white",
-                color: "black",
+                color: "white",
               },
             }}>
               <Typography variant="body2" style={{
@@ -387,14 +375,14 @@ const ContactUs = () => {
               },
               "& .MuiSelect-root_contactus": {
                 backgroundColor: "white",
-                color: "black",
+                color: "white",
               },
               "& .MuiSelect-icon": {
-                color: "black",
+                color: "white",
               },
               "& .MuiList-root_contactus": {
                 backgroundColor: "white",
-                color: "black",
+                color: "white",
               },
             }}>
               <Typography variant="body2" style={{
@@ -443,14 +431,14 @@ const ContactUs = () => {
               },
               "& .MuiSelect-root_contactus": {
                 backgroundColor: "white",
-                color: "black",
+                color: "white",
               },
               "& .MuiSelect-icon": {
-                color: "black",
+                color: "white",
               },
               "& .MuiList-root_contactus": {
                 backgroundColor: "white",
-                color: "black",
+                color: "white",
               },
             }}>
               <Typography variant="body2" style={{
@@ -491,14 +479,14 @@ const ContactUs = () => {
               },
               "& .MuiSelect-root_contactus": {
                 backgroundColor: "white",
-                color: "black",
+                color: "white",
               },
               "& .MuiSelect-icon": {
-                color: "black",
+                color: "white",
               },
               "& .MuiList-root_contactus": {
                 backgroundColor: "white",
-                color: "black",
+                color: "white",
               },
             }}>
               <Typography variant="body2" style={{

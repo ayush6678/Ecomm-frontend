@@ -8,7 +8,7 @@ import "./Profile.css";
 // import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userAction";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 const ProfilePage = () => {
   // const alert = useAlert();
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const ProfilePage = () => {
 
   const logoutHandler = () => {
     dispatch(logout());
-    // alert.success("Logged out successfully");
+    toast.success("Logged out successfully");
     navigate("/login");
   };
   useEffect(() => {

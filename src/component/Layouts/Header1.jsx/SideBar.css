@@ -2,11 +2,13 @@
   position: fixed;
   top: 0;
   left: 0;
+  font-family: "Roboto","sans-serif";
+  font-weight: 300;
   bottom: 0;
   z-index: 999;
   width: 240px;
-  background-color: rgb(37, 37, 37);
-   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  background-color: rgb(255, 255, 255);
+  /* box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); */
   padding-top: 20px;
 }
 
@@ -16,7 +18,7 @@
   right: 8px;
   padding: 10px;
   font-size: 20px;
-  color: #f2f2f2;
+  color: #000000;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -26,7 +28,7 @@
 }
 
 .sidebar-close-btn:hover {
-  background-color: #ed1c24;
+  background-color: #3A68B8;
   transform: scale(1.1);
 }
 
@@ -40,29 +42,31 @@
 .sidebar-menu-item {
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 6px;
+  margin: 6px;
   margin-bottom: 1rem;
-  border-radius: 5px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
- 
+  border-radius: 1px;
+  /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); */
+
 }
 
 .sidebar-menu-item:hover {
-  background-color: #ed1c24;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  background-color: #3A68B8;
+  color: aliceblue;
+  /* box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); */
 }
 
 .sidebar-menu-item-text {
-  color: #f2f2f5;
+  color: #000000;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   margin-left: 1rem;
   text-decoration: none;
   text-decoration-line: none
 }
 
 .sidebar-menu-item svg {
-  color: #f2f2f5;
+  color: #000000;
   font-size: 26px;
   margin-right: 0.5rem;
 }

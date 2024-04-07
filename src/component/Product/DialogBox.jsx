@@ -23,7 +23,7 @@ import { NEW_REVIEW_RESET } from "../../constants/productsConstants";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useParams } from "react-router-dom";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import { clearErrors, newReview } from "../../actions/productAction";
 
 
@@ -74,17 +74,17 @@ const DialogBox = ({ open, handleClose, id }) => {
       myForm.set("productId", productId);
     }
     dispatch(newReview(myForm));
-    // alert.success("Review posted successfully");
+    toast.success("Review posted successfully");
     handleClose();
   };
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (success) {
-      // alert.success("Review posted successfully");
+      toast.success("Review posted successfully");
       dispatch({ type: NEW_REVIEW_RESET });
     }
   }, [dispatch,

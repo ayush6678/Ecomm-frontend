@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./Products.css";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Layouts/loader/Loader";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 // import { useRouteMatch } from "react-router-dom";
 import MetaData from "../Layouts/MetaData/MetaData";
 import { clearErrors, getProduct } from "../../actions/productAction";
@@ -49,7 +49,7 @@ function Products() {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     dispatch(getProduct(

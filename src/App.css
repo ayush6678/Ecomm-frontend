@@ -5,13 +5,14 @@ body,
   width: 100%;
 }
 
-body{
+body {
   background-color: #f1f1f1;
   margin: 0px;
   padding: 0px;
 
-  font-family: 'Archivo', sans-serif;;
+  font-family:
 }
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -27,8 +28,9 @@ input::-webkit-inner-spin-button {
 } */
 
 .greenColor {
-  color: green !important; 
+  color: green !important;
 }
-.redColor { 
+
+.redColor {
   color: red !important;
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ProductList.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import {
   getAllreviews,
   clearErrors,
@@ -202,15 +202,15 @@ function ProductReviews() {
     }
 
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (deleteError) {
-      // alert.error(deleteError);
+      toast.error(deleteError);
       dispatch(clearErrors());
     }
     if (isDeleted) {
-      // alert.success("Review Deleted Successfully");
+      toast.success("Review Deleted Successfully");
       // history.push("/admin/reviews");
       dispatch({ type: DELETE_REVIEW_RESET });
     }

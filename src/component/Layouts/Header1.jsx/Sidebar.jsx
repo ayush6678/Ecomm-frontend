@@ -2,7 +2,7 @@ import React from "react";
 // import { logout } from "../../../actions/userAction";
 import { Link } from "react-router-dom";
 // import { useDispatch } from "react-redux";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";

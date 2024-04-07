@@ -13,6 +13,8 @@ import {
   displayMoney,
   generateDiscountedPrice,
 } from "../DisplayMoney/DisplayMoney";
+import { loadStripe } from '@stripe/stripe-js';
+
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -59,8 +61,7 @@ const Cart = () => {
     dispatch(removeItemFromCart(id));
   };
 
-  const checkoutHandler = () => {
-
+  const checkoutHandler = async () => {
     navigate("/login?redirect=/shipping");
   };
 

@@ -38,6 +38,7 @@ import {
   DELETE_USER_FAIL,
   DELETE_USER_SUCCESS,
 } from "../constants/userConstant";
+import { toast } from "react-toastify";
 
 const token = localStorage.getItem('token');
 
@@ -54,14 +55,14 @@ export function login(email, password) {
       const config = { headers: { "Content-Type": "application/json" } };
 
       const { data } = await axios.post(
-        "https://ecomm-backend-o6x0.onrender.com/api/v1/login",
+        "http://localhost:5000/api/v1/login",
         { email, password },
         config
       );
 
       // console.log(data);
       localStorage.setItem("token", data.token)
-      //const { data1 } = await axios.get("https://ecomm-backend-o6x0.onrender.com/api/v1/profile");
+      //const { data1 } = await axios.get("http://localhost:5000/api/v1/profile");
 
       dispatch({ type: LOGIN_SUCCESS, payload: data.user });
       sessionStorage.setItem("user", JSON.stringify(data.user));
@@ -83,18 +84,16 @@ export function signUp(signupData) {
       };
 
       const { data } = await axios.post(
-        "https://ecomm-backend-o6x0.onrender.com/api/v1/register",
+        "http://localhost:5000/api/v1/register",
         signupData,
         config
       );
 
       dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
 
-
-
     } catch (error) {
-
       dispatch({ type: REGISTER_USER_FAIL, payload: error.message })
+      toast.error("Failed to Create New User");
     }
 
   }
@@ -115,7 +114,7 @@ export const load_UserProfile = () => async (dispatch) => {
       dispatch({ type: LOAD_USER_SUCCESS, payload: user });
     } else {
       // If user data is not available in session storage, make a backend API call
-      const { data } = await axios.get("https://ecomm-backend-o6x0.onrender.com/api/v1/profile");
+      const { data } = await axios.get("http://localhost:5000/api/v1/profile");
 
       dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
 
@@ -134,7 +133,7 @@ export function logout() {
     try {
       sessionStorage.removeItem("user");
       localStorage.removeItem("token");
-      await axios.get(`https://ecomm-backend-o6x0.onrender.com/api/v1/logout`); // token will expired from cookies and no more user data access
+      await axios.get(`http://localhost:5000/api/v1/logout`); // token will expired from cookies and no more user data access
       dispatch({ type: LOGOUT_SUCCESS });
 
     } catch (error) {
@@ -160,7 +159,7 @@ export function updateProfile(userData) {
 
 
       const { data } = await axios.put(
-        `https://ecomm-backend-o6x0.onrender.com/api/v1/profile/update`,
+        `http://localhost:5000/api/v1/profile/update`,
         userData,
         config
       );
@@ -192,7 +191,7 @@ export function updatePassword(userPassWord) {
       };
 
       const { data } = await axios.put(
-        `https://ecomm-backend-o6x0.onrender.com/api/v1/password/update`,
+        `http://localhost:5000/api/v1/password/update`,
         userPassWord,
         config
       );
@@ -219,7 +218,7 @@ export function forgetPassword(email) {
       };
 
       const { data } = await axios.post(
-        `https://ecomm-backend-o6x0.onrender.com/api/v1/password/forgot`,
+        `http://localhost:5000/api/v1/password/forgot`,
         email,
         config
       );
@@ -243,7 +242,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
     const config = { headers: { "Content-Type": "application/json", Authorization: `${token}` } };
 
     const { data } = await axios.put(
-      `https://ecomm-backend-o6x0.onrender.com/api/v1/password/reset/${token}`,
+      `http://localhost:5000/api/v1/password/reset/${token}`,
       passwords,
       config
     );
@@ -269,7 +268,7 @@ export const getAllUsers = () => async (dispatch) => {
       headers: { Authorization: `${token}` }
     };
 
-    const { data } = await axios.get("https://ecomm-backend-o6x0.onrender.com/api/v1/admin/users",
+    const { data } = await axios.get("http://localhost:5000/api/v1/admin/users",
       config
     );
 
@@ -306,7 +305,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
 
     const config = { headers: { "Content-Type": "application/json", Authorization: `${token}` } }
     const { data } = await axios.put(
-      `https://ecomm-backend-o6x0.onrender.com/api/v1/admin/user/${id}`, userData,
+      `http://localhost:5000/api/v1/admin/user/${id}`, userData,
       config
     );
     console.log(data);

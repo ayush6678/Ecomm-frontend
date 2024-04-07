@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import ReorderIcon from "@mui/icons-material/Reorder";
 import SearchBar from "./Searchbar";
 import "./Header.css";
-import CartIcon from "./CartIcon";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { useSelector } from "react-redux";
-
+import { IoBagOutline } from "react-icons/io5";
 import ProfileModal from "./ProfileModel";
 
 function Header() {
@@ -57,8 +56,21 @@ function Header() {
   return (
     <>
       <div className="header">
-        {/* nav */}
+        <div className="red">
+          Free delivery on orders above 499
+        </div>
+
+        <div className="kriptees-main">
+          Kriptees
+          {/* <img
+                src={require("../../../Image/logo.png")}
+                alt="logo"
+                className="headerBottom__logo_main"
+              /> */}
+        </div>
+
         <div className="headerBottom">
+
           <div className="headerBottom__logo">
             <div className="header_mobile_menu">
               <span>
@@ -81,7 +93,16 @@ function Header() {
                   />
                 )}
               </span>
-              <span>
+
+              <div className="kriptees-mobile">
+                Kriptees
+                {/* <img
+                src={require("../../../Image/logo.png")}
+                alt="logo"
+                className="headerBottom__logo_main"
+              /> */}
+              </div>
+              {/* <span>
                 <SearchBar
                   searchBarActive={searchBarActive}
                   searchValue={searchValue}
@@ -90,24 +111,9 @@ function Header() {
                   handleSearchInputChange={handleSearchInputChange}
                   handleSearchFormSubmit={handleSearchFormSubmit}
                 />
-              </span>
+              </span> */}
             </div>
           </div>
-
-          {!searchBarActive && (
-            <Link to="/">
-
-              <h1 style={{
-                color: "white",
-              }}>Kriptees</h1>
-
-              {/* <img
-                src={require("../../../Image/logo.png")}
-                alt="logo"
-                className="headerBottom__logo_main"
-              /> */}
-            </Link>
-          )}
 
           {/* navmenu */}
 
@@ -144,17 +150,18 @@ function Header() {
                 handleSearchFormSubmit={handleSearchFormSubmit}
               />
             </div>
-            <span>
+            <div>
               <Link
                 to="/cart"
                 style={{ color: "none", textDecoration: "none" }}
               >
-                <CartIcon fontSize="large" />
+                <IoBagOutline />
+
               </Link>
-            </span>
-            <span>
+            </div>
+            <div>
               <ProfileModal user={user} isAuthenticated={isAuthenticated} />
-            </span>
+            </div>
 
             <div className="headerLogin">
               {isAuthenticated ? (
@@ -182,6 +189,8 @@ function Header() {
               )}
             </div>
           </div>
+
+
         </div>
       </div >
     </>

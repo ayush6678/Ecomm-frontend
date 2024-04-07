@@ -22,13 +22,13 @@ import {
   clearErrors,
   // getProductDetails,
 } from "../../actions/productAction";
-// import { useAlert } from "react-alert";
 import MetaData from "../Layouts/MetaData/MetaData";
 import { addItemToCart } from "../../actions/cartAction";
 import CricketBallLoader from "../Layouts/loader/Loader";
 import Button from "@mui/material/Button";
 import { PRODUCT_DETAILS_RESET } from "../../constants/productsConstants";
 import { getProductDetails } from "../../actions/productAction";
+import { toast } from 'react-toastify';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -50,7 +50,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors);
     }
     if (success) {
@@ -74,7 +74,7 @@ const ProductDetails = () => {
   const handleAddItem = () => {
 
     dispatch(addItemToCart(id, quantity));
-    // alert.success("Item Added To Cart");
+    toast.success("Item Added To Cart");
   };
 
   // handling Preview image

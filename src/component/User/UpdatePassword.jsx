@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import CricketBallLoader from "../Layouts/loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePassword, clearErrors } from "../../actions/userAction";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import { UPDATE_PASSWORD_RESET } from "../../constants/userConstant";
 import MetaData from "../Layouts/MetaData/MetaData";
 import { useNavigate } from "react-router-dom";
@@ -48,7 +48,7 @@ function UpdatePassword() {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
-      // alert.error("Password and Confirm Password do not match");
+      toast.error("Password and Confirm Password do not match");
       return;
     }
     const myForm = new FormData();
@@ -61,11 +61,11 @@ function UpdatePassword() {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      // alert.success("Profile Updated Successfully");
+      toast.success("Profile Updated Successfully");
       dispatch({
         type: UPDATE_PASSWORD_RESET,
       });

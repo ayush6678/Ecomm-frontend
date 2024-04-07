@@ -4,7 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllOrders, clearErrors, deleteOrder } from "../../actions/orderAction";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 // import { useHistory } from "react-router-dom";
 import MetaData from "../Layouts/MetaData/MetaData";
 import Loader from "../Layouts/loader/Loader";
@@ -52,15 +52,15 @@ function OrderList() {
   // dispatching the action
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (deleteError) {
-      // alert.error(deleteError)
+      toast.error(deleteError)
       dispatch(clearErrors())
     }
     if (isDeleted) {
-      // alert.success("Order Deleted Successfully");
+      toast.success("Order Deleted Successfully");
       // history.push("/admin/orders");
       dispatch({ type: DELETE_ORDER_RESET });
 

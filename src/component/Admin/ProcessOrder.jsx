@@ -9,7 +9,7 @@ import Navbar from "./Navbar";
 import Sidebar from "./Siderbar";
 import MetaData from "../Layouts/MetaData/MetaData";
 import Loader from "../Layouts/loader/Loader";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import { Typography, Divider } from "@mui/material";
 // import { makeStyles } from "@mui/styles";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
@@ -349,16 +349,16 @@ function ProcessOrder() {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (updateError) {
-      // alert.error(updateError);
+      toast.error(updateError);
       dispatch(clearErrors());
     }
     if (isUpdated) {
 
-      // alert.success("Order Updated Successfully");  
+      toast.success("Order Updated Successfully");  
       dispatch({ type: UPDATE_ORDER_RESET });
     }
     dispatch(getOrderDetails(productId));

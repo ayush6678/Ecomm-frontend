@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword, clearErrors } from "../../actions/userAction";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import MetaData from "../Layouts/MetaData/MetaData";
 // import { useHistory, useRouteMatch } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -52,7 +52,7 @@ function ResetPassword() {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
@@ -68,7 +68,7 @@ function ResetPassword() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      // alert.error("Password and Confirm Password do not match");
+      toast.error("Password and Confirm Password do not match");
       return;
     }
     const myForm = new FormData();

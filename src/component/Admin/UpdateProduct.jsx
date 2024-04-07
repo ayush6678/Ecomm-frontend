@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import MetaData from "../Layouts/MetaData/MetaData";
 import Loader from "../Layouts/loader/Loader";
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -91,17 +91,17 @@ function UpdateProduct() {
     }
 
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (updateError) {
-      // alert.error(updateError);
+      toast.error(updateError);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      // alert.success("Product Updated Successfully");
+      toast.success("Product Updated Successfully");
       navigate("/admin/products");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }

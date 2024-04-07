@@ -123,7 +123,7 @@ const ProductCard = ({ product }) => {
                 <Button
                     variant="contained"
                     style={{
-                        backgroundColor: "black",
+                        backgroundColor: "#3A68B8",
                         color: "white",
                         borderRadius: "4",
                         fontWeight: "bold",

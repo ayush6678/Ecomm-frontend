@@ -14,18 +14,17 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { login, clearErrors } from "../../actions/userAction";
-// import CricketBallLoader from "../Layouts/loader/Loader";
-// import { useAlert } from "react-alert";
+import CricketBallLoader from "../Layouts/loader/Loader";
 import { Link } from "react-router-dom";
-// import MetaData from "../Layouts/MetaData/MetaData";
+import MetaData from "../Layouts/MetaData/MetaData";
 import { LockOpen } from "@mui/icons-material";
+import { toast } from 'react-toastify';
 
 function Login() {
 
     const navigate = useNavigate();
 
     const location = useLocation();
-    // const history = useHistory();
 
     const dispatch = useDispatch();
     // const alert = useAlert();
@@ -65,12 +64,11 @@ function Login() {
         : "/account";
     useEffect(() => {
         if (error) {
-            // alert.error(error);
+            toast.error(error);
             dispatch(clearErrors());
         }
 
         if (isAuthenticated) {
-            // history.push(redirect);
             navigate(redirect);
         }
     }, [dispatch, isAuthenticated, loading, error, alert,
@@ -86,106 +84,111 @@ function Login() {
 
     return (
         <>
-            <div className="formContainer">
-                <form className="form">
-                    <Avatar className="avatar">
-                        <LockOpen />
-                    </Avatar>
-                    <Typography variant="h5" component="h1" style={{
-                        textAlign: "center",
-                        marginBottom: "50px",
-                        color: "#414141",
-                        fontWeight: "bold",
-                    }} >
-                        Sign in to Your Account
-                    </Typography>
+            <MetaData title={"Login"} />
+            {loading ? (
+                <CricketBallLoader />
+            ) : (
+                <div className="formContainer">
+                    <form className="form">
+                        <Avatar className="avatar">
+                            <LockOpen />
+                        </Avatar>
+                        <Typography variant="h5" component="h1" style={{
+                            textAlign: "center",
+                            marginBottom: "50px",
+                            color: "#414141",
+                            fontWeight: "bold",
+                        }} >
+                            Sign in to Your Account
+                        </Typography>
 
-                    <TextField
-                        label="Email"
-                        variant="outlined"
-                        fullWidth
-                        className="emailInput textField"
-                        value={email}
-                        onChange={handleEmailChange}
-                        error={!isValidEmail && email !== ""}
-                        helperText={
-                            !isValidEmail && email !== ""
-                                ? "Please enter a valid email address."
-                                : ""
-                        }
-                    />
+                        <TextField
+                            label="Email"
+                            variant="outlined"
+                            fullWidth
+                            className="emailInput textField"
+                            value={email}
+                            onChange={handleEmailChange}
+                            error={!isValidEmail && email !== ""}
+                            helperText={
+                                !isValidEmail && email !== ""
+                                    ? "Please enter a valid email address."
+                                    : ""
+                            }
+                        />
 
 
-                    <TextField
-                        label="Password"
-                        variant="outlined"
-                        type={showPassword ? "text" : "password"}
-                        fullWidth
-                        className="passwordInput textField"
-                        InputProps={{
-                            endAdornment: (
-                                <Button
-                                    variant="outlined"
-                                    className="showPasswordButton"
-                                    onClick={handleShowPasswordClick}
+                        <TextField
+                            label="Password"
+                            variant="outlined"
+                            type={showPassword ? "text" : "password"}
+                            fullWidth
+                            className="passwordInput textField"
+                            InputProps={{
+                                endAdornment: (
+                                    <Button
+                                        variant="outlined"
+                                        className="showPasswordButton"
+                                        onClick={handleShowPasswordClick}
+                                    >
+                                        {showPassword ? <VisibilityOff color="disabled" /> : <Visibility color="primary" />}
+                                    </Button>
+                                ),
+                            }}
+                            value={password}
+                            onChange={handlePasswordChange}
+                        />
+
+                        <Grid container className="rememberMeContainer">
+                            <Grid item>
+                                <FormControlLabel
+                                    control={<Checkbox color="primary" />}
+                                    label="Remember me"
+                                />
+                            </Grid>
+                            <Grid item>
+                                <Link
+                                    to="/password/forgot"
+                                    className="forgotPasswordLink"
                                 >
-                                    {showPassword ? <VisibilityOff color="disabled"/> : <Visibility color="primary"/>}
-                                </Button>
-                            ),
-                        }}
-                        value={password}
-                        onChange={handlePasswordChange}
-                    />
-
-                    <Grid container className="rememberMeContainer">
-                        <Grid item>
-                            <FormControlLabel
-                                control={<Checkbox color="primary" />}
-                                label="Remember me"
-                            />
+                                    Forgot your password?
+                                </Link>
+                            </Grid>
                         </Grid>
-                        <Grid item>
-                            <Link
-                                to="/password/forgot"
-                                className="forgotPasswordLink"
-                            >
-                                Forgot your password?
+
+                        <Typography
+                            variant="body2"
+                            className="termsAndConditionsText"
+                        >
+                            I accept the terms and conditions
+                            <Link to="/policy/privacy" className="privacyText">
+                                Privacy Policy.
                             </Link>
-                        </Grid>
-                    </Grid>
+                        </Typography>
 
-                    <Typography
-                        variant="body2"
-                        className="termsAndConditionsText"
-                    >
-                        I accept the terms and conditions
-                        <Link to="/policy/privacy" className="privacyText">
-                            Privacy Policy.
-                        </Link>
-                    </Typography>
+                        <Button
+                            variant="contained"
+                            className="loginButton"
+                            fullWidth
+                            disabled={isSignInDisabled}
+                            onClick={handleLoginSubmit}
+                        >
+                            Sign in
+                        </Button>
 
-                    <Button
-                        variant="contained"
-                        className="loginButton"
-                        fullWidth
-                        disabled={isSignInDisabled}
-                        onClick={handleLoginSubmit}
-                    >
-                        Sign in
-                    </Button>
-
-                    <Typography
-                        variant="body1"
-                        align="center"
-                        style={{ marginTop: "1rem" }}
-                    >
-                        Don't have an account?
-                        <Link to="/signup" className="createAccount">
-                            Create Account
-                        </Link>
-                    </Typography>
-                </form>
-            </div>
+                        <Typography
+                            variant="body1"
+                            align="center"
+                            style={{ marginTop: "1rem" }}
+                        >
+                            Don't have an account?
+                            <Link to="/signup" className="createAccount">
+                                Create Account
+                            </Link>
+                        </Typography>
+                    </form>
+                </div>
+            )}
         </>
     )
 }

@@ -7,7 +7,7 @@ import {
   updateProfile,
   load_UserProfile,
 } from "../../actions/userAction";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstant";
 import MetaData from "../Layouts/MetaData/MetaData";
 // import { useHistory } from "react-router-dom";
@@ -64,12 +64,12 @@ function UpdateProfile() {
     }
 
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     // isUpadted is nothing But success message from response. once user updated then pop the message and show profile data
     if (isUpdated) {
-      // alert.success("Profile Updated Successfully");
+      toast.success("Profile Updated Successfully");
       // now get user New data from backend
       dispatch({
         type: UPDATE_PROFILE_RESET,

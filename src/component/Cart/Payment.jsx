@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../Layouts/MetaData/MetaData";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import axios from "axios";
 // import { useHistory } from "react-router-dom";
 import OrderDetailsSection from "./OrderDetails";
@@ -45,6 +45,13 @@ import {
   generateDiscountedPrice,
 } from "../DisplayMoney/DisplayMoney";
 import { useNavigate } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import "./App.css";
+import CheckoutForm from "./CheckoutForm";
+
+const stripePromise = loadStripe("pk_test_51OtDKlSJy8qnK7idOZpGFybA8ICUk5VWaObpeamxHWl6q6bdc7DzHCmyA1voY6q6I1f7g5vob80WzyeFDh9KL6cV00wNaXZ0h7");
+
 
 const useStyles = {
   payemntPage: {
@@ -335,6 +342,28 @@ const useStyles = {
 };
 
 const PaymentComponent = () => {
+
+  const [clientSecret, setClientSecret] = useState("");
+
+  useEffect(() => {
+    // Create PaymentIntent as soon as the page loads
+    fetch("http://localhost:5000/api/v1/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
+  }, []);
+
+  const appearance = {
+    theme: 'stripe',
+  };
+  const options = {
+    clientSecret,
+    appearance,
+  };
+
   const classes = useStyles;
   const navigate = useNavigate();
   // const alert = useAlert();
@@ -395,6 +424,7 @@ const PaymentComponent = () => {
   };
 
   async function paymentSubmitHandler(e) {
+
     e.preventDefault();
     if (nameOnCard === "") {
       return;
@@ -410,7 +440,7 @@ const PaymentComponent = () => {
       // sessionStorage.removeItem("stripeApiKey");
 
       const { data } = await axios.post(
-        "https://ecomm-backend-o6x0.onrender.com/api/v1/payment/process",
+        "http://localhost:5000/api/v1/payment/process",
         paymentData,
         config
       );
@@ -441,7 +471,7 @@ const PaymentComponent = () => {
               id: result.paymentIntent.id,
               status: result.paymentIntent.status,
             };
-            // alert.success(result.paymentIntent.status);
+            toast.success(result.paymentIntent.status);
             dispatch(createOrder(order));
             navigate("/success");
             console.log('Payment successful:', response);
@@ -477,7 +507,7 @@ const PaymentComponent = () => {
       if (result.error) {
         // if error then again enable the button on
         console.log(result)
-        // alert.error(result.error.message);
+        toast.error(result.error.message);
       }
       else {
         if (result.paymentIntent.status === "succeeded") {
@@ -486,11 +516,11 @@ const PaymentComponent = () => {
             id: result.paymentIntent.id,
             status: result.paymentIntent.status,
           };
-          // alert.success(result.paymentIntent.status);
+          toast.success(result.paymentIntent.status);
           dispatch(createOrder(order));
           navigate("/success");
         } else {
-          // alert.error("There's some issue while processing payment");
+          toast.error("There's some issue while processing payment");
         }
       }
     } catch (error) {
@@ -498,14 +528,14 @@ const PaymentComponent = () => {
 
       // console.log("err")
 
-      // alert.error(error.message);
+      toast.error(error.message);
     }
   }
 
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
@@ -534,6 +564,8 @@ const PaymentComponent = () => {
         <CheckoutSteps activeStep={2} />
         <MetaData title={"Payment"} />
         <div style={classes.paymentPage__container}>
+
+          {/* 
           <div style={classes.PaymentBox}>
             <Typography
               variant="h5"
@@ -668,6 +700,7 @@ const PaymentComponent = () => {
               Place Order
             </Button>
           </div>
+           */}
           <div style={classes.payemntAmount}>
             <div className="order_summary">
               <h4>
@@ -875,6 +908,14 @@ const PaymentComponent = () => {
                 {user.email}
               </Typography>
             </div>
+          </div>
+
+          <div>
+            {clientSecret && (
+              <Elements options={options} stripe={stripePromise}>
+                <CheckoutForm />
+              </Elements>
+            )}
           </div>
         </div>
       </div>

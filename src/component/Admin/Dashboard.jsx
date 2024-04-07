@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAdminProducts, clearErrors } from "../../actions/productAction";
 import MetaData from "../Layouts/MetaData/MetaData";
 import Loader from "../Layouts/loader/Loader";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import { getAllOrders } from "../../actions/orderAction";
 import { getAllUsers, load_UserProfile } from "../../actions/userAction";
 import Navbar from "./Navbar";
@@ -294,15 +294,15 @@ function Dashboard() {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors);
     }
     if (usersError) {
-      // alert.error(usersError);
+      toast.error(usersError);
       dispatch(clearErrors);
     }
     if (ordersError) {
-      // alert.error(ordersError);
+      toast.error(ordersError);
       dispatch(clearErrors);
     }
 

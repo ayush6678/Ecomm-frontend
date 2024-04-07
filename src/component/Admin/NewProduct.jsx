@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import MetaData from "../Layouts/MetaData/MetaData";
 import Loader from "../Layouts/loader/Loader";
 import Sidebar from "./Siderbar";
@@ -75,12 +75,12 @@ function NewProduct() {
   ];
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (success) {
-      // alert.success("Product Created Successfully");
+      toast.success("Product Created Successfully");
       navigate("/admin/dashboard");
       dispatch({ type: NEW_PRODUCT_RESET });
     }

@@ -7,7 +7,7 @@ import { myOrders, clearErrors } from "../../actions/orderAction";
 // import MetaData from "../Layouts/MetaData/MetaData";
 import MetaData from "../Layouts/MetaData/MetaData";
 import CricketBallLoader from "../Layouts/loader/Loader";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import OrderCard from "./OrderCard";
 
 
@@ -47,7 +47,7 @@ const MyOrder = () => {
 
   useEffect(() => {
     if (error) {
-      // alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 

@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../actions/cartAction";
 import { useNavigate } from "react-router-dom";
 import DialogBox from "../Product/DialogBox";
+import { toast } from 'react-toastify';
 
 const useStyles = {
   root: {
@@ -275,7 +276,7 @@ const OrderCard = ({ item, user }) => {
 
   const addToCartHandler = (id, qty = 0) => {
     dispatch(addItemToCart(id, qty))
-    // alert.success("Item Added to Cart")
+    toast.success("Item Added to Cart")
     navigate("/cart")
   }
 

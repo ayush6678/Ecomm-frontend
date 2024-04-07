@@ -4,22 +4,21 @@
   position: relative;
   cursor: pointer;
   border: none;
-  margin-left: 2px;
-  margin-bottom: 7px;
+  /* margin-left: 2px; */
+  /* margin-bottom: 7px; */
 
 }
 
 .css-tzssek-MuiSvgIcon-root {
-  font-size: 28px !important;
+  font-size: 26px !important;
 }
 
 .arrow-icon {
   font-size: 20px !important;
-
 }
 
 .profile-icon>svg {
-  font-size: 2rem;
+  font-size: 26px;
 }
 
 .modal-container {
@@ -30,12 +29,14 @@
 }
 
 .modal-container .modal-content {
-  background-color: #121212;
-  color: #f2f2f2;
+  background-color: #ffffff;
+  color: #000000;
   padding: 20px 5px;
   width: 220px;
-  position: absolute;
-  top: 110px;
+  height: 100vh;
+  /* position: absolute; */
+  font-family: "Roboto";
+  /* top: 110px; */
   right: 2.5rem;
   border: none;
   outline: none;
@@ -54,23 +55,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .welcome-message {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 14px;
+  margin-bottom: 16px;
+  font-size: 20px;
 }
 
 .welcome-message strong {
   font-weight: bold;
-  font-size: 14px !important;
+  font-size: 20px !important;
 }
 
 .welcome-message p {
   margin: 10px 0;
-  font-size: 14px !important;
+  font-size: 16px !important;
 
 }
 
@@ -79,14 +80,14 @@
 .user-email,
 .created-at {
   margin-bottom: -8px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400px;
 
 }
 
 .divider {
   height: 2px;
-  background-color: rgba(145, 142, 142, 0.168);
+  background-color: rgba(147, 147, 147, 0.168);
   margin-bottom: 10px;
   margin-top: 20px;
   width: 100%;
@@ -110,21 +111,21 @@
 }
 
 .menu-item:hover {
-  background-color: #ed1c24;
+  background-color: #3A68B8;
+  color: #ffffff;
   /* box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2), 0px 4px 12px rgba(0, 0, 0, 0.1); */
-
 }
 
 .menu-icon {
-  color: #f2f2f2;
+  color: #000000;
   font-size: 26px;
   margin-right: 0.5rem;
 }
 
 .menu-item span {
-  color: #f2f2f2;
+  color: #000000;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   text-decoration: none;
   text-decoration-line: none;
 }

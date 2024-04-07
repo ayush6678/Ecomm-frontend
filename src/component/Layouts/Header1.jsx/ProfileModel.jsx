@@ -7,11 +7,13 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Modal, Avatar } from "@mui/material";
+import { CiUser } from "react-icons/ci";
+
 import { AccountCircle as AccountCircleIcon } from "@mui/icons-material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import "./ProfileModel.css";
 import { useNavigate } from "react-router-dom";
-// import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import { logout } from "../../../actions/userAction";
 
@@ -78,7 +80,7 @@ const ProfileModal = ({ user, isAuthenticated }) => {
   function logoutUserHandler() {
     setIsOpen(false);
     dispatch(logout());
-    // alert.success("Logout Successfully");
+    toast.success("Logout Successfully");
   }
 
   function cartHandler() {
@@ -94,9 +96,9 @@ const ProfileModal = ({ user, isAuthenticated }) => {
   return (
     <>
       <div className="profile-icon" onClick={handleOpen}>
-        <PersonIcon
+        <CiUser
           className={`icon smaller ${isOpen ? "active" : ""}`}
-          fontSize="large"
+          // fontSize="small"
         />
         {isOpen ? (
           <ArrowDropUpIcon className="arrow-icon" />

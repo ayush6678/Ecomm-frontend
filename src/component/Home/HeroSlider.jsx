@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const slides = [
     {
-        image: require("../../Image/Cricket-wepon/2.jpg"),
+        image: "https://s3-alpha-sig.figma.com/img/b288/8691/7ed165934d06614ab2ad9886ae614315?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=iv1Gu3kTxyK0Ma8TTyb3Ss8JI9bCHpop-10fYdnLhOhwodzUsRUEHPMtrzaQY7oVgetPs-nZ4BdJ5AKN2MXHyBv0Y9EMWHbFyrxkk0OC-dWjcTDJfeEBSrYP~iy5Uq6bKUlCgsvQ-APLPaweV-RwJ6HScsyVIl8E~Qs74EXNv42Bfkdk4bze1210CFvoZEDRvc7q6aeX6ym0GAdN~lZdCpb-Jfa2xbIfzgfLrx1ncpyY~I-VFxE2A5l3WBw5MqM6ASMqlPv9XIEMa8CdvlzmYUT5O7mZj-DFL6CI4R8sdcfelcquRiA4E0Qi4VMrxP60NAWTyRYQcFq6tS46sekx6A__",
         quote:
             "Unleash Your Passion for Cricket and Embrace the Thrill of the Game",
         saleText:
@@ -52,7 +52,7 @@ export default function HeroSlider() {
     };
 
     return (
-        <>
+        <div style={{marginTop:"7rem"}}>
             <Carousel
                 autoPlay={true}
                 navButtonsAlwaysVisible
@@ -86,7 +86,7 @@ export default function HeroSlider() {
                 }
                 fullHeightHover={false}
                 style={{
-                    height: "calc(100vh - 64px)",
+                    height: "calc(50vh )",
                     width: "100%",
                     position: "relative"
                     // [theme.breakpoints.down("sm")]: {
@@ -99,7 +99,7 @@ export default function HeroSlider() {
             >
                 {slides.map((slide, index) => (
                     <div key={index} style={{
-                        height: "calc(100vh - 64px)",
+                        height: "calc(70vh)",
                         width: "100%",
                         position: "relative"
                         // [theme.breakpoints.down("sm")]: {
@@ -185,6 +185,6 @@ export default function HeroSlider() {
                     </div>
                 ))}
             </Carousel >
-        </>
+        </div>
     );
 }
