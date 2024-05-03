@@ -68,13 +68,13 @@ const OrderDetailsSection = ({ item, totalDiscount, totalPrice }) => {
   const classes = useStyles;
 
   return (
-    <div className={classes.rootPayment}>
-      <img src={item.image} alt={item.name} className={classes.image} />
-      <div className={classes.details}>
-        <Typography variant="subtitle1" className={classes.productName}>
+    <div style={classes.rootPayment}>
+      <img src={item.image} alt={item.name} style={classes.image} />
+      <div style={classes.details}>
+        <Typography variant="subtitle1" style={classes.productName}>
           {item.name}
         </Typography>
-        <Typography variant="body2" className={classes.quantity}>
+        <Typography variant="body2" style={classes.quantity}>
           <span
             style={{ fontWeight: 400, marginRight: "10px", color: "#00000080" }}
           >
@@ -82,17 +82,17 @@ const OrderDetailsSection = ({ item, totalDiscount, totalPrice }) => {
           </span>{" "}
           {item.quantity}
         </Typography>
-        <div className={classes.priceContainer}>
-          <Typography variant="body2" className={classes.finalPrice}>
+        <div style={classes.priceContainer}>
+          <Typography variant="body2" style={classes.finalPrice}>
             {totalPrice}
           </Typography>
-          <Typography variant="body2" className={classes.discountPrice}>
+          <Typography variant="body2" style={classes.discountPrice}>
             {totalDiscount}
           </Typography>
         </div>
         <div>
-          <Typography variant="body2" className={classes.paymentStatus}>
-            <span className={classes.paymentValue}>Payment:</span> Paid
+          <Typography variant="body2" style={classes.paymentStatus}>
+            <span style={classes.paymentValue}>Payment:</span> Paid
           </Typography>
         </div>
       </div>

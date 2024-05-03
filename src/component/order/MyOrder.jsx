@@ -9,6 +9,7 @@ import MetaData from "../Layouts/MetaData/MetaData";
 import CricketBallLoader from "../Layouts/loader/Loader";
 import { toast } from 'react-toastify';
 import OrderCard from "./OrderCard";
+import { useNavigate } from "react-router-dom";
 
 
 const useStyles = {
@@ -39,13 +40,22 @@ const MyOrder = () => {
   const currentYear = new Date().getFullYear();
   const dispatch = useDispatch();
   // const alert = useAlert();
-
   const { orders,
     loading,
     error } = useSelector((state) => state.myOrder);
-  const { user } = useSelector((state) => state.userData);
 
+  const { user, isAuthenticated } = useSelector((state) => state.userData);
+
+  const navigate = useNavigate();
   useEffect(() => {
+
+    // if user not logged in
+    if (isAuthenticated === false) {
+      navigate("/login");
+    }
+
+
+
     if (error) {
       toast.error(error);
       dispatch(clearErrors());
@@ -70,11 +80,11 @@ const MyOrder = () => {
               Your Order
             </Typography>
             <Typography variant="body1" className={classes.orderPageText}>
-              {orders.length} order placed in {currentYear}
+              {orders && orders.length} order placed in {currentYear}
             </Typography>
           </div>
 
-          {orders.map((item) => (
+          {orders && orders.map((item) => (
             <div className={classes.orderCard} key={item._id}>
               <OrderCard item={item} user={user} />
             </div>

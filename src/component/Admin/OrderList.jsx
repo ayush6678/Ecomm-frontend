@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ProductList.css";
 import { DataGrid } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllOrders, clearErrors, deleteOrder } from "../../actions/orderAction";
 import { toast } from 'react-toastify';
@@ -15,13 +15,20 @@ import Navbar from "./Navbar";
 import { DELETE_ORDER_RESET } from "../../constants/orderConstant";
 function OrderList() {
   const dispatch = useDispatch();
-  // const history = useHistory();
   // const alert = useAlert();
+  const navigate = useNavigate();
 
-  const { error, loading, orders } = useSelector((state) => state.allOrders);
+  const {
+    error,
+    loading,
+    orders
+  } = useSelector((state) => state.allOrders);
+
+
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.deleteUpdateOrder
   );
+
   const [toggle, setToggle] = useState(false);
 
   // togle handler =>
@@ -53,6 +60,7 @@ function OrderList() {
   useEffect(() => {
     if (error) {
       toast.error(error);
+      console.log(error)
       dispatch(clearErrors());
     }
     if (deleteError) {
@@ -61,13 +69,19 @@ function OrderList() {
     }
     if (isDeleted) {
       toast.success("Order Deleted Successfully");
-      // history.push("/admin/orders");
+      navigate("/admin/orders");
       dispatch({ type: DELETE_ORDER_RESET });
-
     }
     dispatch(getAllOrders());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, error, alert, isDeleted, deleteError]);
+  }, [dispatch,
+    error,
+    alert,
+    isDeleted,
+    navigate,
+     deleteError
+  ]);
+
 
   // delet order handler
   const deleteOrderHandler = (id) => {
@@ -91,7 +105,7 @@ function OrderList() {
       headerClassName: "column-header hide-on-mobile",
       renderCell: (params) => {
         const color = params.value === "Delivered" ? "green" : "red";
-        return <div style={{ color:"white", fontWeight: "600" }}>{params.value}</div>;
+        return <div style={{ color: `${color}`, fontWeight: "600" }}>{params.value}</div>;
       },
     },
     {
@@ -120,11 +134,11 @@ function OrderList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/admin/order/${params.getValue(params.id, "id")}`}>
+            <Link to={`/admin/order/${params.id}`}>
               <EditIcon className="icon-" />
             </Link>
             <Link
-              onClick={() => deleteOrderHandler(params.getValue(params.id, "id"))}
+              onClick={() => deleteOrderHandler(params.id)}
             >
               <DeleteIcon className="iconbtn" />
             </Link>
@@ -148,39 +162,45 @@ function OrderList() {
     });
   })
 
+  console.log(rows)
+
+
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <MetaData title={`ALL Orders - Admin`} />
+      {
+        loading
+          ? (
+            <Loader />
+          ) : (
+            <>
+              <MetaData title={`ALL Orders - Admin`} />
 
-          <div className="product-list" style={{ marginTop: "0" }}>
-            <div className={!toggle ? "listSidebar" : "toggleBox"}>
-              <Sidebar />
-            </div>
+              <div className="product-list" style={{ marginTop: "0" }}>
+                <div className={!toggle ? "listSidebar" : "toggleBox"}>
+                  <Sidebar />
+                </div>
 
-            <div className="list-table">
-              <Navbar toggleHandler={toggleHandler} />
-              <div className="productListContainer">
-                <h4 id="productListHeading">ALL ORDERS</h4>
+                <div className="list-table">
+                  <Navbar toggleHandler={toggleHandler} />
+                  <div className="productListContainer">
+                    <h4 id="productListHeading">ALL ORDERS</h4>
 
-                <DataGrid
-                  rows={rows}
-                  columns={columns}
-                  pageSize={10}
-                  disableSelectionOnClick
-                  className="productListTable"
-                  autoHeight
-                />
+                    <DataGrid
+                      rows={rows}
+                      columns={columns}
+                      pageSize={10}
+                      disableSelectionOnClick
+                      className="productListTable"
+                      autoHeight
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </>
-      )}
+            </>
+          )}
     </>
   );
 }
+
 
 export default OrderList;

@@ -3,13 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../Layouts/MetaData/MetaData";
 import { toast } from 'react-toastify';
 import axios from "axios";
-// import { useHistory } from "react-router-dom";
 import OrderDetailsSection from "./OrderDetails";
 import DummyCard from "./DummyCard";
 import { clearErrors, createOrder } from "../../actions/orderAction";
 import CheckoutSteps from "./CheckoutSteps ";
-
-// for cardDetails for card detials input section and hooks for accessing strip and element from App.js route
 import {
   CardNumberElement,
   CardCvcElement,
@@ -32,10 +29,8 @@ import {
   CardMembership,
   Payment,
   Lock,
-
 } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
-// import { makeStyles } from "@mui/styles";
 import AssuredWorkloadOutlinedIcon from "@mui/icons-material/AssuredWorkloadOutlined";
 import { ReactComponent as MasterCard } from "../../Image/payment-svg/mastercard.svg";
 import { ReactComponent as Visa } from "../../Image/payment-svg/visa (1).svg";
@@ -49,9 +44,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import "./App.css";
 import CheckoutForm from "./CheckoutForm";
-
-const stripePromise = loadStripe("pk_test_51OtDKlSJy8qnK7idOZpGFybA8ICUk5VWaObpeamxHWl6q6bdc7DzHCmyA1voY6q6I1f7g5vob80WzyeFDh9KL6cV00wNaXZ0h7");
-
+const stripePromise = loadStripe("pk_test_51P65fpSGtOgwK9t5rMoHvMwWvBtSexTvUCyqDR6t7dHolnKHrBOBkQTIR6XE1z6RCoULWCRjFipLDuJ04NKscw3s00MLoFd6zG");
 
 const useStyles = {
   payemntPage: {
@@ -342,9 +335,7 @@ const useStyles = {
 };
 
 const PaymentComponent = () => {
-
   const [clientSecret, setClientSecret] = useState("");
-
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     fetch("http://localhost:5000/api/v1/create-payment-intent", {
@@ -406,7 +397,6 @@ const PaymentComponent = () => {
   const handleCloseDummyCard = () => {
     setShowDummyCard(false);
   };
-
 
   const address = `${shippingInfo.address} , ${shippingInfo.city} ${shippingInfo.state
     } , ${shippingInfo.pinCode} , ${shippingInfo.country || "India"}`;
@@ -471,6 +461,7 @@ const PaymentComponent = () => {
               id: result.paymentIntent.id,
               status: result.paymentIntent.status,
             };
+
             toast.success(result.paymentIntent.status);
             dispatch(createOrder(order));
             navigate("/success");
@@ -548,8 +539,6 @@ const PaymentComponent = () => {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-
-
 
   let discountedPrice = generateDiscountedPrice(totalPrice);
   let totalDiscount = totalPrice - discountedPrice;
@@ -786,7 +775,7 @@ const PaymentComponent = () => {
             <div className="paymentLogoImg">
               <img
                 src={require("../../Image/cart/cart_img.png")}
-                alt="payemnt-icons"
+                alt="payment-icons"
                 className="paymentImg"
               />
             </div>
@@ -911,12 +900,26 @@ const PaymentComponent = () => {
           </div>
 
           <div>
+
             {clientSecret && (
               <Elements options={options} stripe={stripePromise}>
                 <CheckoutForm />
               </Elements>
             )}
+
+            <button className="button1" style={{ margin: "10px" }} onClick={() => {
+              order.paymentInfo = {
+                id: "TEAM ONLY",
+                status: "PASSED",
+              };
+              toast.success("TEAM ONLY PAYMENT ACCEPTED!");
+              console.log(order)
+              dispatch(createOrder(order));
+              navigate("/success");
+            }}>Pay Anyways</button>
+
           </div>
+
         </div>
       </div>
 

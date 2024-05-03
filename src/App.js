@@ -12,7 +12,6 @@ import Services from "./Terms&Condtions/Service";
 import PrivacyPolicy from "./Terms&Condtions/Privacy";
 import ReturnPolicyPage from "./Terms&Condtions/Return";
 import ProfilePage from "./component/User/Profile";
-
 import "./App.css";
 import Cart from "./component/Cart/Cart";
 import ProductDetails from "./component/Product/ProductDetails";

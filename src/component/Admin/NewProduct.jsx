@@ -45,10 +45,22 @@ function NewProduct() {
   const [category, setCategory] = useState("");
   const [Stock, setStock] = useState(0);
   const [info, setInfo] = useState("")
-  const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([]);
   const [isCategory, setIsCategory] = useState(false);
-  const fileInputRef = useRef();
+  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrls, setImageUrls] = useState([]);
+
+  const handleInputChange = (e) => {
+    setImageUrl(e.target.value);
+  };
+
+  const handleUpload = () => {
+    if (imageUrl.trim() !== '') {
+      setImageUrls([...imageUrls, imageUrl]);
+      setImageUrl('');
+    }
+  };
+
+
   const [toggle, setToggle] = useState(false);
   const user = sessionStorage.getItem("user");
 
@@ -64,9 +76,7 @@ function NewProduct() {
     setIsCategory(true);
   };
 
-  const handleImageUpload = () => {
-    fileInputRef.current.click();
-  };
+
   const categories = [
     "Bags",
     "Shoes",
@@ -102,28 +112,15 @@ function NewProduct() {
     myForm.set("Stock", Stock);
     myForm.set("info", info);
     myForm.set("user", JSON.parse(user)._id);
-    images.forEach((currImg) => {
+
+    imageUrls.forEach((currImg) => {
       myForm.append("images", currImg);
     });
+
     dispatch(createProduct(myForm));
   };
 
-  const createProductImagesChange = (e) => {
-    const files = Array.from(e.target.files);
-    setImages([]);
-    setImagesPreview([]);
 
-    files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImagesPreview((old) => [...old, reader.result]);
-          setImages((old) => [...old, reader.result]);
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-  };
 
   return (
     <>
@@ -331,51 +328,28 @@ function NewProduct() {
                     }}
                   />
 
-                  <div className="root">
-                    <div className="imgIcon">
-                      <CollectionsIcon
-                        fontSize="large"
-                        style={{ fontSize: 40 }}
-                      />
-                    </div>
+                  <TextField
+                    type="text"
+                    variant="outlined"
+                    label="Images"
+                    className="nameInput textField"
+                    placeholder="Enter image URL"
+                    value={imageUrl}
+                    onChange={handleInputChange}
+                  />
 
-                    <input
-                      type="file"
-                      name="avatar"
-                      className="input"
-                      accept="image/*"
-                      onChange={createProductImagesChange}
-                      multiple
-                      style={{ display: "none" }}
-                      ref={fileInputRef}
-                    />
-                    <label htmlFor="avatar-input">
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className="uploadAvatarButton"
-                        startIcon={
-                          <CloudUploadIcon
-                            style={{
-                              color: "#FFFFFF",
-                            }}
-                          />
-                        }
-                        onClick={handleImageUpload}
-                      >
-                        <p className="uploadAvatarText">
-                          Upload Images
-                        </p>
-                      </Button>
-                    </label>
-                  </div>
+                  <Button
+                    variant="contained"
+                    className="loginButton"
+                    onClick={handleUpload}
+                  >Upload Image</Button>
 
                   <Box className="imageArea">
-                    {imagesPreview &&
-                      imagesPreview.map((image, index) => (
+                    {imageUrls &&
+                      imageUrls.map((url, index) => (
                         <img
                           key={index}
-                          src={image}
+                          src={url}
                           alt="Product Preview"
                           className="image"
                         />

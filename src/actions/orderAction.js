@@ -27,10 +27,9 @@ export const createOrder = (order) => async (dispatch) => {
     dispatch({ type: CREATE_ORDER_REQUEST });
     const token = localStorage.getItem('token');
 
-
     const config = {
-      headers: { "Content-Type": "application/json" },
-      Authorization: `${token}`,
+      headers: { "Content-Type": "application/json", Authorization: `${token}` }
+
     };
     const { data } = await axios.post("http://localhost:5000/api/v1/order/new", order, config);
 
@@ -83,6 +82,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
 };
 
 export const getAllOrders = () => async (dispatch) => {
+
   try {
     dispatch({ type: ALL_ORDERS_REQUEST });
 
@@ -93,12 +93,13 @@ export const getAllOrders = () => async (dispatch) => {
       }
     };
 
-    const { data } = await axios.get(`localhost:5000/api/v1/admin/orders`, config);
+    const { data } = await axios.get(`http://localhost:5000/api/v1/admin/orders`, config);
 
     dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
     dispatch({ type: ALL_ORDERS_FAIL, payload: error.message });
   }
+
 };
 
 
@@ -130,8 +131,8 @@ export const updateOrder = (id, productData) => async (dispatch) => {
     const token = localStorage.getItem('token');
 
     const config = {
-      headers: { "Content-Type": "application/json" },
-      Authorization: `${token}`,
+      headers: { "Content-Type": "application/json", Authorization: `${token}` },
+
     };
     const { data } = await axios.put(
       `http://localhost:5000/api/v1/admin/order/${id}`,

@@ -309,7 +309,7 @@ function ProductReviews() {
                 deleteReviewHandler(params.getValue(params.id, "id"))
               }
             >
-              <DeleteIcon className="iconbtn" style={{ marginLeft: "1rem" }} />
+              <DeleteIcon style="iconbtn" style={{ marginLeft: "1rem" }} />
             </div>
           </>
         );
@@ -338,38 +338,39 @@ function ProductReviews() {
         <>
           <MetaData title="All Reviews" />
 
-          <div className={classes.updateUser1}>
+          <div style={classes.updateUser1}>
             <div
-              className={
-                !toggle ? `${classes.firstBox_01}` : `${classes.toggleBox_01}`
+              style={
+
+                !toggle ? classes.firstBox_01 : classes.toggleBox_01
               }
             >
               <Sidebar />
             </div>
 
-            <div className={classes.secondBox_01}>
-              <div className={classes.navBar_01}>
+            <div style={classes.secondBox_01}>
+              <div style={classes.navBar_01}>
                 <Navbar toggleHandler={toggleHandler} />
               </div>
-              <div className={classes.formSection}>
+              <div style={classes.formSection}>
                 <form
-                  className={`${classes.form}`}
+                  style={classes.form}
                   onSubmit={productReviewsSubmitHandler}
                 >
-                  <Avatar className={classes.avatar}>
+                  <Avatar style={classes.avatar}>
                     <StarRateIcon />
                   </Avatar>
                   <Typography
                     variant="h5"
                     component="h1"
-                    className={classes.heading}
+                    style={classes.heading}
                   >
                     All Reviews
                   </Typography>
                   <TextField
                     variant="outlined"
                     fullWidth
-                    className={`${classes.nameInput} ${classes.textField}`}
+                    style={classes.nameInput}
                     label="Product Id"
                     required
                     value={productId}
@@ -393,7 +394,7 @@ function ProductReviews() {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    className={classes.loginButton}
+                    style={classes.loginButton}
                     disabled={
                       loading ? true : false || productId === "" ? true : false
                     }
@@ -403,7 +404,7 @@ function ProductReviews() {
                 </form>
 
                 {reviews && reviews.length > 0 ? (
-                  <div className="productListContainer">
+                  <div style="productListContainer">
                     <h4 id="productListHeading">ALL PRODUCTS</h4>
                     <DataGrid
                       rows={rows}
@@ -411,11 +412,11 @@ function ProductReviews() {
                       pageSize={10}
                       autoHeight
                       disableSelectionOnClick
-                      className="productListTable"
+                      style="productListTable"
                     />
                   </div>
                 ) : (
-                  <h1 className={classes.heading_02}>No Reviews Found</h1>
+                  <h1 style={classes.heading_02}>No Reviews Found</h1>
                 )}
               </div>
               ;

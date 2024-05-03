@@ -64,7 +64,8 @@ function Login() {
         : "/account";
     useEffect(() => {
         if (error) {
-            toast.error(error);
+            if (isAuthenticated)
+                toast.error(error);
             dispatch(clearErrors());
         }
 

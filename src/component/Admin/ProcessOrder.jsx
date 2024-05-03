@@ -358,7 +358,7 @@ function ProcessOrder() {
     }
     if (isUpdated) {
 
-      toast.success("Order Updated Successfully");  
+      toast.success("Order Updated Successfully");
       dispatch({ type: UPDATE_ORDER_RESET });
     }
     dispatch(getOrderDetails(productId));
@@ -379,227 +379,226 @@ function ProcessOrder() {
       {loading ? (
         <Loader />
       ) : (
-    <>
-      <MetaData title="Process Order" />
-      <div className={classes.prodcessOrder}>
-        <div
-          className={
-            !toggle
-              ? `${classes.firstBox_prodcessOrder}`
-              : `${classes.toggleBox_prodcessOrder}`
-          }
-        >
-          <Sidebar />
-        </div>
-
-        <div className={classes.secondBox__prodcessOrder}>
-          <div className={classes.navBar__prodcessOrder}>
-            <Navbar toggleHandler={toggleHandler} />
-          </div>
-          <div className={classes.mainInfo__prodcessOrder}>
-            <div className={classes.order_Details__prodcessOrder}>
-              <h5 className={classes.shipping_heading__prodcessOrder}>
-                USER ORDER DETAILS
-              </h5>
-              {order.orderItems &&
-                order.orderItems.map((item, idx) => (
-                  <Link
-                    to={`/product/${item.productId}`}
-                    style={{
-                      textDecoration: "none",
-                      color: "inherit",
-                      textDecorationColor: "none",
-                    }}
-                  >
-                    <OrderDetailsSection
-                      key={idx}
-                      item={item}
-                      totalDiscount={
-                        `₹${(item.price * item.quantity * 20) / 100}` // random discount between 1 to 30
-                      }
-                      totalPrice={`₹${item.price * item.quantity}`}
-                    />
-                  </Link>
-                ))}
+        <>
+          <MetaData title="Process Order" />
+          <div style={classes.prodcessOrder}>
+            <div
+              style={
+                !toggle
+                  ? classes.firstBox_prodcessOrder
+                  : classes.toggleBox_prodcessOrder
+              }
+            >
+              <Sidebar />
             </div>
 
-            <div className={classes.shipping_Deatils__prodcessOrder}>
-              <Typography
-                variant="h6"
-                className={classes.orderSub_heading__prodcessOrder}
-              >
-                DELIVERY ADDRESS
-              </Typography>
-
-              <div className={classes.shipping_Address__prodcessOrder}>
-                <div
-                  className={
-                    classes.shipping_Address_Details__prodcessOrder
-                  }
-                >
-                  <Typography
-                    variant="subtitle2"
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: 400,
-                    }}
-                  >
-                    {order.user && order.user.name}
-                  </Typography>
-                  <Typography
-                    variant="subtitle2"
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: 400,
-                    }}
-                  >
-                    {order.shippingInfo &&
-                      `${order.shippingInfo.address}, ${order.shippingInfo.city}, ${order.shippingInfo.state}, ${order.shippingInfo.pinCode}, ${order.shippingInfo.country}`}
-                  </Typography>
-
-                  <Typography
-                    variant="subtitle2"
-                    className={classes.mobileNo__prodcessOrder}
-                    style={{
-                      fontWeight: 400,
-                      marginTop: "-5px",
-                      fontSize: "16px",
-                    }}
-                  >
-                    {order.shippingInfo && order.shippingInfo.phoneNo}
-                  </Typography>
-
-                  <Typography
-                    variant="subtitle2"
-                    className={classes.emailAddress__prodcessOrder}
-                    style={{
-                      fontWeight: 400,
-                      fontSize: "16px",
-                    }}
-                  >
-                    {order.user && order.user.email}
-                  </Typography>
+            <div style={classes.secondBox__prodcessOrder}>
+              <div style={classes.navBar__prodcessOrder}>
+                <Navbar toggleHandler={toggleHandler} />
+              </div>
+              <div style={classes.mainInfo__prodcessOrder}>
+                <div style={classes.order_Details__prodcessOrder}>
+                  <h5 style={classes.shipping_heading__prodcessOrder}>
+                    USER ORDER DETAILS
+                  </h5>
+                  {order.orderItems &&
+                    order.orderItems.map((item, idx) => (
+                      <Link
+                        to={`/product/${item.productId}`}
+                        style={{
+                          textDecoration: "none",
+                          color: "inherit",
+                          textDecorationColor: "none",
+                        }}
+                      >
+                        <OrderDetailsSection
+                          key={idx}
+                          item={item}
+                          totalDiscount={
+                            `₹${(item.price * item.quantity * 20) / 100}` // random discount between 1 to 30
+                          }
+                          totalPrice={`₹${item.price * item.quantity}`}
+                        />
+                      </Link>
+                    ))}
                 </div>
-              </div>
-            </div>
 
-            <Divider className={classes.boldDivider__prodcessOrder} />
-            <div
-              className={`${classes.total_price__prodcessOrder} ${classes.order_Summary_Item__prodcessOrder}`}
-            >
-              <div>
-                <h4>Total Price</h4>
+                <div style={classes.shipping_Deatils__prodcessOrder}>
+                  <Typography
+                    variant="h6"
+                    style={classes.orderSub_heading__prodcessOrder}
+                  >
+                    DELIVERY ADDRESS
+                  </Typography>
 
-                <p
-                  style={{
-                    fontSize: "14px",
-                    marginTop: "-10px",
-                    color: "#414141",
-                  }}
-                >
-                  (Inclusive of all taxes)
-                </p>
-              </div>
-              <p>
-                <b style={{ marginLeft: "-2rem" }}>
-                  ₹{order.totalPrice && order.totalPrice}
-                </b>
-              </p>
-            </div>
-
-            <div
-              className={`${classes.total_price__prodcessOrder} ${classes.order_Summary_Item__prodcessOrder}`}
-            >
-              <div>
-                <h4>Order Status</h4>
-              </div>
-              <p
-                className={
-                  order.orderStatus && order.orderStatus === "Delivered"
-                    ? "greenColor"
-                    : "redColor"
-                }
-              >
-                <b> {order.orderStatus && order.orderStatus}</b>
-              </p>
-            </div>
-
-            <div
-              className={`${classes.total_price__prodcessOrder} ${classes.order_Summary_Item__prodcessOrder}`}
-            >
-              <div>
-                <h4>Payment Status</h4>
-              </div>
-              <p
-                className={
-                  order.orderStatus && order.orderStatus === "Delivered"
-                    ? `${classes.greenFont}`
-                    : `${classes.redFont}`
-                }
-              >
-                <b className={classes.greenFont}>
-                  {" "}
-                  {order.paymentInfo &&
-                    order.paymentInfo.status === "succeeded"
-                    ? "PAID"
-                    : "NOT PAID"}
-                </b>
-              </p>
-            </div>
-
-            {order.orderStatus && (
-              <>
-                <div
-                  style={{
-                    display:
-                      order.orderStatus === "Delivered" ? "none" : "block",
-                    padding: " 0 1rem 0 0",
-                  }}
-                >
-                  <Divider
-                    className={classes.boldDivider__prodcessOrder2}
-                  />
-                  <form className={classes.updateOrderForm__prodcessOrder}>
-                    <h1>Process Order</h1>
-
-                    <div style={{ marginTop: "-1rem" }}>
-                      <AccountTreeIcon />
-                      <select onChange={(e) => setStatus(e.target.value)}>
-                        <option value="">Choose Category</option>
-                        {order.orderStatus === "Processing" && (
-                          <option value="Shipped">Shipped</option>
-                        )}
-
-                        {order.orderStatus === "Shipped" && (
-                          <option value="Delivered">Delivered</option>
-                        )}
-                      </select>
-                    </div>
-
-                    <Button
-                      variant="contained"
-                      className={classes.placeOrderBtn_prodcessOrder}
-                      fullWidth
-                      onClick={updateOrderSubmitHandler}
-                      disabled={
-                        loading
-                          ? true
-                          : false || status === ""
-                            ? true
-                            : false
+                  <div style={classes.shipping_Address__prodcessOrder}>
+                    <div
+                      style={
+                        classes.shipping_Address_Details__prodcessOrder
                       }
                     >
-                      Process
-                    </Button>
-                  </form>
+                      <Typography
+                        variant="subtitle2"
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: 400,
+                        }}
+                      >
+                        {order.user && order.user.name}
+                      </Typography>
+                      <Typography
+                        variant="subtitle2"
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: 400,
+                        }}
+                      >
+                        {order.shippingInfo &&
+                          `${order.shippingInfo.address}, ${order.shippingInfo.city}, ${order.shippingInfo.state}, ${order.shippingInfo.pinCode}, ${order.shippingInfo.country}`}
+                      </Typography>
+
+                      <Typography
+                        variant="subtitle2"
+                        // style={classes.mobileNo__prodcessOrder}
+                        style={{
+                          fontWeight: 400,
+                          marginTop: "-5px",
+                          fontSize: "16px",
+                        }}
+                      >
+                        {order.shippingInfo && order.shippingInfo.phoneNo}
+                      </Typography>
+
+                      <Typography
+                        variant="subtitle2"
+                        // style={classes.emailAddress__prodcessOrder}
+                        style={{
+                          fontWeight: 400,
+                          fontSize: "16px",
+                        }}
+                      >
+                        {order.user && order.user.email}
+                      </Typography>
+                    </div>
+                  </div>
                 </div>
-              </>
-            )}
+
+                <Divider style={classes.boldDivider__prodcessOrder} />
+                <div
+                  style={classes.total_price__prodcessOrder}
+                >
+                  <div>
+                    <h4>Total Price</h4>
+
+                    <p
+                      style={{
+                        fontSize: "14px",
+                        marginTop: "-10px",
+                        color: "#414141",
+                      }}
+                    >
+                      (Inclusive of all taxes)
+                    </p>
+                  </div>
+                  <p>
+                    <b style={{ marginLeft: "-2rem" }}>
+                      ₹{order.totalPrice && order.totalPrice}
+                    </b>
+                  </p>
+                </div>
+
+                <div
+                  style={classes.total_price__prodcessOrder}
+                >
+                  <div>
+                    <h4>Order Status</h4>
+                  </div>
+                  <p
+                    className={
+                      order.orderStatus && order.orderStatus === "Delivered"
+                        ? "greenColor"
+                        : "redColor"
+                    }
+                  >
+                    <b> {order.orderStatus && order.orderStatus}</b>
+                  </p>
+                </div>
+
+                <div
+                  style={classes.total_price__prodcessOrder}
+                >
+                  <div>
+                    <h4>Payment Status</h4>
+                  </div>
+                  <p
+                    className={
+                      order.orderStatus && order.orderStatus === "Delivered"
+                        ? classes.greenFont
+                        : classes.redFont
+                    }
+                  >
+                    <b style={classes.greenFont}>
+                      {" "}
+                      {order.paymentInfo &&
+                        order.paymentInfo.status === "succeeded"
+                        ? "PAID"
+                        : "NOT PAID"}
+                    </b>
+                  </p>
+                </div>
+
+                {order.orderStatus && (
+                  <>
+                    <div
+                      className={{
+                        display:
+                          order.orderStatus === "Delivered" ? "none" : "block",
+                        padding: " 0 1rem 0 0",
+                      }}
+                    >
+                      <Divider
+                        style={classes.boldDivider__prodcessOrder2}
+                      />
+                      <form style={classes.updateOrderForm__prodcessOrder}>
+                        <h1>Process Order</h1>
+
+                        <div style={{ marginTop: "-1rem" }}>
+                          <AccountTreeIcon />
+                          <select onChange={(e) => setStatus(e.target.value)}>
+                            <option value="">Choose Category</option>
+                            {order.orderStatus === "Processing" && (
+                              <option value="Shipped">Shipped</option>
+                            )}
+                            {order.orderStatus === "Shipped" && (
+                              <option value="Delivered">Delivered</option>
+                            )}
+                          </select>
+                        </div>
+
+                        <Button
+                          variant="contained"
+                          style={classes.placeOrderBtn_prodcessOrder}
+                          fullWidth
+                          onClick={updateOrderSubmitHandler}
+                          disabled={
+                            loading
+                              ? true
+                              : false || status === ""
+                                ? true
+                                : false
+                          }
+                        >
+                          Process
+                        </Button>
+                      </form>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </>
-    )}
+        </>
+      )}
     </>
   );
 }
