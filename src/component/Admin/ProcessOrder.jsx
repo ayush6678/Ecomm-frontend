@@ -5,7 +5,6 @@ import {
   clearErrors,
   getOrderDetails,
 } from "../../actions/orderAction";
-import Navbar from "./Navbar";
 import Sidebar from "./Siderbar";
 import MetaData from "../Layouts/MetaData/MetaData";
 import Loader from "../Layouts/loader/Loader";
@@ -394,7 +393,6 @@ function ProcessOrder() {
 
             <div style={classes.secondBox__prodcessOrder}>
               <div style={classes.navBar__prodcessOrder}>
-                <Navbar toggleHandler={toggleHandler} />
               </div>
               <div style={classes.mainInfo__prodcessOrder}>
                 <div style={classes.order_Details__prodcessOrder}>

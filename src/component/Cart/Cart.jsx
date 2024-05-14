@@ -1,14 +1,8 @@
 import React, { useState } from "react";
 import "./Cart.css";
-import TextField from "@mui/material/TextField";
 import { useSelector, useDispatch } from "react-redux";
 import { addItemToCart, removeItemFromCart } from "../../actions/cartAction";
-import { Typography } from "@mui/material";
-import Button from "@mui/material/Button";
-import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import { Link, useNavigate } from "react-router-dom";
-import MetaData from "../Layouts/MetaData/MetaData";
-import CartItem from "./CartItem";
 import {
   displayMoney,
   generateDiscountedPrice,

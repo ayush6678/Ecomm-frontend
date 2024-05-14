@@ -4,7 +4,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Modal, Avatar } from "@mui/material";
 import { CiUser } from "react-icons/ci";

@@ -1,15 +1,4 @@
 import React from "react";
-import {
-    Card,
-    CardActionArea,
-    CardMedia,
-    CardContent,
-    Typography,
-    Button,
-    Box,
-} from "@mui/material";
-import Rating from "@mui/material/Rating";
-// import { FitScreen } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { displayMoney, generateDiscountedPrice } from "../DisplayMoney/DisplayMoney"
 import { addItemToCart } from "../../actions/cartAction";
@@ -50,19 +39,18 @@ const ProductCard = ({ product }) => {
                 <div class="mt-4 flex justify-between">
                     <div>
                         <h3 className=" text-gray-700">
-                            <a href="#">
-                                <span aria-hidden="true" class="absolute inset-0"></span>
-                                {product.name}
-                            </a>
+                            <span aria-hidden="true" class="absolute inset-0"></span>
+                            {product.name}
                         </h3>
                         <p className="mt-1 text-sm text-gray-500">Black</p>
                     </div>
                     <p className="text-sm font-medium text-gray-900">₹{product.price}</p>
 
                 </div>
-                <button
+                {/* <button
                     onClick={() => addTocartHandler(product._id, 1)}
-                    className=" w-full bg-[#3A68B8] mt-2 text-white p-1 rounded-md">Add to Cart</button>
+                    className=" w-full bg-[#3A68B8] mt-2 text-white p-1 rounded-md">Add to Cart
+                </button> */}
             </div>
 
         </div>

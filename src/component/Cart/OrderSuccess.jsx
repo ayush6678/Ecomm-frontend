@@ -1,67 +1,28 @@
 import React from "react";
-
-// import { makeStyles } from "@mui/styles";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-
-const useStyles = {
-  orderSuccess: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-    padding: "9rem",
-    // backgroundColor: theme.palette.common.white,
-  },
-  successIcon: {
-    fontSize: "8rem",
-    // color: theme.palette.success.main,
-    // marginBottom: theme.spacing(4),
-  },
-  successText: {
-    // marginBottom: theme.spacing(2),
-    fontWeight: "bold",
-    fontSize: "2rem",
-    // color: theme.palette.text.primary,
-    // textShadow: `2px 2px 4px ${theme.palette.text.secondary}`,
-  },
-  link: {
-    textDecoration: "none",
-  },
-  viewOrdersButton: {
-    // marginTop: theme.spacing(4),
-    // padding: theme.spacing(2, 4),
-    // backgroundColor: theme.palette.common.black,
-    // color: theme.palette.common.white,
-    // borderRadius: theme.spacing(4),
-    textTransform: "uppercase",
-    letterSpacing: 2,
-    fontWeight: "bold",
-    transition: "background-color 0.3s ease",
-    "&:hover": {
-      backgroundColor: "#ed1c24",
-    },
-  },
-};
-
+import { useNavigate } from "react-router-dom";
 function OrderSuccess() {
-  const classes = useStyles;
-
+  const navigate = useNavigate()
   return (
-    <div className={classes.orderSuccess}>
-      <CheckCircleIcon className={classes.successIcon} />
-
-      <Typography variant="h4" className={classes.successText}>
-        Congratulations!
-        <br />
-        Your Order has been Placed Successfully
-      </Typography>
-      <Link to="/orders" className={classes.link}>
-        <Button variant="contained" className={classes.viewOrdersButton}>
-          View Orders
-        </Button>
-      </Link>
+    <div className="bg-gray-100 h-screen mt-36">
+      <div className="bg-white p-6  md:mx-auto">
+        <svg viewBox="0 0 24 24" className="text-green-600 w-16 h-16 mx-auto my-6">
+          <path fill="currentColor"
+            d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
+          </path>
+        </svg>
+        <div className="text-center">
+          <h3 className="md:text-2xl text-base text-gray-900 font-semibold text-center">Payment Done!</h3>
+          <p className="text-gray-600 my-2">Thank you for completing your secure online payment.</p>
+          <p> Have a great day!  </p>
+          <div className="py-10 text-center">
+            <button onClick={() => { navigate("/orders") }} className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
+              View Orders
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

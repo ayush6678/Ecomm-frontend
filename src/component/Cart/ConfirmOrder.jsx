@@ -38,8 +38,6 @@ function ConfirmOrder() {
     };
     // session storage allowd save data untill  browser tab is opend
     sessionStorage.setItem("orderInfo", JSON.stringify(data));
-
-
   }
 
   return (

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./ProductList.css";
-import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from 'react-toastify';
 import {
@@ -11,172 +9,11 @@ import {
 // import {useHistory } from "react-router-dom";
 import MetaData from "../Layouts/MetaData/MetaData";
 import Loader from "../Layouts/loader/Loader";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Star from "@mui/icons-material/Star";
-import {
-  Avatar,
-  Button,
-  TextField,
-  Typography,
-  InputAdornment,
-} from "@mui/material";
-import Navbar from "./Navbar";
 import Sidebar from "./Siderbar";
 import { DELETE_REVIEW_RESET } from "../../constants/productsConstants";
-// import { makeStyles } from "@mui/styles";
-import StarRateIcon from "@mui/icons-material/StarRate";
 
-const useStyles = {
-  updateUser1: {
-    display: "flex",
-    alignItems: "flex-start",
-    backgroundColor: "#f1f1f1",
-    justifyContent: "center",
-    width: "100%",
-    gap: "1rem",
-    overflow: "hidden",
-    margin: "-1.1rem 0 0 0",
-    padding: 0,
-  },
-  firstBox_01: {
-    width: "20%",
-    margin: "0rem",
-    height: "fit-content",
-    backgroundColor: "white",
-    borderRadius: "5px",
-    boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
-    display: "block",
-    // [theme.breakpoints.down("999")]: {
-    //   display: "none",
-    // },
-  },
-
-  toggleBox_01: {
-    width: "16rem",
-    margin: "0rem",
-    height: "fit-content",
-    backgroundColor: "white",
-    borderRadius: "5px",
-    boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
-    display: "block",
-    zIndex: "100",
-    position: "absolute",
-    top: "58px",
-    left: "17px",
-  },
-  secondBox_01: {
-    width: "75%",
-
-    height: "fit-content",
-    display: "flex",
-    flexDirection: "column",
-    margin: "-0.5rem 0 0 0",
-    gap: "10px",
-    justifyContent: "center",
-    // [theme.breakpoints.down("999")]: {
-    //   width: "100%",
-    // },
-  },
-  navBar_01: {
-    margin: "0rem",
-  },
-  formSection: {
-    width: "100%",
-    margin: "auto",
-    borderRadius: "5px",
-    height: "100vh",
-    backgroundColor: "white",
-    padding: "1rem 2rem",
-  },
-  form: {
-    width: "350px",
-    margin: "-1rem auto 0 auto",
-    borderRadius: "5px",
-    padding: "2rem",
-  },
-
-  avatar: {
-    margin: " 8px auto",
-    backgroundColor: "black",
-  },
-  textField: {
-    marginBottom: "2rem",
-    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
-      color: "black",
-      padding: "12px 14px",
-    },
-    "& .MuiInputLabel-root": {
-      color: "black",
-      fontSize: "14px",
-      textAlign: "center",
-    },
-    "& .MuiInputLabel-root.Mui-focused": {
-      color: "black",
-      fontSize: "14px",
-      textAlign: "center",
-    },
-    "& .MuiOutlinedInput-root": {
-      "&:hover fieldset": {
-        borderColor: "black",
-        color: "black",
-      },
-      "& .MuiOutlinedInput-input": {
-        padding: "13px 8px",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "black",
-        color: "black",
-        outline: "none",
-      },
-    },
-  },
-
-  heading: {
-    textAlign: "center",
-    marginBottom: "2rem",
-    color: "#414141",
-    fontWeight: "bold",
-  },
-  heading_02: {
-    textAlign: "center",
-    textShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
-    color: "#414141",
-    fontWeight: "900",
-  },
-
-  nameInput: {
-    position: "relative",
-    "& > label": {
-      left: ".2rem",
-    },
-    padding: "4px 0px",
-    fontSize: "1rem",
-    width: "100%",
-    marginBottom: "2rem",
-    height: ".7rem",
-  },
-
-  loginButton: {
-    color: "#fff",
-    backgroundColor: "#000",
-    border: "2px solid #000",
-    margin: "2rem 0",
-    marginTop: "1rem",
-    "&:disabled": {
-      backgroundColor: "#444444", // faded black
-      color: "#FFFFFF",
-      borderColor: "#444444",
-    },
-    "&:hover": {
-      backgroundColor: "#ed1c24",
-      color: "#fff",
-      borderColor: "#ed1c24",
-    },
-  },
-};
 
 function ProductReviews() {
-  const classes = useStyles;
   const dispatch = useDispatch();
   // const history = useHistory();
   // const alert = useAlert();
@@ -273,11 +110,7 @@ function ProductReviews() {
       minWidth: 100,
       flex: 1,
       headerClassName: "column-header hide-on-mobile",
-      cellClassName: (params) => {
-        return params.getValue(params.id, "recommend") === true
-          ? "greenColor"
-          : "redColor"; // if rating of review greater then class green else red
-      },
+
     },
 
     {
@@ -287,11 +120,6 @@ function ProductReviews() {
       minWidth: 200,
       flex: 0.5,
       headerClassName: "column-header hide-on-mobile",
-      cellClassName: (params) => {
-        return params.getValue(params.id, "rating") >= 3
-          ? "greenColor"
-          : "redColor"; // if rating of review greater then class green else red
-      },
     },
 
     {
@@ -301,20 +129,7 @@ function ProductReviews() {
       minWidth: 230,
       headerClassName: "column-header1",
       sortable: false,
-      renderCell: (params) => {
-        return (
-          <>
-            <div
-              onClick={() =>
-                deleteReviewHandler(params.getValue(params.id, "id"))
-              }
-            >
-              <DeleteIcon style="iconbtn" style={{ marginLeft: "1rem" }} />
-            </div>
-          </>
-        );
-      },
-    },
+    }
   ];
 
   const rows = [];
@@ -338,88 +153,128 @@ function ProductReviews() {
         <>
           <MetaData title="All Reviews" />
 
-          <div style={classes.updateUser1}>
+          <div className="flex  ">
             <div
-              style={
-
-                !toggle ? classes.firstBox_01 : classes.toggleBox_01
-              }
             >
               <Sidebar />
             </div>
 
-            <div style={classes.secondBox_01}>
-              <div style={classes.navBar_01}>
-                <Navbar toggleHandler={toggleHandler} />
-              </div>
-              <div style={classes.formSection}>
+            <div className=" w-full flex-col justify-center" >
+
+              <div className=" m-16 ">
                 <form
-                  style={classes.form}
+                  className=""
                   onSubmit={productReviewsSubmitHandler}
                 >
-                  <Avatar style={classes.avatar}>
-                    <StarRateIcon />
-                  </Avatar>
-                  <Typography
-                    variant="h5"
-                    component="h1"
-                    style={classes.heading}
-                  >
+                  <div
+                    className=" flex flex-col  m-4 font-semibold text-xl">
                     All Reviews
-                  </Typography>
-                  <TextField
-                    variant="outlined"
-                    fullWidth
-                    style={classes.nameInput}
+                  </ div>
+
+                  <div>Enter Product ID:</div>
+
+                  < input
                     label="Product Id"
                     required
+                    className=" rounded-md m-2"
                     value={productId}
                     onChange={(e) => setProductId(e.target.value)}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Star
-                            style={{
-                              fontSize: 20,
-                              color: "#414141",
-                            }}
-                          />
-                        </InputAdornment>
-                      ),
-                    }}
                   />
 
-                  <Button
+                  <button
+                    className=" rounded-md bg-blue-400 hover:bg-blue-500 p-2 text-white font-semibold w-24 self-center"
                     id="createProductBtn"
                     type="submit"
-                    fullWidth
-                    variant="contained"
-                    style={classes.loginButton}
                     disabled={
                       loading ? true : false || productId === "" ? true : false
                     }
                   >
                     Search
-                  </Button>
+                  </button>
                 </form>
 
                 {reviews && reviews.length > 0 ? (
-                  <div style="productListContainer">
-                    <h4 id="productListHeading">ALL PRODUCTS</h4>
-                    <DataGrid
-                      rows={rows}
-                      columns={columns}
-                      pageSize={10}
-                      autoHeight
-                      disableSelectionOnClick
-                      style="productListTable"
-                    />
+                  <div >
+
+
+                    <div className="  ">
+                      <div className=" ">
+                        <div class="relative overflow-x-auto m-16 rounded-lg shadow-lg">
+                          <h4 id="productListHeading">Product Reviews:</h4>
+
+                          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                              <tr>
+                                <th scope="col" class="px-6 py-3">
+                                  Product ID
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                  User
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                  Comment
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                  Recommend
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                  Rating
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                  Actions
+                                </th>
+                              </tr>
+                            </thead>
+
+                            <tbody>
+                              {rows.map((item) => (
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                  <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {item.id}
+                                  </th>
+                                  <td class="px-6 py-4">
+                                    {item.user}
+
+                                  </td>
+                                  <td class="px-6 py-4">
+                                    {item.comment}
+
+                                  </td>
+                                  <td class="px-6 py-4">
+                                    {item.recommend}
+                                  </td>
+                                  <td class="px-6 py-4">
+                                    {item.rating}
+                                  </td>
+                                  <td class="px-6 py-4">
+
+                                    <button
+                                      onClick={() =>
+                                        deleteProductReview(item.id)
+                                      }
+                                      className=" mx-1 px-1 bg-red-500 text-white rounded-md">
+
+                                      Delete
+
+                                    </button>
+
+                                  </td>
+                                </tr>
+
+                              ))}
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 ) : (
-                  <h1 style={classes.heading_02}>No Reviews Found</h1>
+                  <h1 >No Reviews Found</h1>
                 )}
               </div>
-              ;
             </div>
           </div>
         </>

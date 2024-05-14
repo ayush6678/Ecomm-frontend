@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
 const classes = {
   cardRoot: {

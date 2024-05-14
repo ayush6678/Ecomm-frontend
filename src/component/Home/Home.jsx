@@ -1,5 +1,4 @@
 import MetaData from "../Layouts/MetaData/MetaData"
-import HeroSlider from "./HeroSlider";
 import ProductCard from "./ProductCard";
 import { clearErrors, getProduct } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,26 +8,11 @@ import { useEffect } from "react";
 import { toast } from 'react-toastify';
 
 
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-
-// import './styles.css';
-
-// import required modules
-// import { Pagination } from 'swiper/modules';
-import { Pagination } from "swiper";
-
-
 function Home() {
-    // const alert = useAlert();
 
     const dispatch = useDispatch();
     const {
-        // loading,
+        loading,
         error, products } = useSelector((state) => state.products);
     console.log(products)
 
@@ -45,23 +29,23 @@ function Home() {
     return (
         <>
             <MetaData title="Kriptees" />
-            <div className="Home_Page" style={{ marginTop: "7rem" }}>
-                <div id="default-carousel" className="relative w-full" data-carousel="slide">
+            <div className="Home_Page" >
+                <div id="default-carousel" className=" lg:mt-20 lg:block hidden relative w-full " data-carousel="slide">
                     <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
                         <div className=" duration-700 ease-in-out" data-carousel-item>
                             <img src="https://i.pinimg.com/originals/d4/a8/fa/d4a8faa6147ef48adf272d83e2eb279e.jpg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
                         </div>
                         <div className=" duration-700 ease-in-out" data-carousel-item>
-                            <img src="https://i.pinimg.com/originals/d4/a8/fa/d4a8faa6147ef48adf272d83e2eb279e.jpg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                            <img src="https://prod-img.thesouledstore.com/public/theSoul/storage/mobile-cms-media-prod/banner-images/web-banner_1_q2b02ee.jpg?format=webp&w=1500&dpr=1.3" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
                         </div>
                         <div className=" duration-700 ease-in-out" data-carousel-item>
-                            <img src="/docs/images/carousel/carousel-3.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                            <img src="" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="." />
                         </div>
                         <div className=" duration-700 ease-in-out" data-carousel-item>
-                            <img src="/docs/images/carousel/carousel-4.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                            <img src="" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="." />
                         </div>
                         <div className=" duration-700 ease-in-out" data-carousel-item>
-                            <img src="/docs/images/carousel/carousel-5.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..." />
+                            <img src="" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="." />
                         </div>
                     </div>
                     <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
@@ -89,24 +73,15 @@ function Home() {
                     </button>
                 </div>
 
-                <div className="vibe">
-                    <div>
-                        Find Your Vibe With Kriptees
-                    </div>
-                    <div style={{ display: "flex", justifyContent: "center" }}>
-                        <div className="boxes">
-                            Basics from 399Rs
-                        </div>
-                        <div className="boxes">
-                            Classic from 499Rs
-                        </div>
-                        <div className="boxes">
-                            Combos from 599Rs
-                        </div>
-                    </div>
+                <div className="">
+                    <img className=" w-screen" src="https://assets.ajio.com/cms/AJIO/WEB/2192023-PLPStrip-RelianceOne-Points-1440x128.jpg" />
                 </div>
 
-                <div className="feature" style={{
+                <div>
+                    <img className=" w-screen" src="https://mercury.akamaized.net/i/db5a03be0bd3268f7023a18cc8ac4a50_270183_0.jpg" />
+                </div>
+
+                <div className="feature hidden lg:block " style={{
                     marginTop: "2.7rem",
                     marginBottom: "2.7rem",
                 }}>
@@ -124,6 +99,10 @@ function Home() {
                     {products &&
                         <FeaturedSlider products={products} />}
 
+                </div>
+                <div className=" ">
+
+                    <img className=" w-screen" src="https://images.bewakoof.com/uploads/grid/app/DailyDeals-ThinStrip-Desktop-T-Shirts--2--1715346507.jpg" alt="." />
                 </div>
 
                 <h2 className="trending_heading">Special Collection</h2>

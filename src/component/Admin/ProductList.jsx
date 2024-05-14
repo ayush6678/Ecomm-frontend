@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./ProductList.css";
-import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearErrors,
@@ -14,7 +12,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MetaData from "../Layouts/MetaData/MetaData";
 import Sidebar from "./Siderbar";
-import Navbar from "./Navbar";
 import { DELETE_PRODUCT_RESET } from "../../constants/productsConstants";
 import Loader from "../Layouts/loader/Loader";
 import { toast } from 'react-toastify';
@@ -98,7 +95,6 @@ function ProductList() {
           <>
             <Link
               to={`/admin/product/${params.id}`}
-              style={{ marginLeft: "1rem" }}
             >
               <EditIcon className="icon-" />
             </Link>
@@ -153,6 +149,7 @@ function ProductList() {
     };
   }, [toggle]);
 
+
   return (
     <>
       {loading ? (
@@ -161,24 +158,93 @@ function ProductList() {
         <>
           <MetaData title={`ALL PRODUCTS - Admin`} />
 
-          <div className="product-list" style={{ marginTop: 0 }}>
-            <div className={!toggle ? "listSidebar" : "toggleBox"}>
+          <div className=" flex" >
+            <div className="">
               <Sidebar />
             </div>
 
-            <div className="list-table">
-              <Navbar toggleHandler={toggleHandler} />
-              <div className="productListContainer">
-                <h4 id="productListHeading">ALL PRODUCTS</h4>
+            <div className=" bg-gray-200 w-full h-screen">
+              <div className=" ">
+                <h4 className=" flex  m-4 font-semibold text-xl">ALL PRODUCTS</h4>
 
-                <DataGrid
+                <div class="relative overflow-x-auto m-16 rounded-lg shadow-lg">
+                  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                      <tr>
+                        <th scope="col" class="px-6 py-3">
+                          Product ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Stock
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Price
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {rows.map((item) => (
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {item.id}
+                          </th>
+                          <td class="px-6 py-4">
+                            {item.name}
+
+                          </td>
+                          <td class="px-6 py-4">
+                            {item.stock}
+
+                          </td>
+                          <td class="px-6 py-4">
+                            ₹{item.price}
+                          </td>
+                          <td class="px-6 py-4">
+                            <button className=" mx-1 px-1 bg-gray-200 rounded-md">
+                              <Link
+                                to={`/admin/product/${item.id}`}
+                              >
+                                Edit
+                              </Link>
+
+                            </button>
+                            <button
+                              onClick={() =>
+                                deleteProductHandler(item.id)
+                              }
+                              className=" mx-1 px-1 bg-red-500 text-white rounded-md">
+
+                              Delete
+
+                            </button>
+
+                          </td>
+                        </tr>
+
+                      ))}
+
+                    </tbody>
+                  </table>
+                </div>
+
+
+
+                {/* <DataGrid
                   rows={rows}
                   columns={columns}
                   pageSize={10}
                   disableSelectionOnClick
                   className="productListTable"
                   autoHeight
-                />
+                /> */}
               </div>
             </div>
           </div>

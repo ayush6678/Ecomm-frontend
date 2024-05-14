@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../Layouts/MetaData/MetaData";
-import Navbar from "./Navbar";
 import Sidebar from "./Siderbar";
 import { UPDATE_USER_RESET } from "../../constants/userConstant";
 import {
@@ -270,9 +269,7 @@ function UpdateUser() {
             </div>
 
             <div style={classes.secondBox_01}>
-              <div style={classes.navBar_01}>
-                <Navbar toggleHandler={toggleHandler} />
-              </div>
+
               <div style={classes.formSection}>
                 <form
                   style={classes.form}

@@ -38,10 +38,7 @@ import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import Shipping from "./component/Cart/Shipping";
 import OrderSuccess from "./component/Cart/OrderSuccess";
 import Activator from "./component/Route/Activator";
-import { Elements } from "@stripe/react-stripe-js";
 import PaymentComponent from "./component/Cart/Payment";
-import axios from "axios";
-import { loadStripe } from "@stripe/stripe-js";
 import UpdateUser from "./component/Admin/UpdateUser";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -52,41 +49,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
-  const [stripeApiKey, setStripeApiKey] = useState("");
-
   const dispatch = useDispatch();
-
-  // get STRIPE_API_KEY for payment from backend for connection to stripe payment gateway
-  async function getStripeApiKey() {
-    try {
-      const { data } = await axios.get("http://localhost:5000/api/v1/stripeapikey");
-      if (
-        data.stripeApiKey !== undefined &&
-        data.stripeApiKey !== null &&
-        data.stripeApiKey !== ""
-      ) {
-        sessionStorage.setItem(
-          "stripeApiKey",
-          JSON.stringify(data.stripeApiKey)
-        );
-      }
-      setStripeApiKey(data.stripeApiKey);
-    } catch (error) {
-      // Handle error if the API call fails
-      console.error("Error fetching Stripe API key:", error);
-    }
-  }
-
-  useEffect(() => {
-    const stripeApiKey = sessionStorage.getItem("stripeApiKey");
-    if (stripeApiKey) {
-
-      setStripeApiKey(stripeApiKey);
-    } else {
-      getStripeApiKey();
-    }
-    // eslint-disable-next-line
-  }, []);
 
   useEffect(() => {
     dispatch(load_UserProfile());
@@ -155,7 +118,7 @@ function App() {
                   component={UpdateProfile}
                 /> */}
                 <UpdateProfile />
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -173,7 +136,7 @@ function App() {
                   component={UpdatePassword}
                 /> */}
                 <UpdatePassword />
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -186,7 +149,7 @@ function App() {
               <>
                 {<Header />}
                 <ResetPassword />
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -200,7 +163,7 @@ function App() {
               <>
                 {<Header />}
                 <Cart />
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -214,7 +177,7 @@ function App() {
               <>
                 {<Header />}
                 <ProductDetails />
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -227,7 +190,7 @@ function App() {
               <>
                 {<Header />}
                 <Products />
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -239,7 +202,7 @@ function App() {
               <>
                 <Header />
                 <Products />
-                <Services />
+                {/* <Services /> */}
                 <Footer />
               </>
             }
@@ -276,7 +239,7 @@ function App() {
               <>
                 <Header />
                 <ReturnPolicyPage />
-                <Services />
+                {/* <Services /> */}
                 <Footer />
               </>
             }
@@ -289,7 +252,7 @@ function App() {
               <>
                 {<Header />}
                 <TermsAndConditions />
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -302,7 +265,7 @@ function App() {
               <>
                 {<Header />}
                 <PrivacyPolicy />
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -315,7 +278,7 @@ function App() {
               <>
                 {<Header />}
                 <TermsAndConditions />
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -328,7 +291,7 @@ function App() {
                 {<Header />}
                 <MyOrder />
                 {/* <PrivateRoute exact path="/orders" component={MyOrder} /> */}
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -342,7 +305,7 @@ function App() {
                 {<Header />}
                 <Shipping />
                 {/* <PrivateRoute exact path="/shipping" component={Shipping} /> */}
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -360,7 +323,7 @@ function App() {
                   path="/order/confirm"
                   component={ConfirmOrder}
                 /> */}
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -373,7 +336,7 @@ function App() {
                 {<Header />}
                 <OrderSuccess />
                 {/* <PrivateRoute exact path="/success" component={OrderSuccess} /> */}
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -473,7 +436,10 @@ function App() {
             exact
             path="/admin/user/:id"
             element={
-              <>
+              <>import Maps from "./views/admin/Maps.js";
+                import Settings from "./views/admin/Settings.js";
+                import Tables from "./views/admin/Tables.js";
+
                 <UpdateUser />
               </>
             }
@@ -487,7 +453,7 @@ function App() {
                 {<Header />}
                 {/* <Route exact path="/account" element={Profile} /> */}
                 <ProfilePage />
-                <Services />
+                {/* <Services /> */}
                 {<Footer />}
               </>
             }
@@ -496,16 +462,15 @@ function App() {
           <Route exact path="/process/payment"
             element={
               <>
-                <Elements stripe={loadStripe(stripeApiKey)}>
 
-                  {<Header />}
-                  <PaymentComponent />
-                </Elements>
+                {<Header />}
+                <PaymentComponent />
 
               </>
             }
           />
           {/* <PrivateRoute exact path="/process/payment" component={Payment} /> */}
+
 
         </Routes>
 

@@ -245,7 +245,8 @@
 
 
   .kriptees-main {
-    display: none;
+    /* display: none; */
+    font-size: 20px;
   }
 
   .kriptees-mobile {

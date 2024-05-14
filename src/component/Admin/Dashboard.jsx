@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BarChart } from "@mui/icons-material";
 import Highcharts from "highcharts";
-import { ShoppingCart, AssignmentInd, People } from "@mui/icons-material";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts3D from "highcharts/highcharts-3d";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,14 +9,9 @@ import Loader from "../Layouts/loader/Loader";
 import { toast } from 'react-toastify';
 import { getAllOrders } from "../../actions/orderAction";
 import { getAllUsers, load_UserProfile } from "../../actions/userAction";
-import Navbar from "./Navbar";
 import Sidebar from "./Siderbar";
 import { useNavigate } from "react-router-dom";
-// import { makeStyles } from "@mui/styles";
-import { Typography } from "@mui/material";
-import ProductImg from "../../Image/admin/products.png";
-import ordersImg from "../../Image/admin/order.png";
-import usersImg from "../../Image/admin/user.png";
+
 Highcharts3D(Highcharts);
 
 const useStyles = {
@@ -70,9 +63,7 @@ const useStyles = {
       width: "100%",
     },
   },
-  navBar: {
-    margin: "0rem",
-  },
+
   summaryCard: {
     display: "flex",
     justifyContent: "center",
@@ -462,315 +453,87 @@ function Dashboard() {
       ) : (
         <>
           <MetaData title="Dashboard - Admin Panel" />
-          <div style={classes.dashboard}>
-            <div
-              style={
-                !toggle ? classes.firstBox : classes.toggleBox
-              }
-            >
-              <Sidebar />
-            </div>
-
-            <div style={classes.secondBox}>
-
-              <div style={classes.navBar}>
-                <Navbar toggleHandler={toggleHandler} />
-              </div>
-
-              <div style={classes.summaryCard}>
+          <div className=" flex " >
+            <Sidebar />
+            <div className=" bg-gray-200 flex-col w-full">
+              <div className=" flex w-full justify-around">
                 <div
-                  style={{
-
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#414141",
-                    margin: "0 1rem ",
-                    width: "30%",
-                    height: "10rem",
-
-                    borderRadius: "5px",
-                    boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
-                    transition: "transform 0.2s ease-in-out",
-                    cursor: "pointer",
-                    "&:hover": {
-                      transform: "scale(1.1) !important",
-                      backgroundColor: "#ed1c24 ",
-                      boxShadow: "0px 0px 10px rgba(0, 0, 0, black) !important",
-                    },
-                    '@media (minWidth: 600px) and (maxWidth: 959px)': { //b/w sm and md
-                      width: "32% !important",
-                      marginBottom: "1rem !important",
-                      padding: "1rem 2rem ! important",
-                    },
-                    '@media (maxWidth: 600px)': {
-                      width: "85% !important",
-                      marginBottom: "1rem !important",
-                      padding: "2rem 2rem ! important",
-                    },
-                    '@media (maxWidth: 599.95px)': { //xs
-                      width: "85%",
-
-                      padding: "1.2rem",
-                      margin: "0   auto",
-                      marginBottom: "1rem",
-                      "&:hover": {
-                        transform: "scale(1.05) !important",
-                      },
-                    },
-
-                    backgroundImage: `url(${ProductImg})`,
-                    backgroundSize: "cover",
-                    // transition: "transform 0.2s ease-in-out",
-                    // cursor: "pointer",
-                    ":hover": {
-                      transform: "scale(1.1)",
-                    },
-
-                  }}
+                  className=" p-12  text-white font-semibold text-2xl m-4 rounded-md bg-blue-500 shadow-lg "
                   onClick={() => navigate("/admin/products")}
                 >
-                  <div style={classes.headerContent}>
-                    <ShoppingCart
-                      fontSize="large"
-                      style={{
-                        fontSize: "3rem",
-                        boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)",
-                      }}
-                    />
-
-                    <Typography variant="h6" style={classes.heading}>
+                  <div
+                    className=" "
+                  >
+                    < div >
                       Total Products
-                    </Typography>
-                  </div>
-                  <div style={classes.textContainer}>
-                    <Typography variant="body2" style={classes.number}>
+                    </ div>
+                    < div >
                       {products && products.length}
-                    </Typography>
+                    </ div>
                   </div>
                 </div>
 
                 <div
+                  className=" p-12  text-white font-semibold text-2xl m-4 rounded-md bg-green-500 shadow-lg "
 
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#414141",
-                    margin: "0 1rem ",
-                    width: "30%",
-                    height: "10rem",
-
-                    borderRadius: "5px",
-                    boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
-                    transition: "transform 0.2s ease-in-out",
-                    cursor: "pointer",
-                    "&:hover": {
-                      transform: "scale(1.1) !important",
-                      backgroundColor: "#ed1c24 ",
-                      boxShadow: "0px 0px 10px rgba(0, 0, 0, black) !important",
-                    },
-                    '@media (minWidth: 600px) and (maxWidth: 959px)': { //b/w sm and md
-                      width: "32% !important",
-                      marginBottom: "1rem !important",
-                      padding: "1rem 2rem ! important",
-                    },
-                    '@media (maxWidth: 600px)': {
-                      width: "85% !important",
-                      marginBottom: "1rem !important",
-                      padding: "2rem 2rem ! important",
-                    },
-                    '@media (maxWidth: 599.95px)': { //xs
-                      width: "85%",
-
-                      padding: "1.2rem",
-                      margin: "0   auto",
-                      marginBottom: "1rem",
-                      "&:hover": {
-                        transform: "scale(1.05) !important",
-                      },
-                    },
-
-                    backgroundImage: `url(${ordersImg})`,
-                    backgroundSize: "cover",
-                    transition: "transform 0.2s ease-in-out",
-                    cursor: "pointer",
-                    ":hover": {
-                      transform: "scale(1.1)",
-                    },
-                  }}
                   onClick={() => navigate("/admin/orders")}
                 >
-                  <div style={classes.headerContent}>
-                    <AssignmentInd
-                      fontSize="large"
-                      style={{
-                        fontSize: "3rem",
-                        boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                      }}
-                    />
-                    <Typography variant="h6" style={classes.heading}>
+                  <div >
+
+                    < div >
                       Total Orders
-                    </Typography>
+                    </ div>
                   </div>
-                  <div style={classes.textContainer}>
-                    <Typography variant="body2" style={classes.number}>
+                  <div >
+                    <  div >
                       {orders && orders.length}
-                    </Typography>
+                    </  div>
                   </div>
                 </div>
 
                 <div
+                  className=" p-12  text-white font-semibold text-2xl m-4 rounded-md bg-orange-500 shadow-lg "
 
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#414141",
-                    margin: "0 1rem ",
-                    width: "30%",
-                    height: "10rem",
-
-                    borderRadius: "5px",
-                    boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
-                    transition: "transform 0.2s ease-in-out",
-                    cursor: "pointer",
-                    "&:hover": {
-                      transform: "scale(1.1) !important",
-                      backgroundColor: "#ed1c24 ",
-                      boxShadow: "0px 0px 10px rgba(0, 0, 0, black) !important",
-                    },
-                    '@media (minWidth: 600px) and (maxWidth: 959px)': { //b/w sm and md
-                      width: "32% !important",
-                      marginBottom: "1rem !important",
-                      padding: "1rem 2rem ! important",
-                    },
-                    '@media (maxWidth: 600px)': {
-                      width: "85% !important",
-                      marginBottom: "1rem !important",
-                      padding: "2rem 2rem ! important",
-                    },
-                    '@media (maxWidth: 599.95px)': { //xs
-                      width: "85%",
-
-                      padding: "1.2rem",
-                      margin: "0   auto",
-                      marginBottom: "1rem",
-                      "&:hover": {
-                        transform: "scale(1.05) !important",
-                      },
-                    },
-
-                    backgroundImage: `url(${usersImg})`,
-                    backgroundSize: "cover",
-                    // transition: "transform 0.2s ease-in-out",
-                    // cursor: "pointer",
-                    ":hover": {
-                      transform: "scale(1.1)",
-                    },
-                  }}
                   onClick={() => navigate("/admin/users")}
                 >
-                  <div style={classes.headerContent}>
-                    <People
-                      fontSize="large"
-                      style={{
-                        fontSize: "3rem",
-                        boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                      }}
-                    />
-                    <Typography variant="h6" style={classes.heading}>
+                  <div >
+                    <  div >
                       Total Users
-                    </Typography>
+                    </  div>
                   </div>
-                  <div style={classes.textContainer}>
-                    <Typography variant="body2" style={classes.number}>
+                  <div >
+                    <  div >
                       {users && users.length}
-                    </Typography>
+                    </  div>
                   </div>
                 </div>
               </div>
 
-              <div style={classes.revenue}>
-                <div style={classes.doughnutChart}>
+              <div className=" flex">
+                <div className=" shadow-2xl rounded-md m-4 " >
                   <HighchartsReact
                     highcharts={Highcharts}
                     options={doughnutOptions}
                   />
                 </div>
 
-                <div
-                  // style={classes.revnueContainer}
-                  style={{
-                    width: "42%",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    margin: "0 1rem",
-                    height: "400px",
-                    backgroundColor: "black",
-                    borderRadius: "5px",
-                    padding: "1rem 2rem",
-                    boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
-                    transition: "background-color 0.3s",
-
-                    // '@media (maxWidth: 600px)': {
-                    //   width: "85% !important",
-                    //   padding: "1rem",
-                    //   height: "250px",
-                    // },
-
-                    '@media (maxWidth: 959.95px)': {
-                      width: "30%",
-                      padding: "1rem 3rem",
-                    },
-                    '@media (maxWidth: 600px)': {
-                      marginTop: "1rem",
-                      width: "85% !important",
-                      padding: "2rem !important",
-                      height: "250px",
-                    },
-
-                    '@media (maxWidth: 599.95px)': {
-                      width: "85%",
-                      marginBottom: "1rem",
-                      padding: "1rem !important",
-                    },
-
-                    backgroundImage: `url(${ProductImg})`,
-                    backgroundSize: "cover",
-                    // transition: "transform 0.2s ease-in-out",
-                    // borderRadius: "5px",
-
-                    // width: "42%",
-                  }}
-                >
-                  <div style={classes.headerContent}>
-                    <BarChart
-                      fontSize="large"
-                      style={{
-                        fontSize: "3rem",
-                        boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                      }}
-                    />
-
-                    <Typography variant="h6" style={classes.heading}>
+                <div className=" shadow-2xl bg-white rounded-md m-4 w-full flex items-center align-middle justify-center flex-col">
+                  <div  >
+                    <  div >
                       Total Revenue
-                    </Typography>
+                    </  div>
                   </div>
-                  <div style={classes.textContainer}>
-                    <Typography variant="body2" style={classes.number}>
+                  <div>
+                    <  div variant="body2" >
                       ₹{totalAmount.toFixed(2)}
-                    </Typography>
+                    </  div>
                   </div>
                 </div>
               </div>
 
-              <div style={classes.lineChart}>
+              <div
+                className=" shadow-2xl rounded-md m-4  flex items-center align-middle justify-center flex-col"
+              >
                 <HighchartsReact
                   highcharts={Highcharts}
                   options={lineOptions}

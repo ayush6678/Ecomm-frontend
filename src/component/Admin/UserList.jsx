@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./ProductList.css";
-import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -9,7 +7,6 @@ import MetaData from "../Layouts/MetaData/MetaData";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "./Siderbar";
-import Navbar from "./Navbar";
 import Loader from "../Layouts/loader/Loader";
 import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";
 import { DELETE_USER_RESET } from "../../constants/userConstant";
@@ -172,18 +169,17 @@ function UserList() {
             </div>
 
             <div className="list-table">
-              <Navbar toggleHandler={toggleHandler} />
               <div className="productListContainer">
                 <h4 id="productListHeading">ALL USERS</h4>
 
-                <DataGrid
+                {/* <DataGrid
                   rows={rows}
                   columns={columns}
                   pageSize={10}
                   disableSelectionOnClick
                   className="productListTable"
                   autoHeight
-                />
+                /> */}
               </div>
             </div>
           </div>

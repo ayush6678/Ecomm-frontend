@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./ProductList.css";
-import { DataGrid } from "@mui/x-data-grid";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllOrders, clearErrors, deleteOrder } from "../../actions/orderAction";
@@ -11,7 +9,6 @@ import Loader from "../Layouts/loader/Loader";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "./Siderbar";
-import Navbar from "./Navbar";
 import { DELETE_ORDER_RESET } from "../../constants/orderConstant";
 function OrderList() {
   const dispatch = useDispatch();
@@ -79,7 +76,7 @@ function OrderList() {
     alert,
     isDeleted,
     navigate,
-     deleteError
+    deleteError
   ]);
 
 
@@ -174,25 +171,82 @@ function OrderList() {
           ) : (
             <>
               <MetaData title={`ALL Orders - Admin`} />
-
-              <div className="product-list" style={{ marginTop: "0" }}>
-                <div className={!toggle ? "listSidebar" : "toggleBox"}>
+              <div className=" flex" >
+                <div className="">
                   <Sidebar />
                 </div>
 
-                <div className="list-table">
-                  <Navbar toggleHandler={toggleHandler} />
-                  <div className="productListContainer">
-                    <h4 id="productListHeading">ALL ORDERS</h4>
+                <div className=" bg-gray-200 w-full h-screen">
+                  <div className=" ">
+                    <h4 className=" flex  m-4 font-semibold text-xl">ALL ORDERS</h4>
 
-                    <DataGrid
-                      rows={rows}
-                      columns={columns}
-                      pageSize={10}
-                      disableSelectionOnClick
-                      className="productListTable"
-                      autoHeight
-                    />
+                    <div class="relative overflow-x-auto m-16 rounded-lg shadow-lg">
+                      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                          <tr>
+                            <th scope="col" class="px-6 py-3">
+                              Order ID
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                              Status
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                              Item Quantity
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                              Amount
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                              Actions
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          {rows.map((item) => (
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {item.id}
+                              </th>
+                              <td class="px-6 py-4">
+                                {item.status}
+
+                              </td>
+                              <td class="px-6 py-4">
+                                {item.itemsQty}
+
+                              </td>
+                              <td class="px-6 py-4">
+                                ₹{item.amount}
+                              </td>
+                              <td class="px-6 py-4">
+                                <button className=" mx-1 px-1 bg-gray-200 rounded-md">
+                                  <Link
+                                    to={`/admin/product/${item.id}`}
+                                  >
+                                    Edit
+                                  </Link>
+
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    deleteOrderHandler(item.id)
+                                  }
+                                  className=" mx-1 px-1 bg-red-500 text-white rounded-md">
+
+                                  Delete
+
+                                </button>
+
+                              </td>
+                            </tr>
+
+                          ))}
+
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>

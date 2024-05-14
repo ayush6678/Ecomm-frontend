@@ -14,6 +14,7 @@ import MetaData from "../Layouts/MetaData/MetaData";
 import { useNavigate } from "react-router-dom";
 
 function UpdatePassword() {
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, isUpdated, error } = useSelector(
