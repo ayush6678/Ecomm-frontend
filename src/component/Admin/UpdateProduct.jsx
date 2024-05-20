@@ -9,9 +9,7 @@ import {
   clearErrors,
   getProductDetails,
 } from "../../actions/productAction";
-// import { useHistory } from "react-router-dom";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productsConstants";
-import "../User/LoginFormStyle.css";
 import { useNavigate, useParams } from "react-router-dom";
 function UpdateProduct() {
   const dispatch = useDispatch();

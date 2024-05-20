@@ -1,11 +1,9 @@
 import React from "react";
-import { Typography, Button } from "@mui/material";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 function OrderSuccess() {
   const navigate = useNavigate()
   return (
-    <div className="bg-gray-100 h-screen mt-36">
+    <div className="bg-white h-screen mt-36">
       <div className="bg-white p-6  md:mx-auto">
         <svg viewBox="0 0 24 24" className="text-green-600 w-16 h-16 mx-auto my-6">
           <path fill="currentColor"

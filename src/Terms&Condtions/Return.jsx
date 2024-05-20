@@ -1,83 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Return.css"
 import MetaData from "../component/Layouts/MetaData/MetaData";
-import TermsImage from "../Image/about/tc.jpg";
 const ReturnPolicyPage = () => {
   return (
-    <div className="container__0">
+    <div className="">
       <MetaData title="Return Policy" />
-      <div className="image-container">
-        <img
-          src={TermsImage}
-          alt="Background"
-        />
-        <h1 className="policy-text">RETURN POLICY</h1>
-      </div>
-      <div className="content-container">
-        <p>
-          Thank you for shopping with Kriptees! We want to ensure your
-          satisfaction with every purchase. If you are not completely satisfied
-          with your purchase, we offer a return policy of 30 days for most
-          products and 7 days for select products.
-        </p>
-        <p>
-          To be eligible for a return, the item must be unused, in its original
-          packaging, and in the same condition as you received it. You will also
-          need to provide proof of purchase. Please note that certain items,
-          such as personalized or custom-made products, may not be eligible for
-          return unless there is a defect or error on our part.
-        </p>
-        <p>
-          If you would like to initiate a return, please contact our Customer
-          Service Department within the specified return period. Our team will
-          guide you through the return process and provide you with the
-          necessary instructions and return address.
-        </p>
-        <p>
-          Once we receive your returned item and verify its condition, we will
-          process the refund to the original payment method used for the
-          purchase. Please allow up to [number of days] for the refund to be
-          reflected in your account.
-        </p>
-        <p>
-          Please note that return shipping costs are the responsibility of the
-          customer, unless the return is due to a defect or error on our part.
-          We recommend using a trackable shipping method to ensure the safe and
-          timely delivery of your return.
-        </p>
-        <p>
-          If you have any questions or need further assistance regarding our
-          return policy, please feel free to contact our Customer Service
-          Department. We are here to help!
-        </p>
-        <h2>Contact Information:</h2>
-        <p>
-          Customer Service Department
-          <br />
-          <span style={{ fontWeight: "500" }}>Email </span>:
-          support@Kriptees.com
-          <br />
-          <span style={{ fontWeight: "500" }}>Phone  </span>:  123-456-7890
-          <br />
-          <span style={{ fontWeight: "500" }}>    Hours of Operation: Monday to Friday, 9:00 AM to 5:00 PM (GMT) </span>
-        </p>
-        <p>
-          Please reach out to us if you have any concerns or require any
-          clarifications regarding our{" "}
-          <Link
-            to="/policy/return"
-            style={{
-              textDecoration: "none",
-              color: "inherit",
-              fontWeight: "500",
-            }}
-          >
-            return policy
-          </Link>
-          . We strive to provide excellent customer service and ensure your
-          satisfaction.
-        </p>
+      <div className=" mt-20">
+        <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="bg-white shadow sm:rounded-lg">
+            <div className="px-4 py-5 sm:px-6">
+              <h3 className="text-lg font-medium leading-6 text-gray-900">Cancellation & Refund Policy</h3>
+              {/* <p className="mt-1 max-w-2xl text-sm text-gray-500">Last updated on 19-05-2024 15:01:43</p> */}
+            </div>
+            <div className="border-t border-gray-200">
+              <dl>
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500"></dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                    <p>KRISHNA SINGH believes in helping its customers as far as possible, and has therefore a liberal cancellation policy. Under this policy:</p>
+                  </dd>
+                </div>
+                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500"></dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                    <ul className="list-disc pl-5 space-y-1">
+                      <li>Cancellations will be considered only if the request is made immediately after placing the order. However, the cancellation request may not be entertained if the orders have been communicated to the vendors/merchants and they have initiated the process of shipping them.</li>
+                      <li>KRISHNA SINGH does not accept cancellation requests for perishable items like flowers, eatables etc. However, refund/replacement can be made if the customer establishes that the quality of product delivered is not good.</li>
+                      <li>In case of receipt of damaged or defective items please report the same to our Customer Service team. The request will, however, be entertained once the merchant has checked and determined the same at his own end. This should be reported within 7 Days days of receipt of the products.</li>
+                      <li>In case you feel that the product received is not as shown on the site or as per your expectations, you must bring it to the notice of our customer service within 7 Days days of receiving the product. The Customer Service Team after looking into your complaint will take an appropriate decision.</li>
+                      <li>In case of complaints regarding products that come with a warranty from manufacturers, please refer the issue to them.</li>
+                      <li>In case of any Refunds approved by the KRISHNA SINGH, it'll take 6-8 Days days for the refund to be processed to the end customer.</li>
+                    </ul>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

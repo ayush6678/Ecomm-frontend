@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Profile.css";
-// import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userAction";
 import { toast } from 'react-toastify';
 import { updatePassword } from "../../actions/userAction";
 import { UPDATE_PASSWORD_RESET } from "../../constants/userConstant";
 import { clearErrors } from "../../actions/userAction";
+import {
+  updateProfile,
+  load_UserProfile,
+} from "../../actions/userAction";
+import { UPDATE_PROFILE_RESET } from "../../constants/userConstant";
+import { forgetPassword } from "../../actions/userAction";
 
 const ProfilePage = () => {
   // const alert = useAlert();
   const dispatch = useDispatch();
-  // const history = useHistory();
   const navigate = useNavigate();
   const { user, isAuthenticated } = useSelector((state) => state.userData);
 
@@ -20,6 +23,67 @@ const ProfilePage = () => {
     (state) => state.profileData
   );
 
+
+  //User Update data starts
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidName, setIsValidEName] = useState(true);
+
+  const handleEmailChange = (event) => {
+    const newEmail = event.target.value;
+    setEmail(newEmail);
+    setIsValidEmail(
+      newEmail !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)
+    );
+  };
+
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+    setIsValidEName(event.target.value.length >= 4);
+  };
+
+  const UpdateProfileSubmitHandler = (e) => {
+    e.preventDefault();
+    const myForm = new FormData();
+    myForm.set("name", name);
+    myForm.set("email", email);
+
+    dispatch(updateProfile(myForm));
+  };
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setEmail(user.email);
+    }
+
+    if (error) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
+    if (isUpdated) {
+      toast.success("Profile Updated Successfully");
+      dispatch({
+        type: UPDATE_PROFILE_RESET,
+      });
+      dispatch({
+        type: UPDATE_PROFILE_RESET,
+      });
+      navigate("/account");
+      dispatch(load_UserProfile());
+    }
+  }, [dispatch, error,
+    // alert,
+    navigate, user, isUpdated]);
+
+  const isSignInDisabledProfile = !(email && isValidEmail && name && isValidName);
+
+  //user Update data ends
+
+
+  const [toggle, setToggle] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -107,8 +171,16 @@ const ProfilePage = () => {
     const formattedDate = formatter.format(createdAt);
     return formattedDate;
   };
-  console.log(user)
 
+
+  function handleforgotPasswordSubmit(e) {
+    e.preventDefault();
+
+    const myForm = new FormData();
+    myForm.set("email", user.email);
+    dispatch(forgetPassword(myForm));
+
+  }
   return (
     <>
       <div className="mt-16 lg:mt-36 lg:mx-auto min-h-screen max-w-screen-xl mx-8 xl:mx-auto">
@@ -128,10 +200,60 @@ const ProfilePage = () => {
                 <p className="text-gray-600">Email:{user.email}</p>
 
                 <button
-                  onClick={() => { navigate("/profile/update") }}
-                  className="inline-flex text-sm font-semibold text-blue-600 underline decoration-2">Change</button>
+                  onClick={() => { setToggle(!toggle) }}
+                  className="inline-flex text-sm w-12 font-semibold text-blue-600 underline decoration-2">Change</button>
 
               </div>
+
+              {toggle && <div>
+                <div className="py-2 text-xl font-semibold">
+                  Update User Details:
+                </div>
+                <div>
+                  <label for="name" className="block text-sm font-medium text-gray-700">
+                    Name
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      value={name}
+                      onChange={handleNameChange}
+                      error={!isValidName && name !== ""}
+                      helperText={
+                        !isValidName && name !== "" ? "Name must be between 4 and 20 characters." : ""
+                      }
+                      id="name" name="name" type="name" required
+                      className=" lg:max-w-56 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                      placeholder="Enter your full name" />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="email" className="block text-sm font-medium text-gray-700">
+                    Email address
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      value={email}
+                      onChange={handleEmailChange}
+                      error={!isValidEmail && email !== ""}
+                      helperText={
+                        !isValidEmail && email !== ""
+                          ? "Please enter a valid email address."
+                          : ""
+                      }
+                      id="email" name="email" type="email" autocomplete="email" required
+                      className="lg:max-w-56 appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                      placeholder="Enter your email address" />
+                  </div>
+
+
+                </div>
+                <button
+                  disabled={isSignInDisabledProfile}
+                  onClick={UpdateProfileSubmitHandler}
+                  className="mt-4 rounded-lg disabled:bg-gray-500 bg-blue-600 px-4 py-2 text-white">Update Profile</button>
+                <hr className="mt-4 mb-8" />
+              </div>}
 
             </div>
 
@@ -175,13 +297,13 @@ const ProfilePage = () => {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
               </svg>
             </div>
-            <p className="mt-2">Can't remember your current password. <a className="text-sm font-semibold text-blue-600 underline decoration-2" href="#">Recover Account</a></p>
+            {/* <p className="mt-2">Can't remember your current password. <button onClick={handleforgotPasswordSubmit}
+              className="text-sm font-semibold text-blue-600 underline decoration-2" >Recover Account</button></p> */}
             <button
               disabled={isSignInDisabled}
-
               onClick={updatePasswordSubmitHandler}
-
-              className="mt-4 rounded-lg disabled:bg-gray-500 bg-blue-600 px-4 py-2 text-white">Save Password</button>
+              className="mt-4 rounded-lg disabled:bg-gray-500 bg-blue-600 px-4 py-2 text-white">Save Password
+            </button>
             <hr className="mt-4 mb-8" />
 
             <div className="mb-10">

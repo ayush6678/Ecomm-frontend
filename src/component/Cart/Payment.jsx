@@ -9,7 +9,7 @@ import { generateDiscountedPrice } from "../DisplayMoney/DisplayMoney";
 import { useDispatch } from "react-redux";
 import { createOrder } from "../../actions/orderAction";
 import { toast } from "react-toastify";
-
+import { Link } from "react-router-dom";
 function PaymentComponent() {
   const navigate = useNavigate();
   const [paymentMethod, setPaymentMethod] = useState(null);
@@ -32,12 +32,7 @@ function PaymentComponent() {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  let discountedPrice = generateDiscountedPrice(totalPrice);
-  let totalDiscount = totalPrice - discountedPrice;
-  let final = totalPrice - totalDiscount;
-  final = displayMoney(final);
-  totalDiscount = displayMoney(totalDiscount);
-  totalPrice = displayMoney(totalPrice);
+
 
   function generateOrderId() {
     const currentDate = new Date();
@@ -71,7 +66,7 @@ function PaymentComponent() {
       headers: { "Content-Type": "application/json", Authorization: `${token}` }
 
     };
-    const { data } = await axios.post(`http://localhost:5000/api/v1/payment/createOrder`, order, config);
+    const { data } = await axios.post(`https://ecomm-backend-o6x0.onrender.com/api/v1/payment/createOrder`, order, config);
     console.log(data);
 
     let checkoutOptions = {
@@ -111,7 +106,7 @@ function PaymentComponent() {
       shippingInfo,
       orderItems: cartItems,
       itemsPrice: subTotal,
-      shippingPrice: 0,
+      shippingPrice: 90,
       totalPrice: totalFinalPrice,
     };
 
@@ -136,7 +131,7 @@ function PaymentComponent() {
 
 
   return (
-    <div className=" mt-36">
+    <div className=" mt-16">
       <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
         <div action="#" className="mx-auto max-w-screen-xl px-4 2xl:px-0">
           <div className="mx-auto max-w-3xl">
@@ -160,6 +155,8 @@ function PaymentComponent() {
 
             <div className="mt-6 sm:mt-8">
               <div className="relative overflow-x-auto border-b border-gray-200 dark:border-gray-800">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Items in the package</h4>
+
                 <table className="w-full text-left font-medium text-gray-900 dark:text-white md:table-fixed">
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
 
@@ -168,11 +165,11 @@ function PaymentComponent() {
                         <tr>
                           <td className="whitespace-nowrap py-4 md:w-[384px]">
                             <div className="flex items-center gap-4">
-                              <a href="#" className="flex items-center aspect-square w-10 h-10 shrink-0">
-                                <img className="h-auto w-full max-h-full dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt="imac image" />
-                                <img className="hidden h-auto w-full max-h-full dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="imac image" />
-                              </a>
-                              <a href="#" className="hover:underline">{items.name}</a>
+                              <div className="flex items-center aspect-square w-10 h-10 shrink-0">
+                                <img className="h-auto w-full max-h-full dark:hidden" src={items.image} alt="imac image" />
+                                <img className="hidden h-auto w-full max-h-full dark:block" src={items.image} alt="imac image" />
+                              </div>
+                              <Link to={'/'} className="hover:underline">{items.name}</Link>
                             </div>
                           </td>
 
@@ -195,22 +192,22 @@ function PaymentComponent() {
                       <dt className="text-gray-500 dark:text-gray-400">Original price</dt>
                       <dd className="text-base font-medium text-gray-900 dark:text-white">{totalPrice}</dd>
                     </dl>
-
+                    {/* 
                     <dl className="flex items-center justify-between gap-4">
                       <dt className="text-gray-500 dark:text-gray-400">Savings</dt>
                       <dd className="text-base font-medium text-green-500">-{totalDiscount}</dd>
-                    </dl>
+                    </dl> */}
 
                     <dl className="flex items-center justify-between gap-4">
                       <dt className="text-gray-500 dark:text-gray-400">Store Pickup</dt>
-                      <dd className="text-base font-medium text-gray-900 dark:text-white">₹{40}</dd>
+                      <dd className="text-base font-medium text-gray-900 dark:text-white">₹{90}</dd>
                     </dl>
 
                   </div>
 
                   <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                     <dt className="text-lg font-bold text-gray-900 dark:text-white">Total</dt>
-                    <dd className="text-lg font-bold text-gray-900 dark:text-white">{final}</dd>
+                    <dd className="text-lg font-bold text-gray-900 dark:text-white">₹{totalPrice + 90}</dd>
                   </dl>
                 </div>
               </div>
@@ -265,17 +262,9 @@ function PaymentComponent() {
                     <button onClick={doPayment} className="mt-4 flex w-full items-center justify-center rounded-lg bg-primary-700  px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300  dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 sm:mt-0">Pay Now</button>
                   </div>
                 )}
-
               </div>
-
-
             </div>
-
-
           </div>
-
-
-
         </div>
       </section>
     </div>

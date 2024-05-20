@@ -9,320 +9,8 @@ import Sidebar from "./Siderbar";
 import MetaData from "../Layouts/MetaData/MetaData";
 import Loader from "../Layouts/loader/Loader";
 import { toast } from 'react-toastify';
-import { Typography, Divider } from "@mui/material";
-// import { makeStyles } from "@mui/styles";
-import AccountTreeIcon from "@mui/icons-material/AccountTree";
-import { Button } from "@mui/material";
 import { UPDATE_ORDER_RESET } from "../../constants/orderConstant";
 import { Link, useParams } from "react-router-dom";
-import OrderDetailsSection from "../Cart/OrderDetails";
-
-
-const useStyles = {
-  prodcessOrder: {
-    display: "flex",
-    alignItems: "flex-start",
-    backgroundColor: "#f1f1f1",
-    justifyContent: "center",
-    width: "97%",
-    gap: "1rem",
-
-    overflow: "hidden",
-    marginTop: "-1rem",
-  },
-  firstBox_prodcessOrder: {
-    width: "20%",
-    margin: "0rem",
-    height: "fit-content",
-    backgroundColor: "white",
-    marginTop: "-1rem",
-    borderRadius: "5px",
-    boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
-    display: "block",
-    // [theme.breakpoints.down("999")]: {
-    //   display: "none",
-    // },
-  },
-
-  toggleBox_prodcessOrder: {
-    width: "16rem",
-    margin: "0rem",
-    height: "fit-content",
-    backgroundColor: "white",
-    borderRadius: "5px",
-    boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.5)",
-    display: "block",
-    zIndex: "100",
-    position: "absolute",
-    top: "58px",
-    left: "17px",
-  },
-  secondBox__prodcessOrder: {
-    width: "75%",
-    height: "fit-content",
-    display: "flex",
-
-    flexDirection: "column",
-    gap: "1rem",
-    justifyContent: "center",
-    // [theme.breakpoints.down("999")]: {
-    //   width: "100%",
-    // },
-  },
-  navBar__prodcessOrder: {
-    margin: "0rem",
-  },
-
-  mainInfo__prodcessOrder: {
-    backgroundColor: "white !important",
-    display: "flex",
-    flexDirection: "column",
-    gap: "1rem",
-    justifyContent: "center",
-    width: "92%",
-    margin: "0 auto",
-    padding: "0rem 3rem 2rem 3rem",
-    // [theme.breakpoints.down("sm")]: {
-    //   width: "100%",
-    //   padding: "0rem 1rem 2rem 1rem",
-    // },
-
-    // [theme.breakpoints.down("xs")]: {
-    //   width: "100%",
-    //   padding: "0rem 0.5rem 2rem 0.5rem",
-    // },
-  },
-  order_Details__prodcessOrder: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    marginLeft: "3rem",
-    padding: "2rem 0.5rem 2rem 0.5rem",
-    // [theme.breakpoints.down("sm")]: {
-    //   width: "80%",
-    //   padding: "1rem",
-    //   marginLeft: "1rem",
-    // },
-
-    // [theme.breakpoints.down("xs")]: {
-    //   width: "90%",
-    //   padding: "0 0.5rem",
-    //   marginLeft: "0rem",
-    // },
-  },
-  orderSub_heading__prodcessOrder: {
-    fontWeight: "600",
-    fontSize: "1.5rem",
-    marginBottom: "10px",
-
-    // [theme.breakpoints.down("sm")]: {
-    //   fontSize: "1.2rem",
-    //   padding: "0 2rem",
-    // },
-
-    // [theme.breakpoints.down("xs")]: {
-    //   fontSize: "1rem",
-    //   padding: "0 1rem",
-    // },
-  },
-
-  boldDivider__prodcessOrder: {
-    borderBottom: `0.3px solid #3A3E3A`,
-    margin: "0 0 0 3rem",
-    width: "52%",
-    // [theme.breakpoints.down("sm")]: {
-    //   width: "90%",
-    //   margin: "0 0 0 1rem",
-    // },
-
-    // [theme.breakpoints.down("xs")]: {
-    //   width: "90%",
-    //   margin: "0 0 0 0.5rem",
-    // },
-  },
-  boldDivider__prodcessOrder2: {
-    borderBottom: `0.8px solid #f5f5f5`,
-    margin: "0 0 0 3rem",
-    width: "52%",
-    // [theme.breakpoints.down("sm")]: {
-    //   width: "90%",
-    //   margin: "0 0 0 1rem",
-    // },
-
-    // [theme.breakpoints.down("xs")]: {
-    //   width: "90%",
-    //   margin: "0 0 0 0.5rem",
-    // },
-  },
-
-  shipping_Deatils__prodcessOrder: {
-    display: "flex",
-    flexDirection: "column",
-    width: "50%",
-    marginLeft: "3rem",
-    // padding: "1rem 1px",
-    // [theme.breakpoints.down("sm")]: {
-    //   width: "90%",
-    //   padding: "0 2rem",
-    //   marginLeft: "1rem",
-    // },
-
-    // [theme.breakpoints.down("xs")]: {
-    //   width: "90%",
-    //   padding: "0 1.5rem",
-    //   marginLeft: "0rem",
-    // },
-  },
-  shipping_Address__prodcessOrder: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100%",
-
-    // [theme.breakpoints.down("sm")]: {
-    //   width: "90%",
-    //   padding: "0 2rem",
-    //   marginLeft: "1rem",
-    //   marginTop: "-1rem",
-    // },
-
-    // [theme.breakpoints.down("xs")]: {
-    //   width: "90%",
-    //   padding: "0 1.5rem",
-    //   marginLeft: "0rem",
-    //   marginTop: "-1rem",
-    // },
-  },
-  shipping_Address_Details__prodcessOrder: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    fontWeight: "300",
-    width: "50%",
-    padding: "1rem 0px",
-  },
-  shipping_heading__prodcessOrder: {
-    fontWeight: "800",
-    fontSize: "1.5rem",
-
-    // [theme.breakpoints.down("sm")]: {
-    //   fontSize: "1.2rem",
-    // },
-
-    // [theme.breakpoints.down("xs")]: {
-    //   fontSize: "1rem",
-    // },
-  },
-
-  total_price__prodcessOrder: {
-    display: "flex",
-    gap: "18rem",
-    marginLeft: "3.1rem",
-    marginTop: "-1rem",
-    marginBottom: "-1rem",
-
-    // [theme.breakpoints.down("sm")]: {
-    //   gap: "10rem",
-    //   marginLeft: "2rem",
-    // },
-
-    // [theme.breakpoints.down("xs")]: {
-    //   gap: "7rem",
-    //   padding: "0rem 1.2rem",
-    // },
-  },
-  total_price_span__prodcessOrder: {
-    fontSize: "16px",
-    fontWeight: 600,
-    color: "#414141",
-  },
-  total_price_p__prodcessOrder: {
-    fontSize: "16px",
-    fontWeight: 500,
-  },
-  total_price_h4__prodcessOrder: {
-    fontSize: "16px",
-    fontWeight: 800,
-  },
-  greenFont: {
-    color: "green",
-  },
-  redFont: {
-    color: "red",
-  },
-  updateOrderForm__prodcessOrder: {
-    backgroundColor: "white",
-    marginLeft: "3rem",
-
-    "& > div": {
-      display: "flex",
-      width: "100%",
-      alignItems: "center",
-      "& > select": {
-        padding: "1vmax 4vmax",
-        margin: "2rem 0",
-        width: "50%",
-        boxSizing: "border-box",
-        border: "1px solid rgba(0, 0, 0, 0.267)",
-        borderRadius: "4px",
-        font: "300 0.9vmax cursive",
-        outline: "none",
-      },
-      "& > svg": {
-        position: "absolute",
-        transform: "translateX(1vmax)",
-        fontSize: "1.6vmax",
-        color: "rgba(0, 0, 0, 0.623)",
-      },
-    },
-    // [theme.breakpoints.down("799")]: {
-    //   width: "100%",
-    //   padding: "1rem",
-    //   marginLeft: "0rem",
-    //   "& > div > select": {
-    //     padding: "2.5vmax 2.5vmax",
-    //     font: "300 1.7vmax cursive",
-    //   },
-    //   "& > div > svg": {
-    //     fontSize: "2.8vmax",
-    //   },
-    // },
-  },
-
-  placeOrderBtn_prodcessOrder: {
-    backgroundColor: "#000",
-    color: "#fff",
-    fontWeight: "500",
-    fontSize: "1rem",
-    padding: "0.5rem 1rem",
-    borderRadius: "0.5rem",
-    width: "50%",
-    marginBottom: "1rem",
-    marginTop: "-1rem",
-    "&:hover": {
-      backgroundColor: "#00000080",
-    },
-    // [theme.breakpoints.down("799")]: {
-    //   width: "50%",
-    //   padding: "0.5rem 1rem",
-    //   marginLeft: "0rem",
-    // },
-  },
-
-  image: {
-    width: "155px",
-    height: "140px",
-    objectFit: "cover",
-    // [theme.breakpoints.down(899)]: {
-    //   width: "255px",
-    //   height: "240px",
-    // },
-
-    // [theme.breakpoints.down(599)]: {
-    //   width: "155px",
-    //   height: "140px",
-    // },
-  },
-};
 
 function ProcessOrder() {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
@@ -332,10 +20,9 @@ function ProcessOrder() {
 
   const dispatch = useDispatch();
   // const alert = useAlert();
-  const classes = useStyles;
+  const classes = {};
   const params = useParams();
   const productId = params.id;
-
 
   // for order status
   const [status, setStatus] = useState("");
@@ -373,6 +60,8 @@ function ProcessOrder() {
     myForm.set("status", status);
     dispatch(updateOrder(productId, myForm));
   };
+
+  console.log(order)
   return (
     <>
       {loading ? (
@@ -380,220 +69,108 @@ function ProcessOrder() {
       ) : (
         <>
           <MetaData title="Process Order" />
-          <div style={classes.prodcessOrder}>
+          <div className=" flex" >
             <div
-              style={
-                !toggle
-                  ? classes.firstBox_prodcessOrder
-                  : classes.toggleBox_prodcessOrder
-              }
+              className="flex"
             >
               <Sidebar />
             </div>
 
-            <div style={classes.secondBox__prodcessOrder}>
-              <div style={classes.navBar__prodcessOrder}>
-              </div>
-              <div style={classes.mainInfo__prodcessOrder}>
-                <div style={classes.order_Details__prodcessOrder}>
-                  <h5 style={classes.shipping_heading__prodcessOrder}>
-                    USER ORDER DETAILS
-                  </h5>
+            <div className="bg-gray-100 p-8 w-full">
+              <div className=" mx-auto bg-white shadow-lg rounded-lg p-6">
+                <div>
+                  <h5 className="text-2xl font-semibold mb-4">USER ORDER DETAILS</h5>
+                  <div>OrderID: {order.ID}</div>
+
+                  <div>Date: {order.createdAt}</div>
                   {order.orderItems &&
                     order.orderItems.map((item, idx) => (
                       <Link
                         to={`/product/${item.productId}`}
+                        key={idx}
+                        className="block mb-4 hover:bg-gray-100 p-4 rounded transition duration-300"
                         style={{
                           textDecoration: "none",
                           color: "inherit",
-                          textDecorationColor: "none",
                         }}
                       >
-                        <OrderDetailsSection
-                          key={idx}
-                          item={item}
-                          totalDiscount={
-                            `₹${(item.price * item.quantity * 20) / 100}` // random discount between 1 to 30
-                          }
-                          totalPrice={`₹${item.price * item.quantity}`}
-                        />
+                        <div>
+                          <img src={item.image} width={100} />
+                          <div>{item.name}</div>
+                          <div>{item.price}</div>
+                          <div>X{item.quantity}</div>
+                          <div>{item._id}</div>
+                        </div>
                       </Link>
                     ))}
                 </div>
 
-                <div style={classes.shipping_Deatils__prodcessOrder}>
-                  <Typography
-                    variant="h6"
-                    style={classes.orderSub_heading__prodcessOrder}
-                  >
-                    DELIVERY ADDRESS
-                  </Typography>
-
-                  <div style={classes.shipping_Address__prodcessOrder}>
-                    <div
-                      style={
-                        classes.shipping_Address_Details__prodcessOrder
-                      }
-                    >
-                      <Typography
-                        variant="subtitle2"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: 400,
-                        }}
-                      >
-                        {order.user && order.user.name}
-                      </Typography>
-                      <Typography
-                        variant="subtitle2"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: 400,
-                        }}
-                      >
-                        {order.shippingInfo &&
-                          `${order.shippingInfo.address}, ${order.shippingInfo.city}, ${order.shippingInfo.state}, ${order.shippingInfo.pinCode}, ${order.shippingInfo.country}`}
-                      </Typography>
-
-                      <Typography
-                        variant="subtitle2"
-                        // style={classes.mobileNo__prodcessOrder}
-                        style={{
-                          fontWeight: 400,
-                          marginTop: "-5px",
-                          fontSize: "16px",
-                        }}
-                      >
-                        {order.shippingInfo && order.shippingInfo.phoneNo}
-                      </Typography>
-
-                      <Typography
-                        variant="subtitle2"
-                        // style={classes.emailAddress__prodcessOrder}
-                        style={{
-                          fontWeight: 400,
-                          fontSize: "16px",
-                        }}
-                      >
-                        {order.user && order.user.email}
-                      </Typography>
+                <div className="mt-8">
+                  <div className="text-xl font-semibold mb-2">DELIVERY ADDRESS</div>
+                  <div className="bg-gray-50 p-4 rounded shadow-sm">
+                    <div className="font-medium text-lg">{order.user && order.user.name}</div>
+                    <div className="mt-2">
+                      {order.shippingInfo &&
+                        `${order.shippingInfo.address}, ${order.shippingInfo.city}, ${order.shippingInfo.state}, ${order.shippingInfo.pinCode}, ${order.shippingInfo.country}`}
                     </div>
+                    <div className="mt-2">{order.shippingInfo && order.shippingInfo.phoneNo}</div>
+                    <div className="mt-2">{order.user && order.user.email}</div>
                   </div>
                 </div>
 
-                <Divider style={classes.boldDivider__prodcessOrder} />
-                <div
-                  style={classes.total_price__prodcessOrder}
-                >
-                  <div>
-                    <h4>Total Price</h4>
+                <div className="mt-8">
+                  <div className="flex justify-between items-center">
+                    <h4 className="text-xl font-semibold">Total Price</h4>
+                    <p className="text-gray-600">(Inclusive of all taxes)</p>
+                  </div>
+                  <p className="text-2xl font-bold mt-2">₹{order.totalPrice && order.totalPrice}</p>
+                </div>
 
-                    <p
-                      style={{
-                        fontSize: "14px",
-                        marginTop: "-10px",
-                        color: "#414141",
-                      }}
-                    >
-                      (Inclusive of all taxes)
+                <div className="mt-8">
+                  <div className="flex justify-between items-center">
+                    <h4 className="text-xl font-semibold">Order Status</h4>
+                    <p className="text-lg font-bold">{order.orderStatus && order.orderStatus}</p>
+                  </div>
+                </div>
+
+                <div className="mt-8">
+                  <div className="flex justify-between items-center">
+                    <h4 className="text-xl font-semibold">Payment Status</h4>
+                    <p className="text-lg font-bold">
+                      {order.paymentInfo.status}
                     </p>
                   </div>
-                  <p>
-                    <b style={{ marginLeft: "-2rem" }}>
-                      ₹{order.totalPrice && order.totalPrice}
-                    </b>
-                  </p>
-                </div>
-
-                <div
-                  style={classes.total_price__prodcessOrder}
-                >
-                  <div>
-                    <h4>Order Status</h4>
-                  </div>
-                  <p
-                    className={
-                      order.orderStatus && order.orderStatus === "Delivered"
-                        ? "greenColor"
-                        : "redColor"
-                    }
-                  >
-                    <b> {order.orderStatus && order.orderStatus}</b>
-                  </p>
-                </div>
-
-                <div
-                  style={classes.total_price__prodcessOrder}
-                >
-                  <div>
-                    <h4>Payment Status</h4>
-                  </div>
-                  <p
-                    className={
-                      order.orderStatus && order.orderStatus === "Delivered"
-                        ? classes.greenFont
-                        : classes.redFont
-                    }
-                  >
-                    <b style={classes.greenFont}>
-                      {" "}
-                      {order.paymentInfo &&
-                        order.paymentInfo.status === "succeeded"
-                        ? "PAID"
-                        : "NOT PAID"}
-                    </b>
-                  </p>
                 </div>
 
                 {order.orderStatus && (
                   <>
-                    <div
-                      className={{
-                        display:
-                          order.orderStatus === "Delivered" ? "none" : "block",
-                        padding: " 0 1rem 0 0",
-                      }}
-                    >
-                      <Divider
-                        style={classes.boldDivider__prodcessOrder2}
-                      />
-                      <form style={classes.updateOrderForm__prodcessOrder}>
-                        <h1>Process Order</h1>
-
-                        <div style={{ marginTop: "-1rem" }}>
-                          <AccountTreeIcon />
-                          <select onChange={(e) => setStatus(e.target.value)}>
+                    <div className="mt-8 bg-gray-50 p-6 rounded shadow-sm">
+                      <form>
+                        <h1 className="text-2xl font-semibold mb-4">Process Order</h1>
+                        <div className="mb-4">
+                          <select
+                            onChange={(e) => setStatus(e.target.value)}
+                            className="w-full p-2 border border-gray-300 rounded"
+                          >
                             <option value="">Choose Category</option>
-                            {order.orderStatus === "Processing" && (
-                              <option value="Shipped">Shipped</option>
-                            )}
-                            {order.orderStatus === "Shipped" && (
-                              <option value="Delivered">Delivered</option>
-                            )}
+                            {order.orderStatus === "Processing" && <option value="Shipped">Shipped</option>}
+                            {order.orderStatus === "Shipped" && <option value="Delivered">Delivered</option>}
                           </select>
                         </div>
-
-                        <Button
-                          variant="contained"
-                          style={classes.placeOrderBtn_prodcessOrder}
-                          fullWidth
+                        <button
                           onClick={updateOrderSubmitHandler}
-                          disabled={
-                            loading
-                              ? true
-                              : false || status === ""
-                                ? true
-                                : false
-                          }
+                          disabled={loading || status === ""}
+                          className={`w-full py-2 rounded text-white ${loading || status === "" ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700 transition duration-300'}`}
                         >
                           Process
-                        </Button>
+                        </button>
                       </form>
                     </div>
                   </>
                 )}
               </div>
             </div>
+
           </div>
         </>
       )}

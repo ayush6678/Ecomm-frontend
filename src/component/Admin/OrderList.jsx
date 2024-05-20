@@ -6,8 +6,6 @@ import { toast } from 'react-toastify';
 // import { useHistory } from "react-router-dom";
 import MetaData from "../Layouts/MetaData/MetaData";
 import Loader from "../Layouts/loader/Loader";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "./Siderbar";
 import { DELETE_ORDER_RESET } from "../../constants/orderConstant";
 function OrderList() {
@@ -84,66 +82,6 @@ function OrderList() {
   const deleteOrderHandler = (id) => {
     dispatch(deleteOrder(id))
   };
-
-  // DATA GRID VALUE
-  const columns = [
-    {
-      field: "id",
-      headerName: "Order ID",
-      minWidth: 120,
-      flex: 0.7,
-      headerClassName: "column-header",
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      minWidth: 100,
-      flex: 0.8,
-      headerClassName: "column-header hide-on-mobile",
-      renderCell: (params) => {
-        const color = params.value === "Delivered" ? "green" : "red";
-        return <div style={{ color: `${color}`, fontWeight: "600" }}>{params.value}</div>;
-      },
-    },
-    {
-      field: "itemsQty",
-      headerName: "Items Qty",
-      type: "number",
-      minWidth: 120,
-      flex: 0.8,
-      headerClassName: "column-header hide-on-mobile",
-    },
-    {
-      field: "amount",
-      headerName: "Amount",
-      type: "number",
-      minWidth: 120,
-      flex: 0.8,
-      headerClassName: "column-header hide-on-mobile",
-    },
-    {
-      field: "actions",
-      headerName: "Actions",
-      flex: 1.5,
-      sortable: false,
-      minWidth: 150,
-      headerClassName: "column-header1",
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={`/admin/order/${params.id}`}>
-              <EditIcon className="icon-" />
-            </Link>
-            <Link
-              onClick={() => deleteOrderHandler(params.id)}
-            >
-              <DeleteIcon className="iconbtn" />
-            </Link>
-          </>
-        );
-      },
-    },
-  ];
 
 
 
@@ -223,7 +161,7 @@ function OrderList() {
                               <td class="px-6 py-4">
                                 <button className=" mx-1 px-1 bg-gray-200 rounded-md">
                                   <Link
-                                    to={`/admin/product/${item.id}`}
+                                    to={`/admin/order/${item.id}`}
                                   >
                                     Edit
                                   </Link>

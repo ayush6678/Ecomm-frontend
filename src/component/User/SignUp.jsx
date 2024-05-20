@@ -1,23 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-    Avatar,
-    Button,
-    Checkbox,
-    TextField,
-    FormControlLabel,
-    Grid,
-    Typography,
-} from "@mui/material";
 // import CricketBallLoader from "../Layouts/loader/Loader";
 // import MetaData from "../Layouts/MetaData/MetaData";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp, clearErrors } from "../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
-// import useStyles from "./LoginFromStyle";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { LockOutlined } from "@mui/icons-material";
 
 function SignUp() {
 
@@ -97,9 +84,9 @@ function SignUp() {
         isValidEmail &&
         confirmPassword &&
         name &&
-        isValidName &&
-        areCheckboxesChecked.checkbox1 &&
-        areCheckboxesChecked.checkbox2
+        isValidName 
+        // areCheckboxesChecked.checkbox1 &&
+        // areCheckboxesChecked.checkbox2
     );
 
     function handleSignUpSubmit(e) {
@@ -124,7 +111,105 @@ function SignUp() {
     }
     return (
         <>
-            <div className="formContainer">
+            <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+                <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                    <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
+                        Create an Account
+                    </h2>
+                    <p className="mt-2 text-center text-sm text-gray-600 max-w">
+                        <Link to={"/login"} href="#" className="font-medium text-blue-600 hover:text-blue-500">
+                            Login if already created
+                        </Link>
+                    </p>
+                </div>
+
+                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                    <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                        <form className="space-y-6" action="#" method="POST">
+
+                            <div>
+                                <label for="name" className="block text-sm font-medium text-gray-700">
+                                    Name
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        value={name}
+                                        onChange={handleNameChange}
+                                        error={!isValidName && name !== ""}
+                                        helperText={
+                                            !isValidName && name !== "" ? "Name must be between 4 and 20 characters." : ""
+                                        }
+                                        id="name" name="name" type="name" required
+                                        className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                        placeholder="Enter your full name" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="email" className="block text-sm font-medium text-gray-700">
+                                    Email address
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        value={email}
+                                        onChange={handleEmailChange}
+                                        error={!isValidEmail && email !== ""}
+                                        helperText={
+                                            !isValidEmail && email !== ""
+                                                ? "Please enter a valid email address."
+                                                : ""
+                                        }
+                                        id="email" name="email" type="email" autocomplete="email" required
+                                        className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                        placeholder="Enter your email address" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="password" className="block text-sm font-medium text-gray-700">
+                                    Password
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        error={!isValidPassword && password !== ""}
+                                        helperText={!isValidPassword && password !== "" ? "Password must be at least 8 characters." : ""}
+                                        value={password}
+                                        onChange={handlePasswordChange}
+                                        id="password" name="password" type="password" autocomplete="current-password" required
+                                        className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                        placeholder="Enter your password" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="password" className="block text-sm font-medium text-gray-700">
+                                    Confirm Password
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        value={confirmPassword}
+                                        onChange={handleConfirmPasswordChange}
+                                        id="cnfpassword" name="cnfpassword" type="password" autocomplete="current-password" required
+                                        className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                        placeholder="Enter your password" />
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <button type="submit"
+                                    onClick={handleSignUpSubmit}
+                                    disabled={isSignInDisabled}
+                                    className="group disabled:bg-zinc-500 relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Create Account
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {/* <div className="formContainer">
                 <form className="form">
                     <Avatar className="avatar">
                         <LockOutlined />
@@ -172,7 +257,12 @@ function SignUp() {
                         className="passwordInput textField"
                         error={!isValidPassword && password !== ""}
                         helperText={!isValidPassword && password !== "" ? "Password must be at least 8 characters." : ""}
-                        InputProps={{
+
+                        value={password}
+                        onChange={handlePasswordChange}
+
+
+                                                InputProps={{
                             endAdornment: (
                                 <Button
                                     variant="outlined"
@@ -183,8 +273,6 @@ function SignUp() {
                                 </Button>
                             ),
                         }}
-                        value={password}
-                        onChange={handlePasswordChange}
                     />
                     <TextField
                         label="Confirm Password"
@@ -265,7 +353,7 @@ function SignUp() {
                         </Link>
                     </Typography>
                 </form>
-            </div>
+            </div> */}
         </>
     )
 }

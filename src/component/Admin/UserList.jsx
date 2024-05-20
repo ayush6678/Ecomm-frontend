@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { Button } from "@mui/material";
 import MetaData from "../Layouts/MetaData/MetaData";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "./Siderbar";
 import Loader from "../Layouts/loader/Loader";
 import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";
@@ -51,76 +48,6 @@ function UserList() {
 
   // Datagrid  values  and schema
 
-  const columns = [
-    {
-      field: "name",
-      headerName: "Name",
-      minWidth: 150,
-      flex: 0.5,
-      headerClassName: "column-header hide-on-mobile",
-    },
-
-    {
-      field: "email",
-      headerName: "Email",
-      minWidth: 150,
-      flex: 0.7,
-      headerClassName: "column-header hide-on-mobile",
-    },
-
-    {
-      field: "role",
-      headerName: "Role",
-      type: "number",
-      minWidth: 150,
-      flex: 0.3,
-      headerClassName: "column-header hide-on-mobile",
-      cellClassName: (params) => {
-        return params.formattedValue === "admin"
-          ? "greenColor"
-          : "redColor";
-      },
-    },
-    {
-      field: "actions",
-      flex: 0.3,
-      headerName: "Actions",
-      minWidth: 150,
-      type: "number",
-
-      headerClassName: "column-header hide-on-mobile",
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={`/admin/user/${params.id
-              // params.getValue(params.id, "id")
-              }`}>
-              <EditIcon className="icon-" />
-            </Link>
-
-            <Button
-              onClick={() =>
-                deleteUserHandler(
-                  params.id
-                  // params.getValue(params.id, "id")
-                  )
-              }
-            >
-              <DeleteIcon className="iconbtn" />
-            </Button>
-          </>
-        );
-      },
-    },
-    {
-      field: "id",
-      headerName: "User ID",
-      minWidth: 180,
-      flex: 0.8,
-      sortable: false,
-      headerClassName: "column-header hide-on-mobile",
-    },
-  ];
 
   const rows = [];
 
@@ -155,6 +82,8 @@ function UserList() {
     };
   }, [toggle]);
 
+  console.log(rows)
+
   return (
     <>
       {loading ? (
@@ -163,23 +92,78 @@ function UserList() {
         <>
           <MetaData title={`ALL Users - Admin`} />
 
-          <div className="product-list" style={{ marginTop: 0 }}>
-            <div className={!toggle ? "listSidebar" : "toggleBox"}>
+          <div className=" flex h-full">
+            <div >
               <Sidebar />
             </div>
 
-            <div className="list-table">
-              <div className="productListContainer">
-                <h4 id="productListHeading">ALL USERS</h4>
+            <div className="">
+              <div className="">
+                <h4 >ALL USERS</h4>
+                <div className=" ">
+                  <div className=" ">
+                    <div class="relative overflow-x-auto m-16 rounded-lg shadow-lg">
+                      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 
-                {/* <DataGrid
-                  rows={rows}
-                  columns={columns}
-                  pageSize={10}
-                  disableSelectionOnClick
-                  className="productListTable"
-                  autoHeight
-                /> */}
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                          <tr>
+                            <th scope="col" class="px-6 py-3">
+                              ID
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                              Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                              Email
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                              Role
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                              Actions
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          {rows.map((item) => (
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {item.id}
+                              </th>
+                              <td class="px-6 py-4">
+                                {item.name}
+
+                              </td>
+                              <td class="px-6 py-4">
+                                {item.email}
+
+                              </td>
+                              <td class="px-6 py-4">
+                                {item.role}
+                              </td>
+                              <td class="px-6 py-4">
+
+                                <button
+                                  onClick={() =>
+                                    deleteUserHandler(item.id)
+                                  }
+                                  className=" mx-1 px-1 bg-red-500 text-white rounded-md">
+
+                                  Delete
+
+                                </button>
+
+                              </td>
+                            </tr>
+
+                          ))}
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

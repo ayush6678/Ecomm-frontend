@@ -1,68 +1,9 @@
 import React from "react";
-import "./Shipping.css";
 import { useSelector, useDispatch } from "react-redux";
 import { saveShippingInfo } from "../../actions/cartAction";
 import MetaData from "../Layouts/MetaData/MetaData";
-import CheckoutSteps from "./CheckoutSteps ";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-
-import {
-  Typography,
-  TextField,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Grid,
-} from "@mui/material";
-
-
-const useStyles = {
-  shippingRoot: {
-    width: "60%",
-    margin: "auto",
-  },
-  heading: {
-    // marginBottom: theme.spacing(2),
-    alignSelf: "flex-start",
-  },
-  formControl: {
-    // marginBottom: theme.spacing(2),
-    minWidth: 200,
-  },
-  submitButton: {
-    // marginTop: theme.spacing(2),
-    width: "50%",
-    backgroundColor: "#000000",
-    color: "#FFFFFF",
-    height: "3rem",
-    "&:hover": {
-      backgroundColor: "#ed1c24",
-      color: "#FFFFFF",
-    },
-  },
-  outlinedInput: {
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#000000",
-      },
-      "&:hover fieldset": {
-        borderColor: "#000000",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#000000",
-      },
-    },
-    "& .MuiInputBase-input": {
-      color: "#000000",
-    },
-    "& .MuiInputLabel-root": {
-      color: "#000000",
-    },
-  },
-
-
-};
 
 const Shipping = () => {
   // const alert = useAlert();
@@ -70,7 +11,6 @@ const Shipping = () => {
   const navigate = useNavigate();
   const { shippingInfo } = useSelector((state) => state.cart);
 
-  const classes = useStyles;
   const [address, setAddress] = React.useState(shippingInfo.address);
   const [firstName, setFirstName] = React.useState(shippingInfo.firstName);
   const [lastName, setLastName] = React.useState(shippingInfo.lastName);
@@ -183,13 +123,141 @@ const Shipping = () => {
 
   return (
     <>
-      <div className="shippingPage">
+      <div>
         <MetaData title={"Shipping Info"} />
-        <CheckoutSteps activeStep={1} />
 
-        <div className="shippingPage__container">
-          <div className="shippingPage__container__left">
-            <div style={classes.shippingRoot}>
+        <div>
+          <div className=" lg:mx-36">
+            <div className=" mt-32">
+              <MetaData title={"Shipping Info"} />
+              <div className="container mx-auto px-4">
+                <div className="bg-white p-8 rounded-lg shadow-lg">
+                  <form onSubmit={handleSubmit}>
+                    <h2 className="text-2xl font-semibold mb-6">SHIPPING ADDRESS</h2>
+                    <div className="grid grid-cols-1 gap-6">
+                      <div>
+                        <label className="block text-gray-700">First Name</label>
+                        <input
+                          type="text"
+                          value={firstName}
+                          onChange={handleFirstNameChange}
+                          className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700">Last Name</label>
+                        <input
+                          type="text"
+                          value={lastName}
+                          onChange={handleLastNameChange}
+                          className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700">Address</label>
+                        <input
+                          type="text"
+                          value={address}
+                          onChange={handleAddressChange}
+                          className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-gray-700">City</label>
+                          <input
+                            type="text"
+                            value={city}
+                            onChange={handleCityChange}
+                            className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-gray-700">Pincode</label>
+                          <input
+                            type="text"
+                            value={pinCode}
+                            onChange={handlePincodeChange}
+                            className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                          />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-gray-700">State</label>
+                          <input
+                            type="text"
+                            value={state}
+                            onChange={handleStateChange}
+                            className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-gray-700">Country</label>
+                          <input
+                            type="text"
+                            value={country}
+                            onChange={handleCountryChange}
+                            className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-gray-700">Phone</label>
+                        <input
+                          type="text"
+                          value={phoneNo}
+                          onChange={handlePhoneChange}
+                          className={`w-full mt-2 p-2 border rounded-md ${!isPhoneNoValid && phoneNo !== "" ? 'border-red-500' : 'border-gray-300'}`}
+                        />
+                        {!isPhoneNoValid && phoneNo !== "" && (
+                          <p className="text-red-500 text-sm">Please enter a valid phone number.</p>
+                        )}
+                      </div>
+                      <div>
+                        <label className="block text-gray-700">Email</label>
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={handleEmailChange}
+                          className={`w-full mt-2 p-2 border rounded-md ${!isValidEmail && email !== "" ? 'border-red-500' : 'border-gray-300'}`}
+                        />
+                        {!isValidEmail && email !== "" && (
+                          <p className="text-red-500 text-sm">Please enter a valid email address.</p>
+                        )}
+                      </div>
+                      {/* <div className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={saveAddress}
+                          onChange={handleSaveAddressChange}
+                          className="form-checkbox text-black"
+                        />
+                        <label className="ml-2 text-gray-700">Save Address to Address Book</label>
+                      </div>
+                      <div className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={sameBillingDelivery}
+                          onChange={handleSameBillingDeliveryChange}
+                          className="form-checkbox text-black"
+                        />
+                        <label className="ml-2 text-gray-700">My billing and delivery information are the same.</label>
+                      </div> */}
+                      <div>
+                        <button
+                          type="submit"
+                          className="w-full mt-4 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                        >
+                          Continue
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {/* <div >
               <form onSubmit={handleSubmit}>
                 <Typography variant="h6" style={classes.heading}>
                   SHIPPING ADDRESS
@@ -335,7 +403,7 @@ const Shipping = () => {
                   </Grid>
                 </Grid>
               </form>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

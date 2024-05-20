@@ -1,14 +1,14 @@
 import Login from "./component/User/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignUp from "./component/User/SignUp";
-import ForgotPassword from "./component/User/ForgetPassword";
 import Home from "./component/Home/Home";
 import Header from "./component/Layouts/Header1.jsx/Header";
 import AboutUs from "./Terms&Condtions/Aboutus";
 import ContactUs from "./Terms&Condtions/Contact";
 import Footer from "./component/Layouts/Footer/Footer";
-import TermsAndConditions from "./Terms&Condtions/TermsAndUse";
+import ShippingPolicy from "./Terms&Condtions/ShippingPolicy";
 import Services from "./Terms&Condtions/Service";
+import TermsAndConditions from "./Terms&Condtions/TermsandConditions";
 import PrivacyPolicy from "./Terms&Condtions/Privacy";
 import ReturnPolicyPage from "./Terms&Condtions/Return";
 import ProfilePage from "./component/User/Profile";
@@ -28,9 +28,6 @@ import ProcessOrder from "./component/Admin/ProcessOrder";
 // import UpdateProduct from "./component/Admin/UpdateProduct";
 import NewProduct from "./component/Admin/NewProduct";
 import ProductReviews from "./component/Admin/ProductReviews";
-import UpdateProfile from "./component/User/UpdateProfile";
-import UpdatePassword from "./component/User/UpdatePassword";
-import ResetPassword from "./component/User/ResetPassword";
 import MyOrder from "./component/order/MyOrder";
 import { useDispatch } from "react-redux";
 import { load_UserProfile } from "./actions/userAction";
@@ -58,7 +55,19 @@ function App() {
 
   return (
     <div className="App">
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      // transition:Slide
+      />
 
       <BrowserRouter>
         <Routes>
@@ -96,65 +105,6 @@ function App() {
               </>
             }
           />
-          <Route
-            exact path="/password/forgot"
-            element={
-              <>
-                <Header />
-                <ForgotPassword />
-                <Footer />
-              </>
-            } />
-
-          <Route
-            exact
-            path="/profile/update"
-            element={
-              <>
-                {<Header />}
-                {/* <PrivateRoute
-                  exact
-                  path="/profile/update"
-                  component={UpdateProfile}
-                /> */}
-                <UpdateProfile />
-                {/* <Services /> */}
-                {<Footer />}
-              </>
-            }
-          />
-
-          <Route
-            exact
-            path="/password/update"
-            element={
-              <>
-                {<Header />}
-                {/* <PrivateRoute
-                  exact
-                  path="/password/update"
-                  component={UpdatePassword}
-                /> */}
-                <UpdatePassword />
-                {/* <Services /> */}
-                {<Footer />}
-              </>
-            }
-          />
-
-          <Route
-            exact
-            path="/password/reset/:token"
-            element={
-              <>
-                {<Header />}
-                <ResetPassword />
-                {/* <Services /> */}
-                {<Footer />}
-              </>
-            }
-          />
-
 
           <Route
             exact
@@ -210,7 +160,7 @@ function App() {
 
           <Route
             exact
-            path="/about_us"
+            path="/AboutUs"
             element={
               <>
                 <Header />
@@ -222,7 +172,7 @@ function App() {
 
           <Route
             exact
-            path="/contact"
+            path="/ContactUs"
             element={
               <>
                 <Header />
@@ -234,7 +184,19 @@ function App() {
 
           <Route
             exact
-            path="/policy/return"
+            path="/PrivacyPolicy"
+            element={
+              <>
+                {<Header />}
+                <PrivacyPolicy />
+                {<Footer />}
+              </>
+            }
+          />
+
+          <Route
+            exact
+            path="/RefundandCancellation"
             element={
               <>
                 <Header />
@@ -244,45 +206,33 @@ function App() {
               </>
             }
           />
+          <Route
+            exact
+            path="/ShipandDelivery"
+            element={
+              <>
+                {<Header />}
+                <ShippingPolicy />
+                {<Footer />}
+              </>
+            }
+          />
+
 
           <Route
             exact
-            path="/policy/Terms"
+            path="/TermsandConditions"
             element={
               <>
                 {<Header />}
                 <TermsAndConditions />
-                {/* <Services /> */}
                 {<Footer />}
               </>
             }
           />
 
-          <Route
-            exact
-            path="/policy/privacy"
-            element={
-              <>
-                {<Header />}
-                <PrivacyPolicy />
-                {/* <Services /> */}
-                {<Footer />}
-              </>
-            }
-          />
 
-          <Route
-            exact
-            path="/terms/conditions"
-            element={
-              <>
-                {<Header />}
-                <TermsAndConditions />
-                {/* <Services /> */}
-                {<Footer />}
-              </>
-            }
-          />
+
           <Route
             exact
             path="/orders"
@@ -436,10 +386,7 @@ function App() {
             exact
             path="/admin/user/:id"
             element={
-              <>import Maps from "./views/admin/Maps.js";
-                import Settings from "./views/admin/Settings.js";
-                import Tables from "./views/admin/Tables.js";
-
+              <>
                 <UpdateUser />
               </>
             }

@@ -8,8 +8,6 @@ import {
 import {
   Link, useNavigate,
 } from "react-router-dom";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import MetaData from "../Layouts/MetaData/MetaData";
 import Sidebar from "./Siderbar";
 import { DELETE_PRODUCT_RESET } from "../../constants/productsConstants";
@@ -51,66 +49,7 @@ function ProductList() {
     dispatch(deleteProduct(id));
   };
 
-  const columns = [
-    {
-      field: "id",
-      headerName: "Product ID",
-      minWidth: 230,
-      flex: 0.5,
-      headerClassName: "column-header",
-    },
-    {
-      field: "name",
-      headerName: "Name",
-      minWidth: 150,
-      flex: 0.5,
-      magin: "0 auto",
-      headerClassName: "column-header hide-on-mobile",
-    },
-    {
-      field: "stock",
-      headerName: "Stock",
-      type: "number",
-      minWidth: 100,
-      flex: 0.5,
-      headerClassName: "column-header hide-on-mobile",
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      type: "number",
-      minWidth: 200,
-      flex: 0.5,
-      headerClassName: "column-header hide-on-mobile",
-    },
-    {
-      field: "actions",
-      headerName: "Actions",
-      flex: 1,
-      sortable: false,
-      minWidth: 230,
-      headerClassName: "column-header1",
-      renderCell: (params) => {
-        return (
-          <>
-            <Link
-              to={`/admin/product/${params.id}`}
-            >
-              <EditIcon className="icon-" />
-            </Link>
 
-            <div
-              onClick={() =>
-                deleteProductHandler(params.id)
-              }
-            >
-              <DeleteIcon className="iconbtn" />
-            </div>
-          </>
-        );
-      },
-    },
-  ];
 
 
   const rows = [];

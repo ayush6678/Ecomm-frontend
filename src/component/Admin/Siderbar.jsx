@@ -83,7 +83,7 @@ function Sidebar() {
               </Link>
 
               <Link
-                to="/contact"
+                to="/ContactUs"
               >
                 <li className=" bg-sky-400 p-2 rounded-md hover:bg-sky-500 font-semibold text-white ">
                   <span >Contact</span>

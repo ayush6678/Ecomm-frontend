@@ -6,7 +6,6 @@ import {
   clearErrors,
   deleteProductReview,
 } from "../../actions/productAction";
-// import {useHistory } from "react-router-dom";
 import MetaData from "../Layouts/MetaData/MetaData";
 import Loader from "../Layouts/loader/Loader";
 import Sidebar from "./Siderbar";
@@ -15,8 +14,6 @@ import { DELETE_REVIEW_RESET } from "../../constants/productsConstants";
 
 function ProductReviews() {
   const dispatch = useDispatch();
-  // const history = useHistory();
-  // const alert = useAlert();
   const [toggle, setToggle] = useState(false);
   const { error, reviews, loading } = useSelector(
     (state) => state.getAllReview

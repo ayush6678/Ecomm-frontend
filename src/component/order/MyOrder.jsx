@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { myOrders, clearErrors } from "../../actions/orderAction";
 import MetaData from "../Layouts/MetaData/MetaData";
 import CricketBallLoader from "../Layouts/loader/Loader";
 import { toast } from 'react-toastify';
-import OrderCard from "./OrderCard";
 import { useNavigate } from "react-router-dom";
 import { addItemToCart } from "../../actions/cartAction";
 

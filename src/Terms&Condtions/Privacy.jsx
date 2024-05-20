@@ -1,126 +1,98 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Privacy.css";
 import MetaData from "../component/Layouts/MetaData/MetaData";
+
 const PrivacyPolicy = () => {
   return (
-    <div className="privacy-policy-container">
+    <div className="mt-20">
       <MetaData title={"Privacy Policy"} />
-      <div className="container___">
-        <h1>Privacy Policy of Kriptees</h1>
-        <p style={{ fontSize: "16px", fontWeight: "600" }}>
-          {" "}
-          Effective Date: 23-12-2021
-        </p>
-        <p>
-          At Kriptees, we value the privacy of our customers and are
-          committed to protecting your personal information. This Privacy Policy
-          explains how we collect, use, disclose, and safeguard your information
-          when you use our website and services. Please read this Privacy Policy
-          carefully. By accessing or using our website and services, you
-          acknowledge that you have read, understood, and agree to be bound by
-          all the terms outlined in this Privacy Policy.
-        </p>
-        <h2>1. Information We Collect</h2>
-        <h3>1.1 Personal Information:</h3>
-        <p>
-          We may collect personal information that you voluntarily provide to us
-          when you register an account, place an order, subscribe to our
-          newsletter, participate in contests or surveys, or contact us for
-          support. This information may include your name, email address, phone
-          number, shipping address, billing address, and payment details.
-        </p>
-        <h3>1.2 Non-Personal Information:</h3>
-        <p>
-          When you interact with our website, we may collect non-personal
-          information about your device, browsing actions, and usage patterns.
-          This information may include your IP address, browser type, operating
-          system, referring URLs, and interactions with our website.
-        </p>
-        <h2>2. Use of Information</h2>
-        <h3>2.1 Personal Information:</h3>
-        <p>We may use the personal information we collect to:</p>
-        <ul>
-          <li>Process and fulfill your orders</li>
-          <li>Provide customer support and respond to inquiries</li>
-          <li>
-            Send you promotional offers, newsletters, and marketing
-            communications (you can opt-out at any time)
-          </li>
-          <li>Improve our website, products, and services</li>
-          <li>Personalize your experience on our website</li>
-          <li>
-            Prevent fraudulent activities and ensure the security of our
-            platform
-          </li>
-        </ul>
-        <h3>2.2 Non-Personal Information:</h3>
-        <p>
-          We may use non-personal information for various purposes, including:
-        </p>
-        <ul>
-          <li>Analyzing trends and user behavior</li>
-          <li>Monitoring and improving the functionality of our website</li>
-          <li>Customizing content and advertisements</li>
-          <li>Generating aggregated statistical data</li>
-        </ul>
-        <h2>3. Disclosure of Information</h2>
-        <p>
-          We may disclose your information to third parties in the following
-          circumstances:
-        </p>
-        <ul>
-          <li>
-            To our trusted service providers who assist us in operating our
-            business and providing services to you
-          </li>
-          <li>
-            To comply with legal obligations, enforce our policies, or respond
-            to legal requests
-          </li>
-          <li>
-            In the event of a merger, acquisition, or sale of all or a portion
-            of our business assets
-          </li>
-          <li>With your consent or at your direction</li>
-        </ul>
-        <h2>4. Security</h2>
-        <p>
-          We take reasonable measures to protect your information from
-          unauthorized access, disclosure, alteration, or destruction. However,
-          please note that no method of transmission over the internet or
-          electronic storage is completely secure, and we cannot guarantee
-          absolute security.
-        </p>
-        <h2>5. Children's Privacy</h2>
-        <p>
-          Our website and services are not intended for children under the age
-          of 13. We do not knowingly collect personal information from children.
-          If we become aware that we have collected personal information from a
-          child without parental consent, we will take steps to remove that
-          information from our servers.
-        </p>
-        <h2>6. Changes to This Privacy Policy</h2>
-        <p>
-          We may update our Privacy Policy from time to time. Any changes will
-          be posted on this page, and the revised Privacy Policy will take
-          effect immediately upon posting. We encourage you to review this
-          Privacy Policy periodically for any updates or changes.
-        </p>
-        <h2>7. Contact Us</h2>
-        <p>
-          If you have any questions, concerns, or suggestions regarding this
-          Privacy Policy, please contact us at{" "}
-          <Link to="/" style={{ textDecoration: "none", color: "inherit", fontWeight: 700 }}>
-            [insert contact information]
-          </Link>
-        </p>
-        <p>
-          By using the Kriptees website and services, you agree to the
-          collection, use, and disclosure of your information as described in
-          this Privacy Policy.
-        </p>
+
+      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="bg-white shadow sm:rounded-lg">
+          <div className="px-4 py-5 sm:px-6">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Privacy Policy</h3>
+            {/* <p className="mt-1 max-w-2xl text-sm text-gray-500">Last updated on 19-05-2024 15:00:19</p> */}
+          </div>
+          <div className="border-t border-gray-200">
+            <dl>
+              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">What data is being collected</dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Name</li>
+                    <li>Contact information including address and email address</li>
+                    <li>Demographic information or, preferences or interests</li>
+                    <li>Personal Data or Other information relevant/ required for providing the goods or services to you</li>
+                  </ul>
+                </dd>
+              </div>
+              <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">What we do with the data we gather</dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Internal record keeping.</li>
+                    <li>For improving our products or services.</li>
+                    <li>For providing updates to you regarding our products or services including any special offers.</li>
+                    <li>To communicate information to you</li>
+                    <li>For internal training and quality assurance purposes</li>
+                  </ul>
+                </dd>
+              </div>
+              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">Who do we share your data with</dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Third parties including our service providers in order to facilitate the provisions of goods or services to you, carry out your requests, respond to your queries, fulfil your orders or for other operational and business reasons.</li>
+                    <li>With our group companies (to the extent relevant)</li>
+                    <li>Our auditors or advisors to the extent required by them for performing their services</li>
+                    <li>Governmental bodies, regulatory authorities, law enforcement authorities pursuant to our legal obligations or compliance requirements.</li>
+                  </ul>
+                </dd>
+              </div>
+              <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">How we use cookies</dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <p>We use "cookies" to collect information and to better understand customer behaviour. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to avail our goods or services to the full extent. We do not control the use of cookies by third parties. The third party service providers have their own privacy policies addressing how they use such information.</p>
+                </dd>
+              </div>
+              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">Your rights relating to your data</dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>
+                      <strong>Right to Review:</strong> You can review the data provided by you and can request us to correct or amend such data (to the extent feasible, as determined by us). That said, we will not be responsible for the authenticity of the data or information provided by you.
+                    </li>
+                    <li>
+                      <strong>Withdrawal of your Consent:</strong> You can choose not to provide your data, at any time while availing our goods or services or otherwise withdraw your consent provided to us earlier, in writing to our email ID: kripteesofficial@gmail.com In the event you choose to not provide or later withdraw your consent, we may not be able to provide you our services or goods. Please note that these rights are subject to our compliance with applicable laws.
+                    </li>
+                  </ul>
+                </dd>
+              </div>
+              <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">How long will we retain your information or data?</dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <p>We may retain your information or data (i) for as long as we are providing goods and services to you; and (ii) as permitted under applicable law, we may also retain your data or information even after you terminate the business relationship with us. However, we will process such information or data in accordance with applicable laws and this Policy.</p>
+                </dd>
+              </div>
+              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">Data Security</dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <p>We will use commercially reasonable and legally required precautions to preserve the integrity and security of your information and data.</p>
+                </dd>
+              </div>
+              <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">Queries/ Grievance Officer</dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <p>For any queries, questions or grievances about this Policy, please contact us using the contact information provided on this website.</p>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
       </div>
+
+
+
     </div>
   );
 };
