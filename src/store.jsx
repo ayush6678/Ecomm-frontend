@@ -26,8 +26,6 @@ import {
   orderDetialsReducer,
   allOrdersReducer,
   deletUpdateOrderReducer,
-
-
 } from "./reducers/orderReducer";
 
 const rootReducer = combineReducers({

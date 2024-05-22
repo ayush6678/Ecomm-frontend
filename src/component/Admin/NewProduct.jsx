@@ -86,7 +86,6 @@ function NewProduct() {
     myForm.set("Stock", Stock);
     myForm.set("info", info);
     myForm.set("user", JSON.parse(user)._id);
-
     imageUrls.forEach((currImg) => {
       myForm.append("images", currImg);
     });
@@ -112,9 +111,8 @@ function NewProduct() {
             <div className=" flex  w-full justify-center bg-slate-300">
 
               <div>
-                <form
-                  encType="multipart/form-data"
-                  onSubmit={createProductSubmitHandler}
+                <div
+                  // encType="multipart/form-data"
                   className="flex flex-col items-center bg-white m-4 p-8 rounded-md"
                 >
                   < div className=" text-xl font-semibold m-4">
@@ -171,8 +169,8 @@ function NewProduct() {
                   </div>
 
 
-                  <div                       className=" rounded-md"
->
+                  <div className=" rounded-md"
+                  >
                     {!isCategory && (
                       < div>
                         Choose Category
@@ -218,14 +216,12 @@ function NewProduct() {
                       placeholder="Enter image URL"
                       value={imageUrl}
                       className=" rounded-md"
-
                       onChange={handleInputChange}
                     />
                   </div>
 
                   < button
-                    className=" px-2 py-1 bg-blue-400 m-2 rounded-md text-white font-semibold shadow-sm disabled:bg-gray-40 hover:bg-blue-500"
-
+                    className=" px-2 py-1 bg-blue-400 m-2 rounded-md text-white font-semibold shadow-sm hover:bg-blue-500"
                     onClick={handleUpload}
                   >Upload Image</ button>
 
@@ -242,12 +238,12 @@ function NewProduct() {
 
                   <  button
                     className=" px-2 py-1 bg-green-400 m-2 rounded-md text-white font-semibold shadow-sm disabled:bg-gray-40 hover:bg-green-500"
-                    type="submit"
+                    onClick={createProductSubmitHandler}
                     disabled={loading ? true : false}
                   >
                     Create
                   </  button>
-                </form>
+                </div>
               </div >
 
             </div >
