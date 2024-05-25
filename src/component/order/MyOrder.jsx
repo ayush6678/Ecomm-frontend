@@ -88,7 +88,6 @@ const MyOrder = () => {
                           <div class="flex items-center gap-6">
                             <a href="#" class="h-14 w-14 shrink-0">
                               <img class="h-full w-full dark:hidden" src={product.image} alt="imac image" />
-                              <img class="hidden h-full w-full dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="imac image" />
                             </a>
 
                             <a href="#" class="min-w-0 flex-1 font-medium text-gray-900 hover:underline dark:text-white">{product.name} </a>

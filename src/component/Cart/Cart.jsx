@@ -60,6 +60,7 @@ const Cart = () => {
     0
   );
 
+  console.log(cartItems)
   return (
     <>
       <div className="font-[sans-serif] mt-36">
@@ -74,6 +75,7 @@ const Cart = () => {
                 <thead className="whitespace-nowrap text-left">
                   <tr>
                     <th className="text-base text-[#333] p-4">Description</th>
+                    <th className="text-base text-[#333] p-4">Size</th>
                     <th className="text-base text-[#333] p-4">Quantity</th>
                     <th className="text-base text-[#333] p-4">Price</th>
                   </tr>
@@ -96,6 +98,13 @@ const Cart = () => {
                                 type="button" className="mt-4 font-semibold text-red-400 text-sm">
                                 Remove
                               </button>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-6 px-4">
+                          <div className="flex items-center  w-max">
+                            <div>
+                              <p className="text-md font-bold text-[#333]">{item.size}</p>
                             </div>
                           </div>
                         </td>
