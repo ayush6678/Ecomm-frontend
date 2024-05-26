@@ -33,38 +33,43 @@ function UpdateProduct() {
   const [category, setCategory] = useState("");
   const [isCategory, setIsCategory] = useState(false);
   const [Stock, setStock] = useState(0);
-  const [images, setImages] = useState([]);
   const [info, setInfo] = useState('');
-  const [imagesPreview, setImagesPreview] = useState([]);
-  const [oldImages, setOldImages] = useState([]);
-  const fileInputRef = useRef();
+  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrls, setImageUrls] = useState([]);
+
   const [toggle, setToggle] = useState(false);
   const categories = [
-    "Anime",
-    "Manga",
-    "Bags",
-    "Shoes",
     "Clothing",
-    "Accessories",
   ];
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
     setIsCategory(true);
   };
 
+  const handleInputChange = (e) => {
+    setImageUrl(e.target.value);
+  };
+
+  const handleUpload = () => {
+    if (imageUrl.trim() !== '') {
+      setImageUrls([...imageUrls, imageUrl]);
+      setImageUrl('');
+    }
+  };
+
   useEffect(() => {
     if (product && product._id !== productId) {
       dispatch(getProductDetails(productId));
     } else {
-
       console.log(product);
       setName(product.name);
       setDescription(product.description);
       setPrice(product.price);
-      setCategory("");
+      setCategory("Clothing");
+      setIsCategory(true)
       setInfo(product.info);
       setStock(product.Stock);
-      setOldImages(product.images);
+      setImageUrls(product.images);
     }
 
     if (error) {
@@ -102,40 +107,20 @@ function UpdateProduct() {
     myForm.set("category", category);
     myForm.set("Stock", Stock);
     myForm.set("info", info);
-    images.forEach((currImg) => {
-      myForm.append("images", currImg);
+    imageUrls.forEach((currImg) => {
+      myForm.append("images", currImg.url);
     });
-
 
     dispatch(updateProduct(productId, myForm));
   };
 
 
-  const handleImageUpload = () => {
-    fileInputRef.current.click();
-  };
-
-  const updateProductImagesChange = (e) => {
-    const files = Array.from(e.target.files);
-    setImages([]);
-    setImagesPreview([]);
-    setOldImages([]);
-    files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImagesPreview((prev) => [...prev, reader.result]);
-          setImages((prev) => [...prev, reader.result]);
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-  };
   // togle handler =>
   const toggleHandler = () => {
     console.log("toggle");
     setToggle(!toggle);
   };
+  console.log(imageUrls)
 
   return (
     <>
@@ -190,6 +175,7 @@ function UpdateProduct() {
                     <input
                       label="Product Info"
                       value={info}
+                      className=" w-96"
                       required
                       onChange={(e) => setInfo(e.target.value)}
                     />
@@ -221,61 +207,47 @@ function UpdateProduct() {
                     </div>
 
                     <div>Product Description</div>
-                    <input
+                    <textarea
                       placeholder="Product Description"
                       value={description}
+                      className=" w-96 h-96 m-4"
                       onChange={(e) => setDescription(e.target.value)}
                     />
 
-                    <div >
-                      <div >
-                      </div>
+                    <div>
+                      <div>Enter Image URL:</div>
 
-                      <input
-                        type="file"
-                        name="avatar"
-                        accept="image/*"
-                        onChange={updateProductImagesChange}
-                        ref={fileInputRef}
-                      />
-                      <label htmlFor="avatar-input">
-                        <button
-                          onClick={handleImageUpload}
-                        >
-                          <p className="uploadAvatarText">
-                            Upload Images
-                          </p>
-                        </button>
-                      </label>
+                      {/* < input
+                        placeholder="Enter image URL"
+                        value={imageUrl}
+                        className=" rounded-md"
+                        onChange={handleInputChange}
+                      /> */}
+                      <div className=" text-center text-red-400 bg-gray-300">
+                        DISABLED
+                      </div>
                     </div>
 
-                    {imagesPreview.length > 0 ? (
-                      <div className=" w-96">
-                        {imagesPreview &&
-                          imagesPreview.map((image, index) => (
-                            <img
-                              key={index}
-                              src={image}
-                              alt="Product Preview"
-                              className="w-96"
-                            />
-                          ))}
-                      </div>
-                    ) : (
-                      <div >
-                        {oldImages &&
-                          oldImages.map((image, index) => (
-                            <img
-                              key={index}
-                              src={image.url}
-                              alt="Old Product Preview"
-                              className="w-96"
-                            />
-                          ))}
-                      </div>
-                    )}
+                    {/* < button
+                      className=" px-2 py-1 bg-blue-400 m-2 rounded-md text-white font-semibold shadow-sm hover:bg-blue-500"
+                      onClick={handleUpload}
+                    >Upload Image</ button> */}
+
+                    <div className=" w-96">
+                      {imageUrls &&
+                        imageUrls.map((url, index) => (
+                          < img
+                            key={index}
+                            src={url.url}
+                            alt="Product Preview"
+                          />
+                        ))}
+                    </div>
+
 
                     <div
+                      className=" p-4 bg-green-400 m-2 rounded-md text-white font-semibold shadow-sm disabled:bg-gray-40 hover:bg-green-500"
+
                       onClick={createProductSubmitHandler}
                       disabled={loading ? true : false}
                     >
