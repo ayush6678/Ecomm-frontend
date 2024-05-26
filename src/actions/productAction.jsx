@@ -205,7 +205,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/v1/admin/product/${id}`,
+      `https://ecomm-backend-o6x0.onrender.com/api/v1/admin/product/${id}`,
       productData,
       config
     );
