@@ -3,15 +3,15 @@ import { FaRupeeSign, FaGooglePay, FaCcAmazonPay, FaCcMastercard, FaCcApplePay }
 import { SiPhonepe, SiPaytm, SiPaypal } from 'react-icons/si';
 import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { SiTwitter } from 'react-icons/si';
-import { MdCached } from 'react-icons/md';   
+import { MdCached } from 'react-icons/md';
 import logo from '../../../ecommerce images/logo.png'; // Make sure to update this path
 
 const Footer = () => {
   return (
-    <footer className="bg-[rgb(57,104,184)] text-white">
-      <div className="px-48 grid gap-5 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-3 justify-center">
+    <footer className="bg-[rgb(57,104,184)] text-white flex flex-col align-middle justify-center items-center w-full">
+      <div className="  gap-5  mb-8 lg:flex justify-center">
 
-        <div className="sm:col-span-1 m-3 mt-6 flex flex-col justify-center">
+        <div className=" m-3 mt-6 flex flex-col justify-center">
           <Link
             to="/"
             aria-label="Go home"
@@ -38,11 +38,11 @@ const Footer = () => {
             <SiPaytm className="mr-2" />
             <SiPaypal className="mr-2" />
 
-            
+
           </div>
         </div>
 
-        <div className="space-y-2 text-sm flex flex-col justify-center">
+        <div className="m-3 space-y-2 text-sm flex flex-col justify-center">
           <p className="text-base font-bold tracking-wide text-white">
             Contacts
           </p>
@@ -83,12 +83,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center">
+        <div className="m-3 flex flex-col justify-center">
           <span className="text-base font-bold tracking-wide text-white">
             Social
           </span>
           <div className="flex items-center mt-1 space-x-3 ">
-          
+
             <div className="flex justify-center items-center space-x-4">
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-800">
                 <FaFacebook className="w-8 h-8" />
@@ -105,15 +105,13 @@ const Footer = () => {
             </div>
           </div>
           <p className="mt-4 text-sm text-white">
-           Reach out to us for more...
+            Reach out to us for more...
           </p>
         </div>
 
       </div>
 
-
-
-      <div className="bg-[#443D83]   justify-between pt-5 pb-10 lg:flex-row">
+      <div className="bg-[#443D83] w-full justify-between pt-5 pb-10 lg:flex-row">
         <ul class="flex flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-x-5 lg:space-y-0 mb-3">
           <li>
             <Link
@@ -161,7 +159,7 @@ const Footer = () => {
           © 2024 Kriptees, All Rights Reserved.
         </p>
       </div>
-     
+
     </footer>
   );
 };
