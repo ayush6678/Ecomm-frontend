@@ -1,6 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
 //  import CricketBallLoader from "../Layouts/loader/Loader";
-import { useStyles } from "./ReviewStyle";
 import { useNavigate } from "react-router-dom";
 import CricketBallLoader from "../Layouts/loader/Loader";
 import { toast } from 'react-toastify';
@@ -12,7 +11,6 @@ import { clearErrors, newReview } from "../../actions/productAction";
 
 
 const ReviewCard = ({ product }) => {
-  const classes = useStyles;
   const { isAuthenticated } = useSelector((state) => state.userData);
   // const alert = useAlert();
   const navigate = useNavigate();
@@ -98,16 +96,16 @@ const ReviewCard = ({ product }) => {
 
   console.log(product.reviews)
   return (
-    <div style={classes.reviewRoot}>
-      <div className=" text-2xl text-center font-bold">
+    <div className=" m-4" >
+      <div className=" text-2xl text-center font-bold m-8">
         Users Reviews
       </div>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      <div
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 lg:mx-96 rounded m-4 items-center align-middle text-center"
         onClick={handleClickOpen}
       >
         Write your Review
-      </button>
+      </div>
 
       {open &&
 
@@ -141,6 +139,7 @@ const ReviewCard = ({ product }) => {
                   className="w-full border border-gray-300 p-2 rounded"
                 />
               </div>
+
               <div className="mb-4">
                 <label className="block text-gray-700 mb-1">Rating</label>
                 <div className="flex items-center">
@@ -167,32 +166,8 @@ const ReviewCard = ({ product }) => {
           </div>
         </div>
       }
-      <div container alignItems="center" style={{ marginTop: "2rem" }}>
-        <div item style={classes.ratingContainer}>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-1">Rating</label>
-            <div className="flex items-center">
-              {[1, 2, 3, 4, 5].map(ratingValue => (
-                <button
-                  key={ratingValue}
-                  className={`text-2xl ${product.ratings >= ratingValue ? 'text-yellow-500' : 'text-gray-300'}`}
-                >
-                  &#9733;
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div style={classes.ratingNumber}>
-          {product.ratings} stars
-        </div>
-        <div item>
-          <div>
-            <strong> Total Reviews : </strong>
-            {product.numOfReviews}
-          </div>
-        </div>
-      </div>
+
+
 
       <div className=" flex overflow-x-scroll">
         {product.reviews &&

@@ -69,7 +69,8 @@ function Home() {
                         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
                     </div> */}
                     <button onClick={() => {
-                        setI(Number(Math.abs(i + 1) % 4))
+                        const newIndex = i === 0 ? 3 : i - 1;
+                        setI(Number(newIndex))
                     }} type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
                         <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                             <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -79,7 +80,8 @@ function Home() {
                         </span>
                     </button>
                     <button onClick={() => {
-                        setI(Number(Math.abs(i + 1) % 4))
+                        const newIndex = i === 3 ? 0 : i + 1;
+                        setI(Number(newIndex))
                     }} type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
                         <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                             <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -92,40 +94,26 @@ function Home() {
 
 
                 <div className="">
-                    <img className=" w-screen" src="https://assets.ajio.com/cms/AJIO/WEB/2192023-PLPStrip-RelianceOne-Points-1440x128.jpg" />
                 </div>
 
                 <div>
-                    <img className=" w-screen" src="https://mercury.akamaized.net/i/db5a03be0bd3268f7023a18cc8ac4a50_270183_0.jpg" />
                 </div>
 
-                <div className="feature hidden lg:block " style={{
-                    marginTop: "2.7rem",
-                    marginBottom: "2.7rem",
-                }}>
-                    <h2
-                        style={{
-                            textAlign: "center",
-                            fontFamily: `"Inria Sans", sans-serif`,
-                            fontWeight: "400",
-                            marginBottom: "2.7rem"
-                        }}
-                    >
+                <div className="hidden lg:block" >
+                    <h2 className=" text-center font-semibold text-2xl m-4">
                         Trending Category
                     </h2>
-
                     {products &&
                         <FeaturedSlider products={products} />}
 
                 </div>
                 <div className=" ">
 
-                    <img className=" w-screen" src="https://images.bewakoof.com/uploads/grid/app/DailyDeals-ThinStrip-Desktop-T-Shirts--2--1715346507.jpg" alt="." />
                 </div>
 
-                <h2 className="trending_heading">Special Collection</h2>
+                <h2 className=" text-center font-semibold text-2xl m-8">Special Collection</h2>
 
-                <div className="trending-products">
+                <div className="flex flex-wrap justify-center">
 
                     {products &&
                         products.map((product) => (

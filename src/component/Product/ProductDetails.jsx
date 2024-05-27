@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
-import {
-  generateDiscountedPrice,
-  calculateDiscount,
-  displayMoney,
-} from "../DisplayMoney/DisplayMoney";
-import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 // import { useRouteMatch } from "react-router-dom";
 import useActive from "../hook/useActive";
@@ -111,6 +104,7 @@ const ProductDetails = () => {
                   <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
                     {product.info}
                   </p>
+
                   <div className="flex mb-4">
                     <div className="mr-4">
                       <span className="font-bold text-gray-700 dark:text-gray-300">Price:</span>
@@ -121,6 +115,31 @@ const ProductDetails = () => {
                       <span className="text-gray-600 dark:text-gray-300">In Stock</span>
                     </div>
                   </div>
+
+
+                  <div className=" flex align-middle items-center gap-4 mb-4" >
+                    <div className=" flex" >
+                      <div className="">
+                        <div className="flex items-center">
+                          {[1, 2, 3, 4, 5].map(ratingValue => (
+                            <div
+                              key={ratingValue}
+                              className={`text-2xl ${product.ratings >= ratingValue ? 'text-yellow-500' : 'text-gray-300'}`}
+                            >
+                              &#9733;
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <div >
+                      <div>
+                        <strong> Total Reviews : </strong>
+                        {product.numOfReviews}
+                      </div>
+                    </div>
+                  </div>
+
                   {/* <div className="mb-4">
                     <span className="font-bold text-gray-700 dark:text-gray-300">Select Color:</span>
                     <div className="flex items-center mt-2">
@@ -168,7 +187,7 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          <div className="reviewCard">
+          <div className="">
             <ReviewCard product={product} />
           </div>
           {/* 
