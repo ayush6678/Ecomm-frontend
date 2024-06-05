@@ -51,7 +51,6 @@ function Home() {
             <MetaData title="Kriptees" />
             <div className="Home_Page" >
 
-
                 <div id="default-carousel" class="relative w-full mt-20 lg:mt-24" data-carousel="slide">
                     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                         <div class=" hidden lg:block duration-700 ease-in-out" data-carousel-item>
@@ -113,7 +112,7 @@ function Home() {
 
                 <h2 className=" text-center font-semibold text-2xl m-8">Special Collection</h2>
 
-                <div className="flex flex-wrap justify-center">
+                <div className="mt-6 grid grid-cols-2 lg:gap-x-6 lg:gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
                     {products &&
                         products.map((product) => (

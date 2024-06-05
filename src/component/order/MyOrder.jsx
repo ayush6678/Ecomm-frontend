@@ -17,9 +17,6 @@ const MyOrder = () => {
     error } = useSelector((state) => state.myOrder);
 
   const { user, isAuthenticated } = useSelector((state) => state.userData);
-
-
-
   const [open, setOpen] = useState(false);
 
 
@@ -61,8 +58,7 @@ const MyOrder = () => {
   }, [dispatch,
     // alert,
     error]);
-
-
+    console.log(orders)
   return (
     <>
       {loading ? (
@@ -75,7 +71,7 @@ const MyOrder = () => {
               <div >
 
                 <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
-                  <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Track the delivery of order #{item._id}</h2>
+                  <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Order ID #{item._id}</h2>
 
                   <div class="mt-6 sm:mt-8 lg:flex lg:gap-8">
 
@@ -86,16 +82,18 @@ const MyOrder = () => {
                       {item.orderItems.map((product) => (
                         <div class="space-y-4 p-6">
                           <div class="flex items-center gap-6">
-                            <a href="#" class="h-14 w-14 shrink-0">
+                            <div class="h-14 w-14 shrink-0">
                               <img class="h-full w-full dark:hidden" src={product.image} alt="imac image" />
-                            </a>
+                            </div>
 
-                            <a href="#" class="min-w-0 flex-1 font-medium text-gray-900 hover:underline dark:text-white">{product.name} </a>
+                            <div class="min-w-0 flex-1 font-medium text-gray-900 hover:underline dark:text-white">{product.name} </div>
                           </div>
                           <div class="flex items-center justify-between gap-4">
                             <p class="text-sm font-normal text-gray-500 dark:text-gray-400"><span class="font-medium text-gray-900 dark:text-white">Product ID:</span> {product.productId}</p>
 
                             <div class="flex items-center justify-end gap-4">
+                              <p class="text-base font-normal text-gray-900 dark:text-white">{product.size}</p>
+
                               <p class="text-base font-normal text-gray-900 dark:text-white">x{product.quantity}</p>
 
                               <p class="text-xl font-bold leading-tight text-gray-900 dark:text-white">₹{product.price}</p>
@@ -110,22 +108,22 @@ const MyOrder = () => {
                         <div class="space-y-2">
                           <dl class="flex items-center justify-between gap-4">
                             <dt class="font-normal text-gray-500 dark:text-gray-400">Original price</dt>
-                            <dd class="font-medium text-gray-900 dark:text-white">$6,592.00</dd>
+                            <dd class="font-medium text-gray-900 dark:text-white">₹{item.totalPrice}</dd>
                           </dl>
 
                           <dl class="flex items-center justify-between gap-4">
                             <dt class="font-normal text-gray-500 dark:text-gray-400">Savings</dt>
-                            <dd class="text-base font-medium text-green-500">-$299.00</dd>
+                            <dd class="text-base font-medium text-green-500">00</dd>
                           </dl>
 
                           <dl class="flex items-center justify-between gap-4">
                             <dt class="font-normal text-gray-500 dark:text-gray-400">Store Pickup</dt>
-                            <dd class="font-medium text-gray-900 dark:text-white">$99</dd>
+                            <dd class="font-medium text-gray-900 dark:text-white">00</dd>
                           </dl>
 
                           <dl class="flex items-center justify-between gap-4">
                             <dt class="font-normal text-gray-500 dark:text-gray-400">Tax</dt>
-                            <dd class="font-medium text-gray-900 dark:text-white">$799</dd>
+                            <dd class="font-medium text-gray-900 dark:text-white">00</dd>
                           </dl>
                         </div>
 
@@ -217,24 +215,6 @@ const MyOrder = () => {
             </section>
 
           ))}
-
-          {/* 
-
-          <MetaData title="My Orders" />
-          <div className={classes.orderPageContainer}>
-            <Typography variant="h6" className={classes.orderPageTitle}>
-              Your Order
-            </Typography>
-            <Typography variant="body1" className={classes.orderPageText}>
-              {orders && orders.length} order placed in {currentYear}
-            </Typography>
-          </div>
-
-          {orders && orders.map((item) => (
-            <div className={classes.orderCard} key={item._id}>
-              <OrderCard item={item} user={user} />
-            </div>
-          ))} */}
         </div>
       )}
     </>

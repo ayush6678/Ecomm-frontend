@@ -39,7 +39,7 @@ import PaymentComponent from "./component/Cart/Payment";
 import UpdateUser from "./component/Admin/UpdateUser";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import Scroll from "./scroll"
 // const LazyProductReviews = lazy(() =>
 //   import("./component/Admin/ProductReviews")
 // );
@@ -68,10 +68,9 @@ function App() {
         theme="light"
       // transition:Slide
       />
-
       <BrowserRouter>
+        <Scroll />
         <Routes>
-
           <Route
             exact path="/"
             element={

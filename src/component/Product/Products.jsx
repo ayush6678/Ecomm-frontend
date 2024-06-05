@@ -84,7 +84,7 @@ function Products() {
         <Loader />
       ) : (
         <>
-          <MetaData title="PRODUCTS --Ecart" />
+          <MetaData title="Products" />
 
           <div className="bg-white mt-0 lg:mt-12 ">
             <div>

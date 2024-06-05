@@ -20,9 +20,6 @@ function PaymentComponent() {
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   // console.log(order)
-
-
-
   const subTotal = cartItems.reduce((acc, currItem) => {
     return acc + currItem.quantity * currItem.price;
   }, 0);
@@ -66,7 +63,7 @@ function PaymentComponent() {
       headers: { "Content-Type": "application/json", Authorization: `${token}` }
 
     };
-    const { data } = await axios.post(`https://ecomm-backend-o6x0.onrender.com/api/v1/payment/createOrder`, order, config);
+    const { data } = await axios.post(`/api/v1/payment/createOrder`, order, config);
     console.log(data);
 
     let checkoutOptions = {

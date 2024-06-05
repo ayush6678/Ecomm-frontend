@@ -8,8 +8,8 @@ import logo from '../../../ecommerce images/logo.png'; // Make sure to update th
 
 const Footer = () => {
   return (
-    <footer className="bg-[rgb(57,104,184)] text-white flex flex-col align-middle justify-center items-center w-full">
-      <div className="  gap-5  mb-8 lg:flex justify-center">
+    <footer className="bg-[rgb(57,104,184)] text-white flex flex-col align-middle justify-center items-center w-full mt-32">
+      <div className="  gap-5  mb-8 lg:flex justify-center ">
 
         <div className=" m-3 mt-6 flex flex-col justify-center">
           <Link
