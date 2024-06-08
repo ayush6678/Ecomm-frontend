@@ -38,7 +38,7 @@ const ProductDetails = () => {
       setPreviewImg(product.images[0].url);
       handleActive(0);
     }
-  }, [product, handleActive]);
+  }, [product]);
 
   const handleAddItem = () => {
     dispatch(addItemToCart(id, quantity, size));
