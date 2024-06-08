@@ -311,18 +311,18 @@ function Products() {
                       </div>
                     </div>
 
-                    <button type="button" className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
+                    {/* <button type="button" className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
                       <span className="sr-only">View grid</span>
                       <svg className="h-5 w-5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z" clip-rule="evenodd" />
                       </svg>
-                    </button>
-                    <button type="button" className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
+                    </button> */}
+                    {/* <button type="button" className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden">
                       <span className="sr-only">Filters</span>
                       <svg className="h-5 w-5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 01.628.74v2.288a2.25 2.25 0 01-.659 1.59l-4.682 4.683a2.25 2.25 0 00-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 018 18.25v-5.757a2.25 2.25 0 00-.659-1.591L2.659 6.22A2.25 2.25 0 012 4.629V2.34a.75.75 0 01.628-.74z" clip-rule="evenodd" />
                       </svg>
-                    </button>
+                    </button> */}
                   </div>
                 </div>
 
@@ -497,39 +497,38 @@ function Products() {
 
                     <div className="lg:col-span-3">
                       <div className="bg-white">
-                        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+                        <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
                           <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
 
 
 
-                          <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                          <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
 
                             {products &&
                               products.map((product) => (
                                 // <ProductCard key={product._id} product={product} />
 
 
-                                <div className="group relative ">
-                                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                                <div className="group relative border rounded-[15px]">
+                                  <div className="aspect-h-1 aspect-w-1 w-full border rounded-t-[15px] overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                                     <img src={product.images[0].url} alt="Front of men&#039;s Basic Tee in black." className="h-full max-h-96 w-full object-cover object-center lg:h-full lg:w-full" />
                                   </div>
-                                  <div className="mt-4 flex justify-between">
+                                  <div className="flex justify-between p-2 border rounded-b-[15px] bg-[#3A68B8]">
                                     <div>
-                                      <h3 className="text-sm text-gray-700">
+                                      <h3 className="text-sm text-white overflow-clip h-12 mr-2 ml-2">
                                         <Link to={`/product/${product._id}`}>
                                           <span aria-hidden="true" className="absolute inset-0"></span>
                                           {product.name}
                                         </Link>
                                       </h3>
-                                      <p className="mt-1 text-sm text-gray-500">Black</p>
                                     </div>
-                                    <p className="text-sm font-medium text-gray-900">
+                                    <p className="text-sm font-medium text-white">
                                       ₹{product.price}</p>
                                   </div>
 
                                   {/* <button
-                                onClick={() => addTocartHandler(product._id, 1)}
-                                className=" w-full bg-[#3A68B8] mt-2 text-white p-1 rounded-md">Add to Cart</button> */}
+                                 onClick={() => addTocartHandler(product._id, 1)}
+                                 className=" w-full bg-[#3A68B8] mt-2 text-white p-1 rounded-md">Add to Cart</button> */}
                                 </div>
 
                               ))}
