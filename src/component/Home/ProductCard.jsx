@@ -28,15 +28,15 @@ const ProductCard = ({ product }) => {
     return (
         <div className="">
 
-            <div className=" lg:m-8  border rounded-[15px]">
+            <div className=" lg:m-8  border lg:rounded-[15px] overflow-hidden">
                 <Link
                     to={`/product/${product._id}`}
                 >
-                    <div class=" hover:shadow-lg aspect-h-1 aspect-w-1 border rounded-t-[15px] w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                    <div class=" hover:shadow-lg aspect-h-1 aspect-w-1 border  w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                         <img src={product.images[0].url} alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                     </div>
                 </Link>
-                <div class="flex justify-between p-2 border rounded-b-[15px] bg-[#3A68B8]">
+                <div class="flex justify-between p-2 border  bg-[#3A68B8]">
                     <div>
                         <h3 className=" text-white overflow-clip h-12 mr-3 ml-2 ">
                             <span class="absolute inset-0"></span>
