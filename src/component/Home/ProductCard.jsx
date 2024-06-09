@@ -28,23 +28,22 @@ const ProductCard = ({ product }) => {
     return (
         <div className="">
 
-            <div className=" lg:m-8 border-black border">
+            <div className=" lg:m-8  border rounded-[15px]">
                 <Link
                     to={`/product/${product._id}`}
                 >
-                    <div class=" hover:shadow-lg aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                    <div class=" hover:shadow-lg aspect-h-1 aspect-w-1 border rounded-t-[15px] w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                         <img src={product.images[0].url} alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                     </div>
                 </Link>
-                <div class="mt-4 flex justify-between p-1">
+                <div class="flex justify-between p-2 border rounded-b-[15px] bg-[#3A68B8]">
                     <div>
-                        <h3 className=" text-gray-700 overflow-clip h-8  ">
+                        <h3 className=" text-white overflow-clip h-12 mr-3 ml-2 ">
                             <span class="absolute inset-0"></span>
                             {product.name}
                         </h3>
-                        <p className="mt-1 text-sm text-gray-500">Black</p>
                     </div>
-                    <p className="text-sm font-medium text-gray-900">₹{product.price}</p>
+                    <p className="text-sm font-medium text-white">₹{product.price}</p>
 
                 </div>
                 {/* <button
