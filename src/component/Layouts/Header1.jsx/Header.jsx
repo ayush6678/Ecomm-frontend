@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../../actions/userAction";
 import "./Header.css"
 import { toast } from "react-toastify";
+import { NavLink } from 'react-router-dom';
 // import { useSelector } from "react-redux";
 import { useSelector } from "react-redux";
 // function Header2() {
@@ -281,11 +282,18 @@ function Header() {
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 z-40 fixed w-full top-0">
+      <div className="bg-red-500 text-white text-center py-1">
+        free delivery on first order above 499rs
+      </div>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
-        <Link to={'/'}>
-          <span className="kriptees-main">Kriptees</span>
-        </Link>
+        <div className="flex items-center justify-center h-full">
+          <Link to={'/'}>
+            <span className="kriptees-main">Kriptees</span>
+          </Link>
+        </div>
+
+
 
         <div className="flex items-center md:order-2 space-x-3  rtl:space-x-reverse">
 
@@ -300,18 +308,23 @@ function Header() {
               <input type="search" id="default-search" className=" hidden lg:block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" required />
             </div>
           </form>
-
-          <div onClick={() => { navigate("/cart") }} class="flex hover:cursor-pointer justify-center items-center">
-            <div class="relative">
-              <div class=" -top-4 absolute left-3">
-
-                <p class="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">{cartItemCount}</p>
-              </div>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="file:  h-6 w-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+          
+          {/* changed here for the cart red notifiaction */}
+          <div onClick={() => { navigate("/cart") }} className="flex hover:cursor-pointer justify-center items-center">
+            <div className="relative">
+              {cartItemCount > 0 && (
+                <div className="-top-4 absolute left-3">
+                  <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
+                    {cartItemCount}
+                  </p>
+                </div>
+              )}
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
             </div>
           </div>
+
 
           <div className=" hidden lg:flex">
             {isAuthenticated ? (
@@ -325,17 +338,21 @@ function Header() {
             ) : (
               <div className=" flex">
                 < Link to="/login">
-                  <div className=" m-3">
-                    Login
-                  </div>
+                    <div className="m-3 bg-blue-700 text-white py-2 px-4 cursor-pointer hover:bg-blue-800" style={{ borderRadius: '12px' }}>
+                      Login
+                    </div>
+
+
                 </Link>
 
-                <Link
-                  to="/signup"
-                >
-                  <div className=" m-3">
-                    Sign Up
-                  </div>
+                  <Link to="/signup">
+                  
+                
+                    <div className="m-3 text-white py-2 px-4 cursor-pointer" style={{ backgroundColor: '#DA0440', borderRadius: '12px' }}>
+                      Sign Up
+                    </div>
+
+
                 </Link>
 
               </div>
@@ -395,20 +412,61 @@ function Header() {
 
         </div>
         <div className="items-center hidden justify-between  w-full md:flex md:w-auto md:order-1" id="navbar-user">
+          
+
+          
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <Link to={"/"} className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</Link>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                    : "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                }
+                aria-current="page"
+              >
+                Home
+              </NavLink>
             </li>
             <li>
-              <Link to={"/products"} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Products</Link>
+              <NavLink
+                to="/products"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                    : "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                }
+              >
+                Products
+              </NavLink>
             </li>
             <li>
-              <Link to={"/TermsandConditions"} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Terms </Link>
+              <NavLink
+                to="/TermsandConditions"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                    : "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                }
+              >
+                Terms
+              </NavLink>
             </li>
             <li>
-              <Link to={"/ContactUs"} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</Link>
+              <NavLink
+                to="/ContactUs"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                    : "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                }
+              >
+                Contact
+              </NavLink>
             </li>
           </ul>
+
         </div>
 
         {sideMenu && (
