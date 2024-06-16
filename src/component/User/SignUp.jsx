@@ -39,7 +39,7 @@ function SignUp() {
         if (isAuthenticated) {
             toast.success("User Registered Successfully");
             console.log("User Registered Successfully")
-            navigate("/account");
+            navigate("/");
         }
     }, [dispatch, isAuthenticated, loading, error,
         // alert, 
