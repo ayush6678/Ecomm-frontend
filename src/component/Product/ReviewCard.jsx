@@ -169,13 +169,16 @@ const ReviewCard = ({ product }) => {
 
 
 
-      <div className=" flex overflow-x-scroll">
+      <div className="flex overflow-x-scroll hide-scrollbar">
         {product.reviews &&
-          product.reviews.map((review) =>
-            <div className=" m-6 p-6 shadow-lg w-96 rounded-md">
-              <div className=" "><div className=" font-semibold">{review.name}</div> {review.createdAt.substring(0, 10)}</div>
-              <div className="flex items-center">
-                {[1, 2, 3, 4, 5].map(ratingValue => (
+          product.reviews.map((review, index) => (
+            <div key={index} className="m-6 p-6 shadow-lg w-96 rounded-md bg-white">
+              <div className="flex justify-between items-center">
+                <div className="font-semibold">{review.name}</div>
+                <div className="text-gray-500 text-sm">{review.createdAt.substring(0, 10)}</div>
+              </div>
+              <div className="flex items-center mt-2">
+                {[1, 2, 3, 4, 5].map((ratingValue) => (
                   <button
                     key={ratingValue}
                     className={`text-2xl ${review.ratings >= ratingValue ? 'text-yellow-500' : 'text-gray-300'}`}
@@ -184,11 +187,10 @@ const ReviewCard = ({ product }) => {
                   </button>
                 ))}
               </div>
-              <div className=" font-semibold">{review.title}</div>
-              <div>{review.comment}</div>
+              <div className="font-semibold mt-4">{review.title}</div>
+              <div className="text-gray-700 mt-2">{review.comment}</div>
             </div>
-
-          )}
+          ))}
       </div>
     </div>
   );

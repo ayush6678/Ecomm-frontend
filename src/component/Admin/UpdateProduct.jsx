@@ -57,6 +57,11 @@ function UpdateProduct() {
     }
   };
 
+
+  const clear = () => {
+    setImageUrls('')
+  }
+
   useEffect(() => {
     if (product && product._id !== productId) {
       dispatch(getProductDetails(productId));
@@ -138,7 +143,7 @@ function UpdateProduct() {
               <div className=" flex  w-full justify-center bg-slate-300">
                 <div
                 >
-                  <form
+                  <div
                     className="flex flex-col items-center bg-white m-4 p-8 rounded-md"
                     encType="multipart/form-data"
                   >
@@ -214,24 +219,33 @@ function UpdateProduct() {
                       onChange={(e) => setDescription(e.target.value)}
                     />
 
-                    <div>
-                      <div>Enter Image URL:</div>
+                    <div className=" flex flex-col">
+                      <div className=" text-center" >Moddify Image URL:</div>
 
-                      {/* < input
-                        placeholder="Enter image URL"
-                        value={imageUrl}
-                        className=" rounded-md"
-                        onChange={handleInputChange}
-                      /> */}
-                      <div className=" text-center text-red-400 bg-gray-300">
-                        DISABLED
-                      </div>
+
+                      {imageUrls &&
+                        imageUrls.map((url, index) => (
+                          <div>
+                            < input
+                              placeholder="Enter image URL"
+                              value={url.url}
+                              onChange={(e) => {
+                                const updatedImageUrl = imageUrls.map((item, i) =>
+                                  i === index ? { ...item, url: e.target.value } : item
+                                );
+                                setImageUrls(updatedImageUrl);
+                              }
+                              }
+                            />
+                            < div className=" text-center" >Image Id :{index}</div>
+                          </div>
+                        ))}
                     </div>
 
-                    {/* < button
+                    < button
                       className=" px-2 py-1 bg-blue-400 m-2 rounded-md text-white font-semibold shadow-sm hover:bg-blue-500"
                       onClick={handleUpload}
-                    >Upload Image</ button> */}
+                    >Set URL</ button>
 
                     <div className=" w-96">
                       {imageUrls &&
@@ -253,13 +267,14 @@ function UpdateProduct() {
                     >
                       Update
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
           </>
         </>
-      )}
+      )
+      }
     </>
   );
 }

@@ -48,7 +48,7 @@ function Login() {
 
     const redirect = location.search
         ? location.search.split("=")[1]
-        : "/account";
+        : "/";
     useEffect(() => {
         if (error) {
             if (isAuthenticated)

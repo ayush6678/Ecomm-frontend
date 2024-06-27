@@ -137,7 +137,7 @@ function ProcessOrder() {
                   <div className="flex justify-between items-center">
                     <h4 className="text-xl font-semibold">Payment Status</h4>
                     <p className="text-lg font-bold">
-                      {order.paymentInfo.status}
+                      {order.paymentInfo && order.paymentInfo.status}
                     </p>
                   </div>
                 </div>

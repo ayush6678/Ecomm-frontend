@@ -40,6 +40,7 @@ import UpdateUser from "./component/Admin/UpdateUser";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Scroll from "./scroll"
+import CustomOrderPage from "./component/Home/CustomOrder";
 // const LazyProductReviews = lazy(() =>
 //   import("./component/Admin/ProductReviews")
 // );
@@ -126,6 +127,18 @@ function App() {
               <>
                 {<Header />}
                 <ProductDetails />
+                {/* <Services /> */}
+                {<Footer />}
+              </>
+            }
+          />
+          <Route
+            exact
+            path="/customise"
+            element={
+              <>
+                {<Header />}
+                {<CustomOrderPage/>}
                 {/* <Services /> */}
                 {<Footer />}
               </>
