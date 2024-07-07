@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 
 function Header() {
-
+  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated, user } = useSelector((state) => state.userData);
   const [searchBarActive, setSearchBarActive] = useState(false);
@@ -22,7 +22,44 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { cartItems } = useSelector((state) => state.cart);
   const cartItemCount = cartItems.length;
+  const sideref = useRef(null);
 
+
+
+
+
+
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (sideref.current && !sideref.current.contains(event.target)) {
+        setInfo(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [sideref]);
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
 
   useEffect(() => {
@@ -96,12 +133,14 @@ function Header() {
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 z-40 fixed w-full top-0">
-      <div className="bg-red-500 text-white text-center py-1">
+
+      <div className={`bg-red-500 text-white text-center py-1 transition-all duration-300 ${isScrolled ? '-translate-y-full' : ''}`}>
         free delivery on first order above 499rs
       </div>
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
-      <div className="flex items-center justify-center h-full">
+      <div className={`max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 transition-all duration-300 ${isScrolled ? ' py-2 -mb-4 -translate-y-6' : 'py-4'}`}>
+
+        <div className="flex items-center justify-center h-full">
           <Link to={"/"}>
             <span className="kriptees-main">Kriptees</span>
           </Link>
@@ -113,7 +152,7 @@ function Header() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35m0 0a7.5 7.5 0 111.415-1.415l4.35 4.35zM12 19.5a7.5 7.5 0 100-15 7.5 7.5 0 000 15z" />
             </svg>
           </div>
-          
+
           <div onClick={cartHandler} className="flex hover:cursor-pointer justify-center items-center">
 
             <div className="relative">
@@ -130,7 +169,7 @@ function Header() {
             </div>
           </div>
 
-          <div className="hidden lg:flex">
+          <div className="hidden lg:flex relative">
             {isAuthenticated ? (
               <button onClick={() => setInfo(!info)} type="button" className="flex text-sm rounded-full justify-center items-center md:me-0" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                 <span className="sr-only">Open user menu</span>
@@ -155,12 +194,8 @@ function Header() {
           </div>
 
 
-
-
           {info && (
             <div className="z-50 fixed top-12 right-3  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-
-
               <div className="px-4 py-3">
                 <span className="block text-sm text-gray-900 dark:text-white">{user.name}
                   {user && user.role === "admin" && (<div className=" my-1 text-red-500"> Admin</div>)}
@@ -276,8 +311,7 @@ function Header() {
         </div>
 
         {sideMenu && (
-
-          <div className="items-center justify-between lg:hidden  w-full md:flex md:w-auto md:order-1" id="navbar-user">
+          <div ref={sideref} className="items-center justify-between lg:hidden  w-full md:flex md:w-auto md:order-1" id="navbar-user">
             <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 
               <li className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" >
@@ -334,6 +368,7 @@ function Header() {
         )}
 
       </div>
+
       {searchBarActive && (
         <div className="bg-white dark:bg-gray-900 absolute top-0 left-0 right-0 w-full h-full z-50 flex items-center justify-center">
           <form onSubmit={handleSearchFormSubmit} className="w-full max-w-2xl mx-auto p-4 flex items-center">
@@ -356,6 +391,7 @@ function Header() {
           </form>
         </div>
       )}
+
     </nav>
   )
 }

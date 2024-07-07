@@ -83,6 +83,8 @@ const ProductDetails = () => {
           <div className="bg-white mt-16 dark:bg-gray-800 py-16">
             <div className="mx-auto px-6 lg:px-8">
               <div className="flex flex-col md:flex-row -mx-4">
+
+
                 <div className="md:flex-1 px-4 flex">
                   <div className="w-full md:w-3/4">
                     <img src={previewImg} className="mb-4 rounded-lg w-full h-auto" alt="Product Main" />
@@ -99,6 +101,8 @@ const ProductDetails = () => {
                     ))}
                   </div>
                 </div>
+
+
                 <div className="md:flex-1 px-4">
                   <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{product.name}</h2>
                   <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{product.info}</p>
