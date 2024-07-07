@@ -31,7 +31,7 @@ export const createOrder = (order) => async (dispatch) => {
       headers: { "Content-Type": "application/json", Authorization: `${token}` }
 
     };
-    const { data } = await axios.post("http://localhost:5000/api/v1/order/new", order, config);
+    const { data } = await axios.post("/api/v1/order/new", order, config);
 
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
   } catch (error) {
@@ -51,7 +51,7 @@ export const myOrders = () => async (dispatch) => {
       }
     };
 
-    const { data } = await axios.get("http://localhost:5000/api/v1/orders/myOrders", config);
+    const { data } = await axios.get("/api/v1/orders/myOrders", config);
 
     dispatch({ type: MY_ORDER_SUCCESS, payload: data.userOrders });
   } catch (error) {
@@ -73,7 +73,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
       }
     };
 
-    const { data } = await axios.get(`http://localhost:5000/api/v1/order/${id}`, config);
+    const { data } = await axios.get(`/api/v1/order/${id}`, config);
 
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order });
   } catch (error) {
@@ -93,7 +93,7 @@ export const getAllOrders = () => async (dispatch) => {
       }
     };
 
-    const { data } = await axios.get(`http://localhost:5000/api/v1/admin/orders`, config);
+    const { data } = await axios.get(`/api/v1/admin/orders`, config);
 
     dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
   } catch (error) {
@@ -115,7 +115,7 @@ export const deleteOrder = (id) => async (dispatch) => {
       }
     };
 
-    const { data } = await axios.delete(`http://localhost:5000/api/v1/admin/order/${id}`, config);
+    const { data } = await axios.delete(`/api/v1/admin/order/${id}`, config);
 
     dispatch({ type: DELETE_ORDER_SUCCESS, payload: data.success });
   } catch (error) {
@@ -135,7 +135,7 @@ export const updateOrder = (id, productData) => async (dispatch) => {
 
     };
     const { data } = await axios.put(
-      `http://localhost:5000/api/v1/admin/order/${id}`,
+      `/api/v1/admin/order/${id}`,
       productData,
       config
     );

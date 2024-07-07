@@ -63,7 +63,7 @@ function PaymentComponent() {
       headers: { "Content-Type": "application/json", Authorization: `${token}` }
 
     };
-    const { data } = await axios.post(`http://localhost:5000/api/v1/payment/createOrder`, order, config);
+    const { data } = await axios.post(`/api/v1/payment/createOrder`, order, config);
     console.log(data);
 
     let checkoutOptions = {
