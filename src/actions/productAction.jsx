@@ -50,6 +50,7 @@ export const getProduct = (
       // when category selected by user then using another link
       if (category) {
         link = `https://ecomm-backend-o6x0.onrender.com/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&category=${category}`;
+
       }
       const { data } = await axios.get(link);
 
@@ -75,6 +76,7 @@ export const getProductDetails = (id) => {
       });
 
       const { data } = await axios.get(`https://ecomm-backend-o6x0.onrender.com/api/v1/product/${id}`);
+
 
       dispatch({
         type: PRODUCT_DETAILS_SUCCESS,
@@ -104,6 +106,7 @@ export const newReview = (reviewData) => async (dispatch) => {
 
     const { data } = await axios.put(`https://ecomm-backend-o6x0.onrender.com/api/v1/review/new`, reviewData, config);
 
+
     dispatch({ type: NEW_REVIEW_SUCCESS, payload: data.success });
   } catch (error) {
     dispatch({ type: NEW_REVIEW_FAIL, payload: error.message });
@@ -124,6 +127,7 @@ export const getAdminProducts = () => async (dispatch) => {
     };
 
     const { data } = await axios.get("https://ecomm-backend-o6x0.onrender.com/api/v1/admin/products", config);
+
 
     dispatch({ type: ADMIN_PRODUCT_SUCCESS, payload: data.products });
   } catch (error) {
@@ -150,6 +154,7 @@ export function createProduct(productData) {
 
       const { data } = await axios.post(
         `https://ecomm-backend-o6x0.onrender.com/api/v1/admin/product/new`,
+
         productData,
         config
       );
@@ -184,6 +189,7 @@ export function deleteProduct(id) {
 
       const { data } = await axios.delete(`https://ecomm-backend-o6x0.onrender.com/api/v1/admin/product/${id}`, config);
 
+
       dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data.success });
     } catch (error) {
       dispatch({ type: DELETE_PRODUCT_FAIL, payload: error.message });
@@ -195,6 +201,7 @@ export function deleteProduct(id) {
 export const updateProduct = (id, productData) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
+    console.log(productData)
 
     const token = localStorage.getItem('token');
     const config = {
@@ -206,6 +213,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 
     const { data } = await axios.put(
       `https://ecomm-backend-o6x0.onrender.com/api/v1/admin/product/${id}`,
+
       productData,
       config
     );
@@ -229,6 +237,7 @@ export const getAllreviews = (productId) => async (dispatch) => {
     dispatch({ type: ALL_REVIEW_REQUEST })
 
     const { data } = await axios.get(`https://ecomm-backend-o6x0.onrender.com/api/v1/reviews?id=${productId}`);
+
     dispatch({ type: ALL_REVIEW_SUCCESS, payload: data.reviews })
   } catch (error) {
     dispatch({ type: ALL_REVIEW_FAIL, payload: error.message })
@@ -243,6 +252,7 @@ export const deleteProductReview = (reviewId, productId) => async (dispatch) => 
 
     const { data } = await axios.delete(
       `https://ecomm-backend-o6x0.onrender.com/api/v1/product/reviews/delete?id=${reviewId}&productId=${productId}`
+
     );
 
     dispatch({ type: DELETE_REVIEW_SUCCESS, payload: data.success });
