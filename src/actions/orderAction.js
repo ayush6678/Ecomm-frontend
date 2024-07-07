@@ -32,7 +32,7 @@ export const createOrder = (order) => async (dispatch) => {
 
     };
 
-    const { data } = await axios.post("https://ecomm-backend-o6x0.onrender.com/api/v1/order/new", order, config);
+    const { data } = await axios.post("/api/v1/order/new", order, config);
 
 
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
@@ -53,7 +53,7 @@ export const myOrders = () => async (dispatch) => {
       }
     };
 
-    const { data } = await axios.get("https://ecomm-backend-o6x0.onrender.com/api/v1/orders/myOrders", config);
+    const { data } = await axios.get("/api/v1/orders/myOrders", config);
 
 
     dispatch({ type: MY_ORDER_SUCCESS, payload: data.userOrders });
@@ -77,7 +77,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
     };
 
 
-    const { data } = await axios.get(`https://ecomm-backend-o6x0.onrender.com/api/v1/order/${id}`, config);
+    const { data } = await axios.get(`/api/v1/order/${id}`, config);
 
 
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order });
@@ -98,7 +98,7 @@ export const getAllOrders = () => async (dispatch) => {
       }
     };
 
-    const { data } = await axios.get(`https://ecomm-backend-o6x0.onrender.com/api/v1/admin/orders`, config);
+    const { data } = await axios.get(`/api/v1/admin/orders`, config);
 
 
     dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
@@ -121,7 +121,7 @@ export const deleteOrder = (id) => async (dispatch) => {
       }
     };
 
-    const { data } = await axios.delete(`https://ecomm-backend-o6x0.onrender.com/api/v1/admin/order/${id}`, config);
+    const { data } = await axios.delete(`/api/v1/admin/order/${id}`, config);
 
 
     dispatch({ type: DELETE_ORDER_SUCCESS, payload: data.success });
@@ -142,7 +142,7 @@ export const updateOrder = (id, productData) => async (dispatch) => {
 
     };
     const { data } = await axios.put(
-      `https://ecomm-backend-o6x0.onrender.com/api/v1/admin/order/${id}`,
+      `/api/v1/admin/order/${id}`,
 
       productData,
       config
