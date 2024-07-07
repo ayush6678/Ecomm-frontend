@@ -45,11 +45,12 @@ export const getProduct = (
         type: ALL_PRODUCT_REQUEST,
       });
 
-      let link = `http://localhost:5000/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+      let link = `https://ecomm-backend-o6x0.onrender.com/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
       // when category selected by user then using another link
       if (category) {
-        link = `http://localhost:5000/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&category=${category}`;
+        link = `https://ecomm-backend-o6x0.onrender.com/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&category=${category}`;
+
       }
       const { data } = await axios.get(link);
 
@@ -74,7 +75,8 @@ export const getProductDetails = (id) => {
         type: PRODUCT_DETAILS_REQUEST,
       });
 
-      const { data } = await axios.get(`http://localhost:5000/api/v1/product/${id}`);
+      const { data } = await axios.get(`https://ecomm-backend-o6x0.onrender.com/api/v1/product/${id}`);
+
 
       dispatch({
         type: PRODUCT_DETAILS_SUCCESS,
@@ -102,7 +104,8 @@ export const newReview = (reviewData) => async (dispatch) => {
       }
     };
 
-    const { data } = await axios.put(`http://localhost:5000/api/v1/review/new`, reviewData, config);
+    const { data } = await axios.put(`https://ecomm-backend-o6x0.onrender.com/api/v1/review/new`, reviewData, config);
+
 
     dispatch({ type: NEW_REVIEW_SUCCESS, payload: data.success });
   } catch (error) {
@@ -123,7 +126,8 @@ export const getAdminProducts = () => async (dispatch) => {
       }
     };
 
-    const { data } = await axios.get("http://localhost:5000/api/v1/admin/products", config);
+    const { data } = await axios.get("https://ecomm-backend-o6x0.onrender.com/api/v1/admin/products", config);
+
 
     dispatch({ type: ADMIN_PRODUCT_SUCCESS, payload: data.products });
   } catch (error) {
@@ -149,7 +153,8 @@ export function createProduct(productData) {
       };
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/admin/product/new`,
+        `https://ecomm-backend-o6x0.onrender.com/api/v1/admin/product/new`,
+
         productData,
         config
       );
@@ -182,7 +187,8 @@ export function deleteProduct(id) {
         }
       };
 
-      const { data } = await axios.delete(`http://localhost:5000/api/v1/admin/product/${id}`, config);
+      const { data } = await axios.delete(`https://ecomm-backend-o6x0.onrender.com/api/v1/admin/product/${id}`, config);
+
 
       dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data.success });
     } catch (error) {
@@ -206,7 +212,8 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/v1/admin/product/${id}`,
+      `https://ecomm-backend-o6x0.onrender.com/api/v1/admin/product/${id}`,
+
       productData,
       config
     );
@@ -229,7 +236,8 @@ export const getAllreviews = (productId) => async (dispatch) => {
   try {
     dispatch({ type: ALL_REVIEW_REQUEST })
 
-    const { data } = await axios.get(`http://localhost:5000/api/v1/reviews?id=${productId}`);
+    const { data } = await axios.get(`https://ecomm-backend-o6x0.onrender.com/api/v1/reviews?id=${productId}`);
+
     dispatch({ type: ALL_REVIEW_SUCCESS, payload: data.reviews })
   } catch (error) {
     dispatch({ type: ALL_REVIEW_FAIL, payload: error.message })
@@ -243,7 +251,8 @@ export const deleteProductReview = (reviewId, productId) => async (dispatch) => 
     dispatch({ type: DELETE_REVIEW_REQUEST })
 
     const { data } = await axios.delete(
-      `http://localhost:5000/api/v1/product/reviews/delete?id=${reviewId}&productId=${productId}`
+      `https://ecomm-backend-o6x0.onrender.com/api/v1/product/reviews/delete?id=${reviewId}&productId=${productId}`
+
     );
 
     dispatch({ type: DELETE_REVIEW_SUCCESS, payload: data.success });
