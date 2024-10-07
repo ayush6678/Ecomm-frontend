@@ -1,24 +1,28 @@
 import { Link } from "react-router-dom";
-import { FaRupeeSign, FaGooglePay, FaCcAmazonPay, FaCcMastercard, FaCcApplePay } from 'react-icons/fa';
-import { SiPhonepe, SiPaytm, SiPaypal } from 'react-icons/si';
-import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
-import { SiTwitter } from 'react-icons/si';
-import { MdCached } from 'react-icons/md';
-import logo from '../../../ecommerce images/logo.png'; // Make sure to update this path
+import {
+  FaRupeeSign,
+  FaGooglePay,
+  FaCcAmazonPay,
+  FaCcMastercard,
+  FaCcApplePay,
+} from "react-icons/fa";
+import { SiPhonepe, SiPaytm, SiPaypal } from "react-icons/si";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import { MdCached } from "react-icons/md";
+import logo from "../../../ecommerce images/logo.png"; // Make sure to update this path
 
 const Footer = () => {
   return (
     <footer className="bg-[rgb(57,104,184)] text-white flex flex-col align-middle justify-center items-center w-full mt-32">
       <div className="  gap-5  mb-8 lg:flex justify-center ">
-
         <div className=" m-3 mt-6 flex flex-col justify-center">
           <Link
             to="/"
             aria-label="Go home"
             title="Company"
-            className="inline-flex items-center"
-          >
-            <img src={logo} alt="Kriptees Logo" className="h-10" /> {/* Adjust height as needed */}
+            className="inline-flex items-center">
+            <img src={logo} alt="Kriptees Logo" className="h-10" />{" "}
+            {/* Adjust height as needed */}
           </Link>
           <div className="mt-3 lg:max-w-sm flex items-center">
             <FaRupeeSign className="mr-2" />
@@ -37,8 +41,6 @@ const Footer = () => {
             <SiPhonepe className="mr-2" />
             <SiPaytm className="mr-2" />
             <SiPaypal className="mr-2" />
-
-
           </div>
         </div>
 
@@ -52,8 +54,7 @@ const Footer = () => {
               href="tel:850-123-5021"
               aria-label="Our phone"
               title="Our phone"
-              className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
-            >
+              className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
               7079604172
             </a>
           </div>
@@ -63,8 +64,7 @@ const Footer = () => {
               href="mailto:info@lorem.mail"
               aria-label="Our email"
               title="Our email"
-              className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
-            >
+              className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
               kriptees@gmail.com
             </a>
           </div>
@@ -76,8 +76,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               aria-label="Our address"
               title="Our address"
-              className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
-            >
+              className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800">
               D 12 sector 27 Noida, Near Anjali Market, Noida, Uttar Pradesh
             </a>
           </div>
@@ -88,27 +87,39 @@ const Footer = () => {
             Social
           </span>
           <div className="flex items-center mt-1 space-x-3 ">
-
             <div className="flex justify-center items-center space-x-4">
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-800">
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-blue-800">
                 <FaFacebook className="w-8 h-8" />
               </a>
-              <a href="https://www.instagram.com/kriptees_official/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-pink-800">
+              <a
+                href="https://www.instagram.com/kriptees_official/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-pink-800">
                 <FaInstagram className="w-8 h-8" />
               </a>
-              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-red-800">
+              <a
+                href="https://www.youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-red-800">
                 <FaYoutube className="w-8 h-8" />
               </a>
-              <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-600">
-                <SiTwitter className="w-8 h-8" />
+              <a
+                href="https://www.twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-blue-600">
+                <FaYoutube className="w-8 h-8" />
               </a>
             </div>
           </div>
-          <p className="mt-4 text-sm text-white">
-            Reach out to us for more...
-          </p>
+          <p className="mt-4 text-sm text-white">Reach out to us for more...</p>
         </div>
-
       </div>
 
       <div className="bg-[#443D83] w-full justify-between pt-5 pb-10 lg:flex-row">
@@ -116,40 +127,35 @@ const Footer = () => {
           <li>
             <Link
               to="/PrivacyPolicy"
-              class="text-sm text-white transition-colors duration-300 hover:text-deep-purple-accent-400"
-            >
+              class="text-sm text-white transition-colors duration-300 hover:text-deep-purple-accent-400">
               Privacy Policy
             </Link>
           </li>
           <li>
             <Link
               to="/TermsandConditions"
-              class="text-sm text-white transition-colors duration-300 hover:text-deep-purple-accent-400"
-            >
+              class="text-sm text-white transition-colors duration-300 hover:text-deep-purple-accent-400">
               Terms & Conditions
             </Link>
           </li>
           <li>
             <Link
               to="/ShipandDelivery"
-              class="text-sm text-white transition-colors duration-300 hover:text-deep-purple-accent-400"
-            >
+              class="text-sm text-white transition-colors duration-300 hover:text-deep-purple-accent-400">
               Terms of Use
             </Link>
           </li>
           <li>
             <Link
               to="/RefundandCancellation"
-              className="text-sm text-white  transition-colors duration-300 hover:text-deep-purple-accent-400"
-            >
+              className="text-sm text-white  transition-colors duration-300 hover:text-deep-purple-accent-400">
               Refund Policy
             </Link>
           </li>
           <li>
             <Link
               to="/ContactUs"
-              className="text-sm text-white  transition-colors duration-300 hover:text-deep-purple-accent-400"
-            >
+              className="text-sm text-white  transition-colors duration-300 hover:text-deep-purple-accent-400">
               Contact Us
             </Link>
           </li>
@@ -159,7 +165,6 @@ const Footer = () => {
           © 2024 Kriptees, All Rights Reserved.
         </p>
       </div>
-
     </footer>
   );
 };
