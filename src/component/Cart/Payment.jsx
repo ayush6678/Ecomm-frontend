@@ -18,7 +18,7 @@ function PaymentComponent() {
   const dispatch = useDispatch();
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
-  // console.log(order)
+
   const subTotal = cartItems.reduce((acc, currItem) => {
     return acc + currItem.quantity * currItem.price;
   }, 0);
@@ -35,25 +35,7 @@ function PaymentComponent() {
     return `order_${orderDateTimeSeconds}`;
   }
 
-  const doPayment = async () => {
-    let cashfree;
-    var initializeSDK = async function () {
-      cashfree = await load({
-        mode: "production",
-      });
-    };
-    initializeSDK();
-
-    const order = {
-      shippingInfo,
-      orderItems: cartItems,
-      itemsPrice: subTotal,
-      shippingPrice: 0,
-      totalPrice: totalFinalPrice,
-    };
-
-    order.ID = generateOrderId();
-
+  const createOrderInDatabase = async (order) => {
     const token = localStorage.getItem("token");
     const config = {
       headers: {
@@ -61,47 +43,94 @@ function PaymentComponent() {
         Authorization: `${token}`,
       },
     };
-    const { data } = await axios.post(
-      `https://ecomm-backend-o6x0.onrender.com/api/v1/payment/createOrder`,
-      order,
-      config
-    );
-    console.log(data);
+    try {
+      await axios.post(
+        `https://ecomm-backend-o6x0.onrender.com/api/v1/order/new`,
+        order,
+        config
+      );
+      console.log("Order created in database");
+    } catch (error) {
+      console.error("Error creating order in database:", error);
+      throw error;
+    }
+  };
 
-    let checkoutOptions = {
-      paymentSessionId: data.payment_session_id,
-      redirectTarget: "_self",
+  const doPayment = async () => {
+    let cashfree;
+    var initializeSDK = async function () {
+      cashfree = await load({
+        mode: "sandbox",
+      });
+    };
+    await initializeSDK();
+
+    const order = {
+      shippingInfo,
+      orderItems: cartItems,
+      itemsPrice: subTotal,
+      shippingPrice: 0,
+      totalPrice: totalFinalPrice,
+      paymentInfo: {
+        id: "pending",
+        status: "pending",
+      },
     };
 
-    await cashfree.checkout(checkoutOptions).then((result) => {
-      if (result.error) {
-        console.log(
-          "User has closed the popup or there is some payment error, Check for Payment Status"
-        );
-        console.log(result.error);
-        toast.error("Payment Failed!");
-      }
-      if (result.paymentDetails) {
-        // This will be called whenever the payment is completed irrespective of transaction status
-        console.log("Payment has been completed, Check for Payment Status");
-        console.log(result.paymentDetails.paymentMessage);
-        toast.success("Payment Successful!");
-        dispatch(createOrder(order));
-        navigate("/success");
-      }
-      if (result.redirect) {
-        // This will be true when the payment redirection page couldnt be opened in the same window
-        // This is an exceptional case only when the page is opened inside an inAppBrowser
-        // In this case the customer will be redirected to return url once payment is completed
-        console.log("Payment will be redirected");
-        toast("Payment will be redirected");
-      }
-    });
+    order.ID = generateOrderId();
 
-    order.paymentInfo = {
-      id: data.payment_session_id,
-      status: data,
-    };
+    try {
+      // Create order in database first
+      await createOrderInDatabase(order);
+
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      };
+      const { data } = await axios.post(
+        `https://ecomm-backend-o6x0.onrender.com/api/v1/payment/createOrder`,
+        order,
+        config
+      );
+      console.log(data);
+
+      let checkoutOptions = {
+        paymentSessionId: data.payment_session_id,
+        redirectTarget: "_self",
+      };
+
+      await cashfree.checkout(checkoutOptions).then(async (result) => {
+        if (result.error) {
+          console.log(result.error);
+          toast.error("Payment Failed!");
+        }
+        if (result.paymentDetails) {
+          console.log(result.paymentDetails);
+          toast.success("Payment Successful!");
+          
+          // Update order with payment info
+          order.paymentInfo = {
+            id: result.paymentDetails.orderId,
+            status: "success",
+          };
+          
+          // Update order in database and Redux
+          await createOrderInDatabase(order);
+          dispatch(createOrder(order));
+          navigate("/success");
+        }
+        if (result.redirect) {
+          console.log("Payment will be redirected");
+          toast("Payment will be redirected");
+        }
+      });
+    } catch (error) {
+      console.error("Payment error:", error);
+      toast.error("Payment process failed");
+    }
   };
 
   const handleSelectionChange = (e) => {
@@ -109,14 +138,14 @@ function PaymentComponent() {
     setPaymentMethod(selectedPaymentMethod);
     if (selectedPaymentMethod === "COD") {
       setShowConfirmation(true);
-      setShowPayButton(false); // Hide pay button if COD is selected
+      setShowPayButton(false);
     } else {
-      setShowConfirmation(false); // Hide confirmation if ONLINE is selected
-      setShowPayButton(true); // Show pay button for ONLINE
+      setShowConfirmation(false);
+      setShowPayButton(true);
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const order = {
       shippingInfo,
       orderItems: cartItems,
@@ -132,11 +161,13 @@ function PaymentComponent() {
     };
 
     try {
+      await createOrderInDatabase(order);
       dispatch(createOrder(order));
       toast.success("Order Confirmed!");
       navigate("/success");
-    } catch {
-      toast.error("Failed!");
+    } catch (error) {
+      console.error("Error creating COD order:", error);
+      toast.error("Failed to create order!");
     }
   };
 

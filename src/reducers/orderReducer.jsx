@@ -20,6 +20,9 @@ import {
   UPDATE_ORDER_SUCCESS,
   UPDATE_ORDER_RESET,
   UPDATE_ORDER_FAIL,
+  TRACK_ORDER_REQUEST,
+  TRACK_ORDER_SUCCESS,
+  TRACK_ORDER_FAIL,
 } from "../constants/orderConstant";
 
 export const newOrderReducer = (state = {}, action) => {
@@ -140,6 +143,33 @@ export const allOrdersReducer = (state = { orders: [] }, action) => {
       return state;
   }
 };
+
+export const orderTrackingReducer = (state = { trackingDetails: {} }, action) => {
+  switch (action.type) {
+    case TRACK_ORDER_REQUEST:
+      return {
+        loading: true,
+      };
+    case TRACK_ORDER_SUCCESS:
+      return {
+        loading: false,
+        trackingDetails: action.payload,
+      };
+    case TRACK_ORDER_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+
 
 // Delete and Upadte
 

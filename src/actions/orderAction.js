@@ -18,6 +18,9 @@ import {
   UPDATE_ORDER_REQUEST,
   UPDATE_ORDER_SUCCESS,
   UPDATE_ORDER_FAIL,
+  TRACK_ORDER_REQUEST,
+  TRACK_ORDER_SUCCESS,
+  TRACK_ORDER_FAIL,
 } from "../constants/orderConstant";
 import axios from "axios";
 
@@ -54,11 +57,15 @@ export const myOrders = () => async (dispatch) => {
     };
 
     const { data } = await axios.get("https://ecomm-backend-o6x0.onrender.com/api/v1/orders/myOrders", config);
+   // console.log("My Orders Data:", data); 
 
 
     dispatch({ type: MY_ORDER_SUCCESS, payload: data.userOrders });
   } catch (error) {
-    dispatch({ type: MY_ORDER_FAIL, payload: error.message });
+    console.error("My Orders Error:", error); // Add this line for debugging
+    dispatch({ type: MY_ORDER_FAIL, payload: error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message });
   }
 };
 
@@ -106,6 +113,27 @@ export const getAllOrders = () => async (dispatch) => {
     dispatch({ type: ALL_ORDERS_FAIL, payload: error.message });
   }
 
+};
+
+export const trackOrder = (orderId) => async (dispatch) => {
+  try {
+    dispatch({ type: TRACK_ORDER_REQUEST });
+
+    const token = localStorage.getItem('token');
+    const config = {
+      headers: { "Content-Type": "application/json", Authorization: `${token}` }
+    };
+
+    const { data } = await axios.get(`https://ecomm-backend-o6x0.onrender.com/api/v1/order/track/${orderId}`, config);
+    console.log("Tracking Data:", data); // Add this line for debugging
+
+    dispatch({ type: TRACK_ORDER_SUCCESS, payload: data });
+  } catch (error) {
+    console.error("Tracking Error:", error); // Add this line for debugging
+    dispatch({ type: TRACK_ORDER_FAIL, payload: error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message });
+  }
 };
 
 
